@@ -2,7 +2,12 @@
 Flu utilities
 
 Usage:
-    flutile aadiff [--make-consensus] [--use-consensus-as-reference] [<filename>]
+    flutile compare [--make-consensus] [--use-consensus-as-reference] [<filename>]
+    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> [<filename>]
+
+Options:
+    --max-day-sep=<days>       Maximum number of days separating members of a group [default: 60]
+    --min-pident-sep=<pident>  Minimum percent identity difference between members of a group [default: 100]
 """
 
 import signal
@@ -11,6 +16,13 @@ from docopt import docopt
 from collections import Counter
 from flutile.version import __version__
 import sys
+import datetime as dt
+import re
+from collections import defaultdict
+
+
+class InputError(Exception):
+    pass
 
 
 def parseFasta(filehandle):
@@ -71,6 +83,78 @@ def aadiff_table(s, consensus=False, consensus_as_ref=False):
                 break
 
 
+def parseOutDate(s):
+    datepat = re.compile("\d\d\d\d-\d\d-\d\d")
+    match = re.search(datepat, s)
+    if match:
+        return dt.date(*[int(x) for x in match.group().split("-")])
+    else:
+        return None
+
+
+def pident(s1, s2):
+    # assert that the sequences are of equal length
+    if len(s1) != len(s2):
+        raise InputError("Cannot compare sequences of different length")
+    # count the number of identities (not counting gaps)
+    identities = 0
+    N = 0
+    for (x, y) in zip(s1, s2):
+        if x != "-" and y != "-":
+            N += 1
+            identities += x == y
+    return 100 * identities / N
+
+
+def represent(s, max_day_sep, min_pident_sep):
+    dates = [parseOutDate(header) for (header, seq) in s]
+    N = len(s)
+    pairs = []
+    paired = set()
+    for i in range(N - 1):
+        for j in range(i + 1, N):
+            close_by_time = abs((dates[i] - dates[j]).days) <= max_day_sep
+            close_by_seq = pident(s[i][1], s[j][1]) >= min_pident_sep
+            if close_by_time and close_by_seq:
+                pairs.append((i, j))
+                paired.update([i,j])
+
+    seqs = set(i for i in range(N) if i not in paired)
+
+    for group in components(pairs):
+        group = sorted(list(group), key=lambda i: dates[i])
+        seqs.add(group[-1])
+
+    return [s[i] for i in seqs]
+
+
+def components(pairs):
+    if len(pairs) == 0:
+        return []
+
+    groupmap = defaultdict(set)
+
+    for (x, y) in pairs:
+        groupmap[x].add(y)
+        groupmap[y].add(x)
+
+    def group(x, xs, xss):
+        for y in xss[x]:
+            if not y in xs:
+                xs.add(y)
+                xs.update(group(y, xs, xss))
+        return xs
+
+    groups = []
+    while groupmap:
+        (a, b) = list(groupmap.items())[0]
+        xs = group(a, set(), groupmap)
+        groupmap = {k: v for (k, v) in groupmap.items() if not k in xs}
+        groups.append(xs)
+
+    return groups
+
+
 def main():
     if os.name is "posix":
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
@@ -82,7 +166,7 @@ def main():
     else:
         f = sys.stdin
 
-    if args["aadiff"]:
+    if args["compare"]:
         s = parseFasta(f)
         for row in aadiff_table(
             s,
@@ -90,6 +174,25 @@ def main():
             consensus_as_ref=args["--use-consensus-as-reference"],
         ):
             print("\t".join(row))
+
+    if args["represent"]:
+        s = parseFasta(f)
+        try:
+          pident = float(args["--min-pident-sep"])
+          if not (0.0 <= pident <= 100.0):
+            print("Expected pident between 0 and 100", file=sys.stderr)
+            exit(1)
+        except TypeError as e:
+          print("Expected pident to be a float", file=sys.stderr)
+          exit(1)
+
+        for (header, seq) in represent(
+            s,
+            max_day_sep=int(args["--max-day-sep"]),
+            min_pident_sep=pident,
+        ):
+            print(">" + header)
+            print(seq)
 
 
 if __name__ == "__main__":
