@@ -2,8 +2,8 @@
 Flu utilities
 
 Usage:
-    flutile compare [--make-consensus] [--use-consensus-as-reference] [<filename>]
-    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> [<filename>]
+    flutile compare [--make-consensus] [--use-consensus-as-reference] [<alignment>]
+    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> [<alignment>]
 
 Options:
     --max-day-sep=<days>       Maximum number of days separating members of a group [default: 60]
