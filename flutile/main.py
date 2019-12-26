@@ -103,7 +103,10 @@ def pident(s1, s2):
         if x != "-" and y != "-":
             N += 1
             identities += x == y
-    return 100 * identities / N
+    if N < 1:
+      return 0
+    else:
+      return 100 * identities / N
 
 
 def represent(s, max_day_sep, min_pident_sep):
@@ -161,8 +164,8 @@ def main():
 
     args = docopt(__doc__, version=f"flutile {__version__}")
 
-    if args["<filename>"]:
-        f = open(args["<filename>"])
+    if args["<alignment>"]:
+        f = open(args["<alignment>"])
     else:
         f = sys.stdin
 

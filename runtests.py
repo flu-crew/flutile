@@ -22,6 +22,8 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAA"), 100)
         self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAT"), 90)
         self.assertEqual(f.pident("AAAAAA--AAAA", "AAAAAG--AAAT"), 80)
+        # No ungapped aligned region
+        self.assertEqual(f.pident("----AAAA", "AAAA----"), 0)
         # An error is raised if the sequences are not of equal length
         self.assertRaises(f.InputError, f.pident, "AAAAAAAAAA", "AAA")
 
