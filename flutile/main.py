@@ -3,11 +3,12 @@ Flu utilities
 
 Usage:
     flutile compare [--make-consensus] [--use-consensus-as-reference] [<alignment>]
-    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> [<alignment>]
+    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> --same-state [<alignment>]
 
 Options:
     --max-day-sep=<days>       Maximum number of days separating members of a group [default: 60]
     --min-pident-sep=<pident>  Minimum percent identity difference between members of a group [default: 100]
+    --same-state               Group strains only if they are in the same sate [default: False]
 """
 
 import signal
@@ -109,8 +110,70 @@ def pident(s1, s2):
       return 100 * identities / N
 
 
-def represent(s, max_day_sep, min_pident_sep):
+USA_STATES = [
+    "alaska",
+    "alabama",
+    "arkansas",
+    "arizona",
+    "california",
+    "colorado",
+    "connecticut",
+    "district_of_columbia",
+    "delaware",
+    "florida",
+    "georgia",
+    "hawaii",
+    "iowa",
+    "idaho",
+    "illinois",
+    "indiana",
+    "kansas",
+    "kentucky",
+    "louisiana",
+    "massachusetts",
+    "maryland",
+    "maine",
+    "michigan",
+    "minnesota",
+    "missouri",
+    "mississippi",
+    "montana",
+    "north_carolina",
+    "north_dakota",
+    "nebraska",
+    "new_hampshire",
+    "new_jersey",
+    "new_mexico",
+    "nevada",
+    "new_york",
+    "ohio",
+    "oklahoma",
+    "oregon",
+    "pennsylvania",
+    "rhode_island",
+    "south_carolina",
+    "south_dakota",
+    "tennessee",
+    "texas",
+    "utah",
+    "virginia",
+    "vermont",
+    "washington",
+    "wisconsin",
+    "west_virginia",
+    "wyoming"
+]
+
+def getUsaState(x):
+  x = x.lower().replace(" ", "_")
+  for state in USA_STATES:
+    if state in x:
+      return state
+  return None
+
+def represent(s, max_day_sep, min_pident_sep, same_state):
     dates = [parseOutDate(header) for (header, seq) in s]
+    states = [getUsaState(header) for (header, seq) in s]
     N = len(s)
     pairs = []
     paired = set()
@@ -118,7 +181,8 @@ def represent(s, max_day_sep, min_pident_sep):
         for j in range(i + 1, N):
             close_by_time = abs((dates[i] - dates[j]).days) <= max_day_sep
             close_by_seq = pident(s[i][1], s[j][1]) >= min_pident_sep
-            if close_by_time and close_by_seq:
+            close_by_state = (not same_state) or (states[i] and states[j] and states[i] == states[j])
+            if close_by_time and close_by_seq and close_by_state:
                 pairs.append((i, j))
                 paired.update([i,j])
 
@@ -193,6 +257,7 @@ def main():
             s,
             max_day_sep=int(args["--max-day-sep"]),
             min_pident_sep=pident,
+            same_state=args["--same-state"],
         ):
             print(">" + header)
             print(seq)
