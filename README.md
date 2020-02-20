@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/arendsee/flutile.svg?branch=master)](https://travis-ci.org/arendsee/flutile)
+[![Build Status](https://travis-ci.org/flu-crew/flutile.svg?branch=master)](https://travis-ci.org/flu-crew/flutile)
 
 # flutile
 

@@ -11,9 +11,9 @@ setup(
     description="sequence analysis tools for flu research",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/arendsee/flutile",
+    url="https://github.com/flu-crew/flutile",
     author="Zebulun Arendsee",
-    author_email="zbwrnz@gmail.com",
+    author_email="zebulun.arendsee@usda.gov",
     packages=["flutile"],
     classifiers=[
         "Programming Language :: Python :: 3",
