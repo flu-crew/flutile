@@ -54,19 +54,19 @@ class TestParsers(unittest.TestCase):
 
     def test_represent(self, maxDiff=300):
         fasta = [("A|2019-06-01", "AAAAA"), ("B|2019-06-06", "AAAAA"), ("C|2019-06-06", "TTAAA"), ("D|2018-06-06", "AAAAA")]
-        a = sorted(f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=False))
+        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=False)
         b = fasta[1:]
-        self.assertEqual(a, b)
+        self.assertEqual(sorted(a), b)
 
     def test_represent_states(self, maxDiff=300):
         fasta = [("A|Iowa|2019-06-01", "AAAAA"), ("B|Iowa|2019-06-06", "AAAAA"), ("C|Iowa|2019-06-06", "TTAAA"), ("D|Iowa|2018-06-06", "AAAAA")]
-        a = sorted(f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True))
+        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True)
         b = fasta[1:]
-        self.assertEqual(a, b)
+        self.assertEqual(sorted(a), b)
 
         fasta = [("A|Iowa|2019-06-01", "AAAAA"), ("B|Nebraska|2019-06-06", "AAAAA"), ("C|Iowa|2019-06-06", "TTAAA"), ("D|Iowa|2018-06-06", "AAAAA")]
-        a = sorted(f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True))
-        self.assertEqual(a, fasta)
+        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True)
+        self.assertEqual(sorted(a), fasta)
 
 
 if __name__ == "__main__":

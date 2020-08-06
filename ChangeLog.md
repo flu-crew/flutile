@@ -1,3 +1,7 @@
+0.3.0 [2020-08-06]
+
+ * Add --print-groups option to represent
+
 0.2.0 [2020-01-06]
 
  * add group by USA state

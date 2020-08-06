@@ -3,12 +3,13 @@ Flu utilities
 
 Usage:
     flutile compare [--make-consensus] [--use-consensus-as-reference] [<alignment>]
-    flutile represent --max-day-sep=<days> --min-pident-sep=<pident> --same-state [<alignment>]
+    flutile represent [--max-day-sep=<days>] [--min-pident-sep=<pident>] [--same-state] [--print-groups] [<alignment>]
 
 Options:
     --max-day-sep=<days>       Maximum number of days separating members of a group [default: 60]
     --min-pident-sep=<pident>  Minimum percent identity difference between members of a group [default: 100]
     --same-state               Group strains only if they are in the same sate [default: False]
+    --print-groups             Rather than subsetting the fasta, print the groups of similar strains
 """
 
 import signal
@@ -105,9 +106,9 @@ def pident(s1, s2):
             N += 1
             identities += x == y
     if N < 1:
-      return 0
+        return 0
     else:
-      return 100 * identities / N
+        return 100 * identities / N
 
 
 USA_STATES = [
@@ -161,15 +162,17 @@ USA_STATES = [
     "washington",
     "wisconsin",
     "west_virginia",
-    "wyoming"
+    "wyoming",
 ]
 
+
 def getUsaState(x):
-  x = x.lower().replace(" ", "_")
-  for state in USA_STATES:
-    if state in x:
-      return state
-  return None
+    x = x.lower().replace(" ", "_")
+    for state in USA_STATES:
+        if state in x:
+            return state
+    return None
+
 
 def represent(s, max_day_sep, min_pident_sep, same_state):
     dates = [parseOutDate(header) for (header, seq) in s]
@@ -188,11 +191,13 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
 
     seqs = set(i for i in range(N) if i not in paired)
 
-    for group in components(pairs):
+    groups = components(pairs)
+
+    for group in groups:
         group = sorted(list(group), key=lambda i: dates[i])
         seqs.add(group[-1])
 
-    return [s[i] for i in seqs]
+    return (groups, [s[i] for i in seqs])
 
 
 def components(pairs):
@@ -245,22 +250,30 @@ def main():
     if args["represent"]:
         s = parseFasta(f)
         try:
-          pident = float(args["--min-pident-sep"])
-          if not (0.0 <= pident <= 100.0):
-            print("Expected pident between 0 and 100", file=sys.stderr)
-            exit(1)
+            pident = float(args["--min-pident-sep"])
+            if not (0.0 <= pident <= 100.0):
+                print("Expected pident between 0 and 100", file=sys.stderr)
+                exit(1)
         except TypeError as e:
-          print("Expected pident to be a float", file=sys.stderr)
-          exit(1)
+            print("Expected pident to be a float", file=sys.stderr)
+            exit(1)
 
-        for (header, seq) in represent(
+        (groups, seqs) = represent(
             s,
             max_day_sep=int(args["--max-day-sep"]),
             min_pident_sep=pident,
             same_state=args["--same-state"],
-        ):
-            print(">" + header)
-            print(seq)
+        )
+
+        if args["--print-groups"]:
+            for group in groups:
+                for i in group:
+                    print(s[i][0])
+                print("")
+        else:
+            for (header, seq) in seqs:
+                print(">" + header)
+                print(seq)
 
 
 if __name__ == "__main__":
