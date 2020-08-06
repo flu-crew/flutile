@@ -176,7 +176,8 @@ def getUsaState(x):
 
 
 def represent(s, max_day_sep, min_pident_sep, same_state):
-    dates = [parseOutDate(header) for (header, seq) in s]
+    if max_day_sep is not None:
+        dates = [parseOutDate(header) for (header, seq) in s]
     if same_state:
         states = [getUsaState(header) for (header, seq) in s]
     N = len(s)
@@ -202,8 +203,13 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
     groups = components(pairs)
 
     for group in groups:
-        group = sorted(list(group), key=lambda i: dates[i])
-        seqs.add(group[-1])
+        if max_day_sep is not None:
+            # if we are using time, then keep the most recent
+            group = reversed(sorted(list(group), key=lambda i: dates[i]))
+        else:
+            # otherwise keep the first alphabetically
+            group = sorted(list(group), key=lambda i: s[i])
+        seqs.add(group[0])
 
     return (groups, [s[i] for i in seqs])
 
