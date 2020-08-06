@@ -6,7 +6,7 @@ Usage:
     flutile represent [--max-day-sep=<days>] [--min-pident-sep=<pident>] [--same-state] [--print-groups] [<alignment>]
 
 Options:
-    --max-day-sep=<days>       Maximum number of days separating members of a group [default: 60]
+    --max-day-sep=<days>       Maximum number of days separating members of a group
     --min-pident-sep=<pident>  Minimum percent identity difference between members of a group [default: 100]
     --same-state               Group strains only if they are in the same sate [default: False]
     --print-groups             Rather than subsetting the fasta, print the groups of similar strains
@@ -176,18 +176,25 @@ def getUsaState(x):
 
 def represent(s, max_day_sep, min_pident_sep, same_state):
     dates = [parseOutDate(header) for (header, seq) in s]
-    states = [getUsaState(header) for (header, seq) in s]
+    if same_state:
+        states = [getUsaState(header) for (header, seq) in s]
     N = len(s)
     pairs = []
     paired = set()
     for i in range(N - 1):
         for j in range(i + 1, N):
-            close_by_time = abs((dates[i] - dates[j]).days) <= max_day_sep
             close_by_seq = pident(s[i][1], s[j][1]) >= min_pident_sep
-            close_by_state = (not same_state) or (states[i] and states[j] and states[i] == states[j])
+            if max_day_sep is not None:
+                close_by_time = abs((dates[i] - dates[j]).days) <= max_day_sep
+            else:
+                close_by_time = True
+            if same_state:
+                close_by_state = states[i] and states[j] and states[i] == states[j]
+            else:
+                close_by_state = True
             if close_by_time and close_by_seq and close_by_state:
                 pairs.append((i, j))
-                paired.update([i,j])
+                paired.update([i, j])
 
     seqs = set(i for i in range(N) if i not in paired)
 
@@ -260,7 +267,7 @@ def main():
 
         (groups, seqs) = represent(
             s,
-            max_day_sep=int(args["--max-day-sep"]),
+            max_day_sep=args["--max-day-sep"],
             min_pident_sep=pident,
             same_state=args["--same-state"],
         )
