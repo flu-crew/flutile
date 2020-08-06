@@ -20,6 +20,7 @@ from flutile.version import __version__
 import sys
 import datetime as dt
 import re
+from tqdm import tqdm
 from collections import defaultdict
 
 
@@ -181,7 +182,7 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
     N = len(s)
     pairs = []
     paired = set()
-    for i in range(N - 1):
+    for i in tqdm(range(N - 1)):
         for j in range(i + 1, N):
             close_by_seq = pident(s[i][1], s[j][1]) >= min_pident_sep
             if max_day_sep is not None:
