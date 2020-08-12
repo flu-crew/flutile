@@ -272,9 +272,18 @@ def main():
             print("Expected pident to be a float", file=sys.stderr)
             exit(1)
 
+        try:
+            if args["--max-day-sep"] is not None:
+                max_day_sep = int(args["--max-day-sep"])
+            else:
+                max_day_sep = None
+        except:
+            print("--max-day-sep must be an integer", file=sys.stderr)
+            sys.exit(1)
+
         (groups, seqs) = represent(
             s,
-            max_day_sep=args["--max-day-sep"],
+            max_day_sep=max_day_sep,
             min_pident_sep=pident,
             same_state=args["--same-state"],
         )
