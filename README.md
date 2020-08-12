@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/flu-crew/flutile.svg?branch=master)](https://travis-ci.org/flu-crew/flutile)
+![PyPI](https://img.shields.io/pypi/v/flutile.svg)
 
 # flutile
 
