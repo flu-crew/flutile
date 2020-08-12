@@ -205,7 +205,7 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
     for group in groups:
         if max_day_sep is not None:
             # if we are using time, then keep the most recent
-            group = reversed(sorted(list(group), key=lambda i: dates[i]))
+            group = list(reversed(sorted(list(group), key=lambda i: dates[i])))
         else:
             # otherwise keep the first alphabetically
             group = sorted(list(group), key=lambda i: s[i])
