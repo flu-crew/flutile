@@ -1,3 +1,7 @@
+0.3.1 [2020-08-12]
+
+Bug fixes
+
 0.3.0 [2020-08-06]
 
 Changes to represent:
