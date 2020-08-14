@@ -202,7 +202,9 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
 
     groups = components(pairs)
 
+    grouped = set()
     for group in groups:
+        grouped.update(group)
         if max_day_sep is not None:
             # if we are using time, then keep the most recent
             group = list(reversed(sorted(list(group), key=lambda i: dates[i])))
@@ -210,6 +212,8 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
             # otherwise keep the first alphabetically
             group = sorted(list(group), key=lambda i: s[i])
         seqs.add(group[0])
+
+    groups = groups + [{i} for i in range(N) if not i in grouped]
 
     return (groups, [s[i] for i in seqs])
 
