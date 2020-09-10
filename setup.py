@@ -20,7 +20,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    entry_points={"console_scripts": ["flutile=flutile.main:main"]},
+    entry_points={"console_scripts": ["flutile=flutile.ui:main"]},
     py_modules=["flutile"],
     zip_safe=False,
+    include_package_data=True,
 )

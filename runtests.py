@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import flutile.main as f
+import flutile.functions as f
 import unittest
-import datetime as dt
+import datetime
 import sys
 
 
@@ -19,9 +19,9 @@ class TestParsers(unittest.TestCase):
         )
 
     def test_pident(self):
-        self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAA"), 100)
-        self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAT"), 90)
-        self.assertEqual(f.pident("AAAAAA--AAAA", "AAAAAG--AAAT"), 80)
+        self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAA"), 1.0)
+        self.assertEqual(f.pident("AAAAAAAAAA", "AAAAAAAAAT"), 0.9)
+        self.assertEqual(f.pident("AAAAAA--AAAA", "AAAAAG--AAAT"), 0.8)
         # No ungapped aligned region
         self.assertEqual(f.pident("----AAAA", "AAAA----"), 0)
         # An error is raised if the sequences are not of equal length
@@ -29,12 +29,13 @@ class TestParsers(unittest.TestCase):
 
     def test_parseOutDate(self):
         self.assertEqual(
-            f.parseOutDate("ladida 2019-01-01 fodidu"), dt.date(2019, 1, 1)
+            f.parseOutDate("ladida 2019-01-01 fodidu"), datetime.date(2019, 1, 1)
         )
 
         # extracts the FIRST date that is observed (is this really what I want?)
         self.assertEqual(
-            f.parseOutDate("ladida 2019-01-01 fodidu 2018-02-02"), dt.date(2019, 1, 1)
+            f.parseOutDate("ladida 2019-01-01 fodidu 2018-02-02"),
+            datetime.date(2019, 1, 1),
         )
 
     def test_components(self):
@@ -53,19 +54,34 @@ class TestParsers(unittest.TestCase):
         )
 
     def test_represent(self, maxDiff=300):
-        fasta = [("A|2019-06-01", "AAAAA"), ("B|2019-06-06", "AAAAA"), ("C|2019-06-06", "TTAAA"), ("D|2018-06-06", "AAAAA")]
-        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=False)
+        fasta = [
+            ("A|2019-06-01", "AAAAA"),
+            ("B|2019-06-06", "AAAAA"),
+            ("C|2019-06-06", "TTAAA"),
+            ("D|2018-06-06", "AAAAA"),
+        ]
+        g, a = f.represent(fasta, max_day_sep=5, min_pident_sep=1.0, same_state=False)
         b = fasta[1:]
         self.assertEqual(sorted(a), b)
 
     def test_represent_states(self, maxDiff=300):
-        fasta = [("A|Iowa|2019-06-01", "AAAAA"), ("B|Iowa|2019-06-06", "AAAAA"), ("C|Iowa|2019-06-06", "TTAAA"), ("D|Iowa|2018-06-06", "AAAAA")]
-        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True)
+        fasta = [
+            ("A|Iowa|2019-06-01", "AAAAA"),
+            ("B|Iowa|2019-06-06", "AAAAA"),
+            ("C|Iowa|2019-06-06", "TTAAA"),
+            ("D|Iowa|2018-06-06", "AAAAA"),
+        ]
+        g, a = f.represent(fasta, max_day_sep=5, min_pident_sep=1.0, same_state=True)
         b = fasta[1:]
         self.assertEqual(sorted(a), b)
 
-        fasta = [("A|Iowa|2019-06-01", "AAAAA"), ("B|Nebraska|2019-06-06", "AAAAA"), ("C|Iowa|2019-06-06", "TTAAA"), ("D|Iowa|2018-06-06", "AAAAA")]
-        g,a = f.represent(fasta, max_day_sep=5, min_pident_sep=100, same_state=True)
+        fasta = [
+            ("A|Iowa|2019-06-01", "AAAAA"),
+            ("B|Nebraska|2019-06-06", "AAAAA"),
+            ("C|Iowa|2019-06-06", "TTAAA"),
+            ("D|Iowa|2018-06-06", "AAAAA"),
+        ]
+        g, a = f.represent(fasta, max_day_sep=5, min_pident_sep=1.0, same_state=True)
         self.assertEqual(sorted(a), fasta)
 
 

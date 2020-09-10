@@ -1,27 +1,13 @@
-"""
-Flu utilities
-
-Usage:
-    flutile compare [--make-consensus] [--use-consensus-as-reference] [<alignment>]
-    flutile represent [--max-day-sep=<days>] [--min-pident-sep=<pident>] [--same-state] [--print-groups] [<alignment>]
-
-Options:
-    --max-day-sep=<days>       Maximum number of days separating members of a group
-    --min-pident-sep=<pident>  Minimum percent identity difference between members of a group [default: 100]
-    --same-state               Group strains only if they are in the same sate [default: False]
-    --print-groups             Rather than subsetting the fasta, print the groups of similar strains
-"""
-
-import signal
-import os
-from docopt import docopt
-from collections import Counter
-from flutile.version import __version__
+import collections
 import sys
-import datetime as dt
+import datetime
 import re
-from tqdm import tqdm
-from collections import defaultdict
+import tqdm
+import tempfile
+import smof
+import os
+from flutile.functions import *
+from flutile.version import __version__
 
 
 class InputError(Exception):
@@ -49,7 +35,7 @@ def parseFasta(filehandle):
 
 def aadiff_table(s, consensus=False, consensus_as_ref=False):
     def find_consensus(i):
-        counts = Counter(s[j][1][i] for j in range(1, len(s)))
+        counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
         return counts.most_common()[0][0]
 
     # add the consensus header column, if needed
@@ -90,7 +76,7 @@ def parseOutDate(s):
     datepat = re.compile("\d\d\d\d-\d\d-\d\d")
     match = re.search(datepat, s)
     if match:
-        return dt.date(*[int(x) for x in match.group().split("-")])
+        return datetime.date(*[int(x) for x in match.group().split("-")])
     else:
         return None
 
@@ -109,7 +95,7 @@ def pident(s1, s2):
     if N < 1:
         return 0
     else:
-        return 100 * identities / N
+        return identities / N
 
 
 USA_STATES = [
@@ -183,7 +169,7 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
     N = len(s)
     pairs = []
     paired = set()
-    for i in tqdm(range(N - 1)):
+    for i in tqdm.tqdm(range(N - 1)):
         for j in range(i + 1, N):
             close_by_seq = pident(s[i][1], s[j][1]) >= min_pident_sep
             if max_day_sep is not None:
@@ -222,7 +208,7 @@ def components(pairs):
     if len(pairs) == 0:
         return []
 
-    groupmap = defaultdict(set)
+    groupmap = collections.defaultdict(set)
 
     for (x, y) in pairs:
         groupmap[x].add(y)
@@ -245,63 +231,101 @@ def components(pairs):
     return groups
 
 
-def main():
-    if os.name is "posix":
-        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+def align(seq, mafft_exe="mafft"):
+    from Bio.Align.Applications import MafftCommandline
 
-    args = docopt(__doc__, version=f"flutile {__version__}")
+    with open(".tmp", "w+") as fasta_fh:
+        smof.print_fasta(seq, out=fasta_fh)
 
-    if args["<alignment>"]:
-        f = open(args["<alignment>"])
-    else:
-        f = sys.stdin
+    o, e = MafftCommandline(mafft_exe, input=".tmp")()
 
-    if args["compare"]:
-        s = parseFasta(f)
-        for row in aadiff_table(
-            s,
-            consensus=args["--make-consensus"],
-            consensus_as_ref=args["--use-consensus-as-reference"],
-        ):
-            print("\t".join(row))
+    aligned_fh = open(".tmp_aln", "w+")
 
-    if args["represent"]:
-        s = parseFasta(f)
-        try:
-            pident = float(args["--min-pident-sep"])
-            if not (0.0 <= pident <= 100.0):
-                print("Expected pident between 0 and 100", file=sys.stderr)
-                exit(1)
-        except TypeError as e:
-            print("Expected pident to be a float", file=sys.stderr)
-            exit(1)
+    print(o, file=aligned_fh)
 
-        try:
-            if args["--max-day-sep"] is not None:
-                max_day_sep = int(args["--max-day-sep"])
-            else:
-                max_day_sep = None
-        except:
-            print("--max-day-sep must be an integer", file=sys.stderr)
-            sys.exit(1)
+    return list(smof.open_fasta(".tmp_aln"))
 
-        (groups, seqs) = represent(
-            s,
-            max_day_sep=max_day_sep,
-            min_pident_sep=pident,
-            same_state=args["--same-state"],
-        )
 
-        if args["--print-groups"]:
-            for group in groups:
-                for i in group:
-                    print(s[i][0])
-                print("")
+def extract_motif(alignment, motif, ref=None):
+    matches = smof.grep(
+        alignment,
+        pattern=motif,
+        match_sequence=True,
+        gapped=True,
+        perl_regexp=True,
+        gff=True,
+    )
+
+    if ref:
+        print("Checking against a reference", file=sys.stderr)
+        for row in matches:
+            els = row.split("\t")
+            if els[0] == ref:
+                lower, upper = els[3:5]
+                break
         else:
-            for (header, seq) in seqs:
-                print(">" + header)
-                print(seq)
+            print(
+                "The reference does not contain the motif, this is a bug",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+    else:
+        print("No reference, using the most common locus", file=sys.stderr)
+        bounds = [(a, b) for a, b in [x.split("\t")[3:5] for x in matches]]
+        boundCount = collections.Counter(bounds)
+        lower, upper = boundCount.most_common()[0][0]
+
+    mot = smof.subseq(alignment, int(lower), int(upper))
+
+    return mot
 
 
-if __name__ == "__main__":
-    main()
+def extract_aa_motif_from_dna(fasta_file, motif, aa_ref_file=None, mafft_exe="mafft"):
+    fna = list(smof.open_fasta(fasta_file))
+    faa = smof.translate(fna, all_frames=True)
+
+    # add reference sequences
+    if aa_ref_file:
+        print(f"Using ref '{aa_ref_file}'", file=sys.stderr) 
+        aa_ref = list(smof.open_fasta(aa_ref_file))
+        faa = list(aa_ref) + list(faa)
+    else:
+        print(f"No ref found", file=sys.stderr) 
+        aa_ref = Fasta([])
+
+    refs = [s.header for s in aa_ref]
+
+    if len(refs) > 0:
+        mot_ref = refs[0]
+    else:
+        mot_ref = None
+
+    aln = align(faa, mafft_exe=mafft_exe)
+
+    mot = extract_motif(aln, motif, ref=mot_ref)
+
+    # remove any reference sequences
+    for header in refs:
+        mot = smof.grep(mot, pattern=header, invert_match=True)
+
+    return mot
+
+
+def extract_h1_ha1(fasta_file, motif="DT[LI]C.*QSR", mafft_exe="mafft", cds=False):
+    h1_ref_file = os.path.join(os.path.dirname(__file__), "data", "h1-ha1-ref.faa")
+
+    ha1 = extract_aa_motif_from_dna(
+        fasta_file, motif=motif, aa_ref_file=h1_ref_file, mafft_exe=mafft_exe
+    )
+
+    smof.print_fasta(ha1)
+
+
+def extract_h3_ha1(fasta_file, motif="QKL.*QTR", mafft_exe="mafft", cds=False):
+    h3_ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
+
+    ha1 = extract_aa_motif_from_dna(
+        fasta_file, motif=motif, aa_ref_file=h3_ref_file, mafft_exe=mafft_exe
+    )
+
+    smof.print_fasta(ha1)

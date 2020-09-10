@@ -1,2 +1,4 @@
-docopt
+smof
+biopython
+click
 tqdm
