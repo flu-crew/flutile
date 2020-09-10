@@ -90,14 +90,14 @@ cds_opt = click.option(
     help="Trim to DNA coding sequence (not AA)",
 )
 
-@click.command(name="h1_ha1", help="Trim H1 sequences down to the HA1 segment.")
+@click.command(name="h1-ha1", help="Trim H1 DNA down to the HA1 AA using Brisbane/10/2007 template.")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
 @cds_opt
 def h1_ha1_cmd(fasta_file, mafft_exe, cds):
     extract_h1_ha1(fasta_file, mafft_exe=mafft_exe, cds=cds)
 
-@click.command(name="h1_ha3", help="Trim H3 sequences down to the HA1 segment.")
+@click.command(name="h3-ha1", help="Trim H3 DNA down to the HA1 AA using California/07/2009 template.")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
 @cds_opt
@@ -107,7 +107,7 @@ def h3_ha1_cmd(fasta_file, mafft_exe, cds):
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
-@click.group(name="trim", help="Cut the fat ones down to size", context_settings=CONTEXT_SETTINGS)
+@click.group(name="trim", help="Trim flu sequences in various ways. The trim operations use subtype-specific templates that are stored in the flutile package. You should not need to change these.", context_settings=CONTEXT_SETTINGS)
 def trim_grp():
     pass
 
