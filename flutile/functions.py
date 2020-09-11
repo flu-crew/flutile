@@ -14,6 +14,11 @@ class InputError(Exception):
     pass
 
 
+def err(msg):
+    print(msg, file=sys.stderr)
+    sys.exit(1)
+
+
 def parseFasta(filehandle):
     seqList = []
     header = None
@@ -246,7 +251,15 @@ def align(seq, mafft_exe="mafft"):
     return list(smof.open_fasta(".tmp_aln"))
 
 
-def extract_motif(alignment, motif, ref=None):
+def is_aligned(fasta):
+    lengths = {len(s.seq) for s in fasta}
+    if len(lengths) != 1:
+        err("Expected all files to be of equal length")
+
+
+def extract_motif(alignment, ref, motif):
+    is_aligned(alignment)
+
     matches = smof.grep(
         alignment,
         pattern=motif,
@@ -256,76 +269,96 @@ def extract_motif(alignment, motif, ref=None):
         gff=True,
     )
 
-    if ref:
-        print("Checking against a reference", file=sys.stderr)
-        for row in matches:
-            els = row.split("\t")
-            if els[0] == ref:
-                lower, upper = els[3:5]
-                break
-        else:
-            print(
-                "The reference does not contain the motif, this is a bug",
-                file=sys.stderr,
-            )
-            sys.exit(1)
+    for row in matches:
+        els = row.split("\t")
+        if ref in els[0]:
+            lower, upper = els[3:5]
+            lower, upper = (int(lower), int(upper))
+            break
     else:
-        print("No reference, using the most common locus", file=sys.stderr)
-        bounds = [(a, b) for a, b in [x.split("\t")[3:5] for x in matches]]
-        boundCount = collections.Counter(bounds)
-        lower, upper = boundCount.most_common()[0][0]
+        err("The reference does not contain the motif, this is a bug")
 
-    mot = smof.subseq(alignment, int(lower), int(upper))
+    mot = smof.subseq(alignment, lower, upper)
 
-    return mot
+    return (mot, lower, upper)
 
 
-def extract_aa_motif_from_dna(fasta_file, motif, aa_ref_file=None, mafft_exe="mafft"):
-    fna = list(smof.open_fasta(fasta_file))
-    faa = smof.translate(fna, all_frames=True)
+def extract_aa2aa(faa, ref, motif, mafft_exe="mafft"):
+    # add reference sequences to the input seq
+    faa = list(ref) + list(faa)
 
-    # add reference sequences
-    if aa_ref_file:
-        print(f"Using ref '{aa_ref_file}'", file=sys.stderr) 
-        aa_ref = list(smof.open_fasta(aa_ref_file))
-        faa = list(aa_ref) + list(faa)
-    else:
-        print(f"No ref found", file=sys.stderr) 
-        aa_ref = Fasta([])
-
-    refs = [s.header for s in aa_ref]
-
-    if len(refs) > 0:
-        mot_ref = refs[0]
-    else:
-        mot_ref = None
-
+    # align the reference and input protein sequences
     aln = align(faa, mafft_exe=mafft_exe)
 
-    mot = extract_motif(aln, motif, ref=mot_ref)
+    # Extract the motif using the first reference.
+    # 'a' and 'b': lower and upper limits of the HA1 segment
+    mot, a, b = extract_motif(aln, ref=ref[0].header, motif=motif)
 
-    # remove any reference sequences
-    for header in refs:
-        mot = smof.grep(mot, pattern=header, invert_match=True)
-
-    return mot
+    return list(mot)[len(ref):]
 
 
-def extract_h1_ha1(fasta_file, motif="DT[LI]C.*QSR", mafft_exe="mafft", cds=False):
-    h1_ref_file = os.path.join(os.path.dirname(__file__), "data", "h1-ha1-ref.faa")
+def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
+    # translate the DNA inputs (longest uninterupted CDS)
+    faa = smof.translate(fna, all_frames=True)
 
-    ha1 = extract_aa_motif_from_dna(
-        fasta_file, motif=motif, aa_ref_file=h1_ref_file, mafft_exe=mafft_exe
-    )
+    # because generators are the root of all evil
+    ref=list(ref)
+    faa=list(faa)
+    fna=list(fna)
+    aln=list(align(ref + faa, mafft_exe=mafft_exe))
 
-    smof.print_fasta(ha1)
+    # align translated inputs and ref, getting back the motifs and start/end positions
+    mot, a, b = extract_motif(aln, ref[0].header, motif=motif)
+
+    k = len(ref)
+    # find (start, length) bounds for each DNA entry
+    for i in range(len(fna)):
+        # start is 0-based
+        # whereas 'a' and 'b' above are 1-based
+        start, length = smof.find_max_orf(fna[i].seq, from_start=False)
+
+        seq = aln[i + k].seq
+
+        # motif start position, 0-based
+        aa_offset = len(seq[0 : (a - 1)].replace("-", ""))
+        aa_length = len(seq[(a - 1) : b].replace("-", ""))
+
+        dna_start = start + aa_offset * 3
+        dna_end = dna_start + aa_length * 3 + 1
+
+        fna[i].seq = fna[i].seq[dna_start:dna_end]
+
+    return fna
 
 
-def extract_h3_ha1(fasta_file, motif="QKL.*QTR", mafft_exe="mafft", cds=False):
-    h3_ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
+def _dispatch_extract(fasta_file, ref_file, conversion=None, *args, **kwargs):
+    # open input sequences
+    entries = smof.open_fasta(fasta_file)
+    # remove gaps
+    entries = list(smof.clean(entries, toseq=True))
+    # load AA reference file
+    ref = list(smof.open_fasta(ref_file))
+    # dispatch by sequence type
+    if conversion == "aa2aa":
+        f = extract_aa2aa
+    elif conversion == "dna2aa":
+        entries = smof.translate(entries, all_frames=True)
+        f = extract_aa2aa
+    elif conversion == "dna2dna":
+        f = extract_dna2dna
+    else:
+        err("Well shit, that shouldn't have happened")
 
-    ha1 = extract_aa_motif_from_dna(
-        fasta_file, motif=motif, aa_ref_file=h3_ref_file, mafft_exe=mafft_exe
-    )
+    return f(entries, ref, *args, **kwargs)
 
-    smof.print_fasta(ha1)
+
+def extract_h1_ha1(fasta_file, motif="DT[LI]C.*QSR", *args, **kwargs):
+    ref_file = os.path.join(os.path.dirname(__file__), "data", "h1-ha1-ref.faa")
+    out = _dispatch_extract(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
+    smof.print_fasta(out)
+
+
+def extract_h3_ha1(fasta_file, motif="QKL.*QTR", *args, **kwargs):
+    ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
+    out = _dispatch(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
+    smof.print_fasta(out)

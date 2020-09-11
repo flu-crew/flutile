@@ -82,41 +82,57 @@ mafft_exe_opt = click.option(
     type=str,
     help="Path to MAFFT alignment tool executable",
 )
-cds_opt = click.option(
-    "--cds",
-    default="mafft",
-    is_flag=True,
-    type=str,
-    help="Trim to DNA coding sequence (not AA)",
+
+conversion_opt = click.option(
+    "--conversion",
+    type=click.Choice(["dna2aa", "dna2dna", "aa2aa"], case_sensitive=False),
+    default="dna2aa",
+    help="aa2aa: align the input and reference AA sequences and extract the HA1 regions based on the reference. dna2aa: translate the input DNA sequences, add the AA reference, align, and extract the HA1. dna2dna: translate the input DNA (keeping track of the CDS start position), add reference, align, find AA HA1 motif, map HA1 regions back to DNA.",
 )
 
-@click.command(name="h1-ha1", help="Trim H1 DNA down to the HA1 AA using Brisbane/10/2007 template.")
-@click.argument("fasta_file", default=sys.stdin, type=click.File())
-@mafft_exe_opt
-@cds_opt
-def h1_ha1_cmd(fasta_file, mafft_exe, cds):
-    extract_h1_ha1(fasta_file, mafft_exe=mafft_exe, cds=cds)
 
-@click.command(name="h3-ha1", help="Trim H3 DNA down to the HA1 AA using California/07/2009 template.")
+@click.command(
+    name="h1-ha1",
+    help="Trim H1 DNA down to the HA1 AA using Brisbane/10/2007 template.",
+)
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
-@cds_opt
-def h3_ha1_cmd(fasta_file, mafft_exe, cds):
-    extract_h3_ha1(fasta_file, mafft_exe=mafft_exe, cds=cds)
+@conversion_opt
+def h1_ha1_cmd(fasta_file, mafft_exe, conversion):
+    extract_h1_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
+
+
+@click.command(
+    name="h3-ha1",
+    help="Trim H3 DNA down to the HA1 AA using California/07/2009 template.",
+)
+@click.argument("fasta_file", default=sys.stdin, type=click.File())
+@mafft_exe_opt
+@conversion_opt
+def h3_ha1_cmd(fasta_file, mafft_exe, conversion_opt):
+    extract_h3_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
 
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
-@click.group(name="trim", help="Trim flu sequences in various ways. The trim operations use subtype-specific templates that are stored in the flutile package. You should not need to change these.", context_settings=CONTEXT_SETTINGS)
+
+@click.group(
+    name="trim",
+    help="Trim flu sequences in various ways. The trim operations use subtype-specific templates that are stored in the flutile package. You should not need to change these.",
+    context_settings=CONTEXT_SETTINGS,
+)
 def trim_grp():
     pass
+
 
 trim_grp.add_command(h1_ha1_cmd)
 trim_grp.add_command(h3_ha1_cmd)
 
+
 @click.group(help="Flu-crew utilities", context_settings=CONTEXT_SETTINGS)
 def cli_grp():
     pass
+
 
 cli_grp.add_command(compare_cmd)
 cli_grp.add_command(represent_cmd)
