@@ -8,25 +8,68 @@ from flutile.functions import *
 
 INT_SENTINEL = 1e9
 
+CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
+
 
 @click.command(
-    name="compare",
-    help="Build table comparing AA differences between strains. The input must be a sequence alignment, usually a protein alignment, but DNA will work too.",
+    name="h1",
+    help="Compare AA differences between H1 strains. The input fasta file does NOT need to be aligned. Indexing is relative to the pandemic A/California/07/2009 strain. Optional trimming removes the first 17 residues from the indexing reference. This affects only the index numbering. If you actually want to trim the amino acid sequences, see `flutile trim`.",
 )
-@click.argument("alignment", default=sys.stdin, type=click.File())
+@click.argument("faa", default=sys.stdin, type=click.File())
 @click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
 @click.option(
     "--consensus-as-reference",
     is_flag=True,
     help="Use the consensus as the reference column",
 )
-def compare_cmd(alignment, make_consensus, consensus_as_reference):
-    s = parseFasta(alignment)
-    rows = aadiff_table(
-        s, consensus=make_consensus, consensus_as_ref=consensus_as_reference
+@click.option(
+    "--keep_signal",
+    is_flag=True,
+    help="Number relative to the initial Methionine (do not trim the signal peptide)",
+)
+def h1_aadiff_cmd(faa, keep_signal, make_consensus, consensus_as_reference):
+    table = h1_aadiff_table(
+        faa_file=faa,
+        keep_signal=keep_signal,
+        consensus=make_consensus,
+        consensus_as_ref=consensus_as_reference,
     )
-    for row in rows:
+    for row in table:
         print("\t".join(row))
+
+@click.command(
+    name="h3",
+    help="Compare AA differences between H3 strains. The input fasta file does NOT need to be aligned. Indexing is relative to A/Brisbane/10/2007.",
+)
+@click.argument("faa", default=sys.stdin, type=click.File())
+@click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
+@click.option(
+    "--consensus-as-reference",
+    is_flag=True,
+    help="Use the consensus as the reference column",
+)
+def h3_aadiff_cmd(faa, keep_signal, make_consensus, consensus_as_reference):
+    table = h3_aadiff_table(
+        faa_file=faa,
+        keep_signal=keep_signal,
+        consensus=make_consensus,
+        consensus_as_ref=consensus_as_reference,
+    )
+    for row in table:
+        print("\t".join(row))
+
+
+@click.group(
+    name="aadiff",
+    help="Compare AA differences between H1 strains.",
+    context_settings=CONTEXT_SETTINGS,
+)
+def aadiff_grp():
+    pass
+
+aadiff_grp.add_command(h1_aadiff_cmd)
+aadiff_grp.add_command(h3_aadiff_cmd)
+
 
 
 #      flutile represent [--max-day-sep=<days>] [--min-pident-sep=<pident>] [--same-state] [--print-groups] [<alignment>]
@@ -56,13 +99,15 @@ def compare_cmd(alignment, make_consensus, consensus_as_reference):
     is_flag=True,
 )
 def represent_cmd(alignment, max_day_sep, min_pident_sep, same_state, print_groups):
-    s = parseFasta(alignment)
-
     if max_day_sep == INT_SENTINEL:
         max_day_sep = None
 
-    (groups, seqs) = represent(
-        s, max_day_sep=max_day_sep, min_pident_sep=min_pident_sep, same_state=same_state
+    (groups, seqs) = with_aligned_pairs(
+        alignment,
+        represent,
+        max_day_sep=max_day_sep,
+        min_pident_sep=min_pident_sep,
+        same_state=same_state,
     )
 
     if print_groups:
@@ -112,10 +157,6 @@ def h1_ha1_cmd(fasta_file, mafft_exe, conversion):
 def h3_ha1_cmd(fasta_file, mafft_exe, conversion_opt):
     extract_h3_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
 
-
-CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
-
-
 @click.group(
     name="trim",
     help="Trim flu sequences in various ways. The trim operations use subtype-specific templates that are stored in the flutile package. You should not need to change these.",
@@ -134,7 +175,7 @@ def cli_grp():
     pass
 
 
-cli_grp.add_command(compare_cmd)
+cli_grp.add_command(aadiff_grp)
 cli_grp.add_command(represent_cmd)
 cli_grp.add_command(trim_grp)
 

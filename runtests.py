@@ -6,6 +6,51 @@ import datetime
 import sys
 
 
+class TestIndexedAADiff(unittest.TestCase):
+    def test_gapped_indices(self):
+        self.assertEqual(f.gapped_indices("ATG"), ["1", "2", "3"])
+        self.assertEqual(f.gapped_indices("--ATG"), ["-2", "-1", "1", "2", "3"])
+        self.assertEqual(
+            f.gapped_indices("--ATG--"), ["-2", "-1", "1", "2", "3", "3+1", "3+2"]
+        )
+        self.assertEqual(
+            f.gapped_indices("--A--T-G--"),
+            ["-2", "-1", "1", "1+1", "1+2", "2", "2+1", "3", "3+1", "3+2"],
+        )
+        self.assertEqual(f.gapped_indices("---"), ["-3", "-2", "-1"])
+
+    #  def test_indexed_aa_diff_table(self):
+    #      #  --GA--T--   index sequence
+    #      #  AAT-GGTTT   reference sequence
+    #      #  AATTGGATT   a compared sequence
+    #      #  -------------------------------
+    #      #  Site   Ref   S1
+    #      #  -2     A
+    #      #  -1     A
+    #      #  1      T
+    #      #  2      -     T
+    #      #  2+1    G     T
+    #      #  2+2    G
+    #      #  3      T     G
+    #      #  3+1    T
+    #      #  3+2    T
+    #      simple = [("Ind", "--GA--T--"), ("Ref", "AAT-GGTTT"),  ("S1", "AATTGGATT")]
+    #      self.assertEqual(f.inexed_aa_diff_table(simple),
+    #          (   ["Site", "Ref", "S1"],
+    #            [
+    #              [ "-2" , "A", ""  ],
+    #              [ "-1" , "A", ""  ],
+    #              [ "1"  , "T", ""  ],
+    #              [ "2"  , "-", "T" ],
+    #              [ "2+1", "G", "T" ],
+    #              [ "2+2", "G", ""  ],
+    #              [ "3"  , "T", "A" ],
+    #              [ "3+1", "T", ""  ]
+    #              [ "3+2", "T", ""  ]
+    #            ]
+    #          )
+
+
 class TestParsers(unittest.TestCase):
     def test_aadiff(self):
         simple_seqs = [("A", "AAAAA"), ("B", "TAAAA"), ("C", "TAAAA"), ("D", "TAAAC")]

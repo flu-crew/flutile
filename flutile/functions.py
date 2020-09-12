@@ -14,67 +14,22 @@ class InputError(Exception):
     pass
 
 
+def is_aligned(fasta):
+    lengths = {len(s.seq) for s in fasta}
+    if len(lengths) != 1:
+        err("Expected all files to be of equal length")
+
+
 def err(msg):
     print(msg, file=sys.stderr)
     sys.exit(1)
 
 
-def parseFasta(filehandle):
-    seqList = []
-    header = None
-    seq = None
-    for line in filehandle:
-        line = line.strip()
-        if not line or line[0] == "#":
-            continue
-        if line[0] == ">":
-            if header and seq:
-                seqList.append((header, seq))
-            header = line[1:]
-            seq = ""
-        else:
-            seq += line
-    seqList.append((header, seq))
-    return seqList
-
-
-def aadiff_table(s, consensus=False, consensus_as_ref=False):
-    def find_consensus(i):
-        counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
-        return counts.most_common()[0][0]
-
-    # add the consensus header column, if needed
-    if consensus or consensus_as_ref:
-        consensus_seq = "".join(find_consensus(i) for i in range(len(s[0][1])))
-        # the consensus column goes first if it is being used as a reference
-        if consensus_as_ref:
-            s = [("Consensus", consensus_seq)] + s
-        # otherwise it goes last
-        else:
-            s = s + [("Consensus", consensus_seq)]
-
-    header = [x[0] for x in s]
-    yield (["site"] + header)
-
-    seq_ids = list(range(len(s)))
-    aa_ids = list(range(len(s[0][1])))
-
-    # for each amino acid position in the alignment
-    for i in aa_ids:
-        ref = s[0][1][i]
-        position = str(i + 1)
-        # for each sequence in the alignment
-        for j in seq_ids:
-            if s[j][1][i] != ref:
-                row = [position, ref]
-                for k in seq_ids[1:]:
-                    aa = s[k][1][i]
-                    if aa == ref:
-                        row.append("")
-                    else:
-                        row.append(aa)
-                yield row
-                break
+def with_aligned_pairs(alignment, f, *args, **kwargs):
+    fasta_obj = smof.open_fasta(alignment)
+    is_aligned(fasta_obj)
+    s = [(s.header, s.seq) for s in fasta_obj]
+    f(s, *args, **kwargs)
 
 
 def parseOutDate(s):
@@ -251,12 +206,6 @@ def align(seq, mafft_exe="mafft"):
     return list(smof.open_fasta(".tmp_aln"))
 
 
-def is_aligned(fasta):
-    lengths = {len(s.seq) for s in fasta}
-    if len(lengths) != 1:
-        err("Expected all files to be of equal length")
-
-
 def extract_motif(alignment, ref, motif):
     is_aligned(alignment)
 
@@ -294,7 +243,7 @@ def extract_aa2aa(faa, ref, motif, mafft_exe="mafft"):
     # 'a' and 'b': lower and upper limits of the HA1 segment
     mot, a, b = extract_motif(aln, ref=ref[0].header, motif=motif)
 
-    return list(mot)[len(ref):]
+    return list(mot)[len(ref) :]
 
 
 def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
@@ -302,10 +251,10 @@ def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
     faa = smof.translate(fna, all_frames=True)
 
     # because generators are the root of all evil
-    ref=list(ref)
-    faa=list(faa)
-    fna=list(fna)
-    aln=list(align(ref + faa, mafft_exe=mafft_exe))
+    ref = list(ref)
+    faa = list(faa)
+    fna = list(fna)
+    aln = list(align(ref + faa, mafft_exe=mafft_exe))
 
     # align translated inputs and ref, getting back the motifs and start/end positions
     mot, a, b = extract_motif(aln, ref[0].header, motif=motif)
@@ -362,3 +311,109 @@ def extract_h3_ha1(fasta_file, motif="QKL.*QTR", *args, **kwargs):
     ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
     out = _dispatch(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
     smof.print_fasta(out)
+
+
+def gapped_indices(seq):
+    def _handle_run(run, ind):
+        if ind == 0:
+            return list(reversed([("-" + str(i)) for i in range(1, run + 1)]))
+        else:
+            return [f"{str(ind)}+{str(i)}" for i in range(1, run + 1)]
+
+    indices = []
+    run = 0
+    ind = 0
+    for i in range(len(seq)):
+        if seq[i] == "-":
+            run += 1
+        else:
+            if run > 0:
+                indices += _handle_run(run, ind)
+                run = 0
+            ind += 1
+            indices.append(str(ind))
+    if run > 0:
+        indices += _handle_run(run, ind)
+    return indices
+
+
+def aadiff_table(s, consensus=False, consensus_as_ref=False):
+    def find_consensus(i):
+        counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
+        return counts.most_common()[0][0]
+
+    # add the consensus header column, if needed
+    if consensus or consensus_as_ref:
+        consensus_seq = "".join(find_consensus(i) for i in range(len(s[0][1])))
+        # the consensus column goes first if it is being used as a reference
+        if consensus_as_ref:
+            s = [("Consensus", consensus_seq)] + s
+        # otherwise it goes last
+        else:
+            s = s + [("Consensus", consensus_seq)]
+
+    header = [x[0] for x in s]
+    yield (["site"] + header)
+
+    seq_ids = list(range(len(s)))
+    aa_ids = list(range(len(s[0][1])))
+
+    # for each amino acid position in the alignment
+    for i in aa_ids:
+        ref = s[0][1][i]
+        position = str(i + 1)
+        # for each sequence in the alignment
+        for j in seq_ids:
+            if s[j][1][i] != ref:
+                row = [position, ref]
+                for k in seq_ids[1:]:
+                    aa = s[k][1][i]
+                    if aa == ref:
+                        row.append("")
+                    else:
+                        row.append(aa)
+                yield row
+                break
+
+
+def indexed_aadiff_table(faa_file, ref_file, trim=0, mafft_exe="mafft", **kwargs):
+
+    # open input sequences
+    entries = smof.open_fasta(faa_file)
+    # remove gaps
+    entries = list(smof.clean(entries, toseq=True))
+    # load AA reference file
+    ref = list(smof.open_fasta(ref_file))[0]
+
+    # trim off signal peptides or other gunk at the beginning of the reference
+    ref.seq = ref.seq[trim:]
+
+    # align the reference and input protein sequences
+    aln = align([ref] + list(entries), mafft_exe=mafft_exe)
+    aln = [(s.header, s.seq) for s in aln]
+
+    indices = gapped_indices(aln[0])
+
+    table = aadiff_table(aln[1:], **kwargs)
+    for row in table:
+        row[0] = indices[row[0]]
+
+    return table
+
+
+def h1_aadiff_table(faa_file, keep_signal=False, **kwargs):
+    # full, un-trimmed pdm protein sequence
+    ref_file = os.path.join(os.path.dirname(__file__), "data", "pdm-ref.faa")
+
+    if keep_signal:
+        trim = 0
+    else:
+        trim = 17
+
+    return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)
+
+
+def h3_aadiff_table(faa_file, **kwargs):
+    # full, un-trimmed H3 protein sequence
+    ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ref.faa")
+    return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)
