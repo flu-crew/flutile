@@ -1,5 +1,1 @@
-from flutile.functions import (
-  parseFasta,
-  aadiff_table,
-  represent,
-)
+from flutile.functions import aadiff_table, represent

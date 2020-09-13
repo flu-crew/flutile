@@ -8,4 +8,5 @@ python:
 install:
     - pip install -r requirements.txt
     - pip install .
+    - pip install smof
 script: ./runtests.py && test-data/clades/test.sh
