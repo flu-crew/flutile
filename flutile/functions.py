@@ -15,8 +15,7 @@ class InputError(Exception):
 
 
 def err(msg):
-    print(msg, file=sys.stderr)
-    sys.exit(1)
+    raise InputError("msg")
 
 
 def parseFasta(filehandle):
@@ -244,16 +243,20 @@ def align(seq, mafft_exe="mafft"):
 
     o, e = MafftCommandline(mafft_exe, input=".tmp")()
 
-    aligned_fh = open(".tmp_aln", "w+")
+    print(e, file=sys.stderr)
 
-    print(o, file=aligned_fh)
+    with open(".tmp_aln", "w+") as fh:
+        print(o, file=fh)
 
-    return list(smof.open_fasta(".tmp_aln"))
+    aln = list(smof.open_fasta(".tmp_aln"))
+
+    return aln
 
 
 def is_aligned(fasta):
     lengths = {len(s.seq) for s in fasta}
     if len(lengths) != 1:
+        print(lengths, file=sys.stderr)
         err("Expected all files to be of equal length")
 
 
@@ -360,5 +363,5 @@ def extract_h1_ha1(fasta_file, motif="DT[LI]C.*QSR", *args, **kwargs):
 
 def extract_h3_ha1(fasta_file, motif="QKL.*QTR", *args, **kwargs):
     ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
-    out = _dispatch(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
+    out = _dispatch_extract(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
     smof.print_fasta(out)

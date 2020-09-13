@@ -1,3 +1,9 @@
+0.5.0 [2020-xx-xx]
+
+ * Fix bug in h3 trim
+ * Add tests for trim
+ * Add sequence samples from all h1 and h3 clades
+
 0.4.0 [2020-09-11]
 
 Add `trim`

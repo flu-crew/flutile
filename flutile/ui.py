@@ -109,7 +109,7 @@ def h1_ha1_cmd(fasta_file, mafft_exe, conversion):
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
 @conversion_opt
-def h3_ha1_cmd(fasta_file, mafft_exe, conversion_opt):
+def h3_ha1_cmd(fasta_file, mafft_exe, conversion):
     extract_h3_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
 
 

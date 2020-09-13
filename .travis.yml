@@ -8,4 +8,4 @@ python:
 install:
     - pip install -r requirements.txt
     - pip install .
-script: ./runtests.py
+script: ./runtests.py && test-data/clades/test.sh
