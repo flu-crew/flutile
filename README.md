@@ -54,3 +54,30 @@ separated by less than or equal to `--max-day-sep` and that are a sequence
 identity of greather than or equal to `--min-pident-sep` will be clustered
 together. A single representative is sampled from each cluster (the latest one
 with ties resolved by order).
+
+
+### `trim`
+
+HA trimming is based on:
+    Burke, Smith (2014) *A Recommended Numbering Scheme for Influenza A HA Subtypes*
+
+
+--- | ------------------------------------------------- | ------------------- | ---------------------- |
+H1  | A/United Kingdom/1/1933                           | MKARLLVLLCALAATDA   | DTICIGYHANNS           |
+H2  | A/Singapore/1/1957                                | MAIIYLILLFTAVRG     | DQICIGYHANNS           |
+H3  | A/Aichi/2/1968                                    | MKTIIALSYIFCLPLG    | QDLPGNDNSTATLCLGHHAVPN | * MKTIIALSYIFCL*A*LG
+H4  | A/swine/Ontario/01911–2/1999                      | MLSIAILFLLIAEGSS    | QNYTGNPVICLGHHAVSN     |
+H5  | A/Vietnam/1203/2004                               | MEKIVLLFAIVSLVKS    | DQICIGYHANNS           |
+H6  | A/chicken/Taiwan/0705/1999                        | MIAIIVIATLAAAGKS    | DKICIGYHANNS           |
+H7  | A/Netherlands/219/2003                            | MNTQILVFALVASIPTNA  | DKICLGHHAVSN           |
+H8  | A/turkey/Ontario/6118/1968                        | MEKFIAIAMLLASTNA    | YDRICIGYQSNNS          |
+H9  | A/swine/Hong Kong/9/1998                          | MEAASLITILLVVTASNA  | DKICIGYQSTNS           |
+H10 | A/mallard/bavaria/3/2006                          | MYKIVVIIALLGAVKG    | LDKICLGHHAVAN          |
+H11 | A/duck/England/1/1956                             | MEKTLLFAAIFLCVKA    | DEICIGYLSNNS           |
+H12 | A/duck/Alberta/60/1976                            | MEKFIILSTVLAASFA    | YDKICIGYQTNNS          |
+H13 | A/gull/Maryland/704/1977                          | MALNVIATLTLISVCVHA  | DRICVGYLSTNS           |
+H14 | A/mallard/Astrakhan/263/1982                      | MIALILVALALSHTAYS   | QITNGTTGNPIICLGHHAVEN  |
+H15 | A/duck/Australia/341/1983                         | MNTQIIVILVLGLSMVRS  | DKICLGHHAVAN           |
+H16 | A/black-headed-gull/Turkmenistan/13/1976          | MMIKVLYFLIIVLGRYSKA | DKICIGYLSNNS           |
+H17 | A/little-yellow-shouldered bat/Guatemala/060/2010 | MELIILLILLNPYTFVLG  | DRICIGYQANQN           |
+H18 | A/flat-faced bat/Peru/033/2010                    | MITILILVLPIVVG      | DQICIGYHSNNS           |

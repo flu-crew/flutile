@@ -398,16 +398,19 @@ def indexed_aadiff_table(faa_file, ref_file, trim=0, mafft_exe="mafft", **kwargs
     ref.seq = ref.seq[trim:]
 
     # align the reference and input protein sequences
-    aln = align([ref] + list(entries), mafft_exe=mafft_exe)
+    aln = align([ref] + entries, mafft_exe=mafft_exe)
     aln = [(s.header, s.seq) for s in aln]
 
-    indices = gapped_indices(aln[0])
+    indices = gapped_indices(aln[0][1])
 
-    table = aadiff_table(aln[1:], **kwargs)
-    for row in table:
-        row[0] = indices[row[0]]
+    table = list(aadiff_table(aln[1:], **kwargs))
 
-    return table
+    for i, row in enumerate(table):
+        if i == 0:
+            yield row
+        else:
+            row[0] = indices[int(row[0])-1]
+            yield row
 
 
 def h1_aadiff_table(faa_file, keep_signal=False, **kwargs):
@@ -422,7 +425,13 @@ def h1_aadiff_table(faa_file, keep_signal=False, **kwargs):
     return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)
 
 
-def h3_aadiff_table(faa_file, **kwargs):
+def h3_aadiff_table(faa_file, keep_signal=False, **kwargs):
     # full, un-trimmed H3 protein sequence
     ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ref.faa")
+
+    if keep_signal:
+        trim = 0
+    else:
+        trim = 16
+
     return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)

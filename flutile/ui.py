@@ -27,7 +27,7 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
     is_flag=True,
     help="Number relative to the initial Methionine (do not trim the signal peptide)",
 )
-def h1_aadiff_cmd(faa, keep_signal, make_consensus, consensus_as_reference):
+def h1_aadiff_cmd(faa, make_consensus, consensus_as_reference, keep_signal):
     table = h1_aadiff_table(
         faa_file=faa,
         keep_signal=keep_signal,
@@ -49,7 +49,12 @@ def h1_aadiff_cmd(faa, keep_signal, make_consensus, consensus_as_reference):
     is_flag=True,
     help="Use the consensus as the reference column",
 )
-def h3_aadiff_cmd(faa, keep_signal, make_consensus, consensus_as_reference):
+@click.option(
+    "--keep_signal",
+    is_flag=True,
+    help="Number relative to the initial Methionine (do not trim the signal peptide)",
+)
+def h3_aadiff_cmd(faa, make_consensus, consensus_as_reference, keep_signal):
     table = h3_aadiff_table(
         faa_file=faa,
         keep_signal=keep_signal,
