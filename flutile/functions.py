@@ -6,6 +6,7 @@ import tqdm
 import tempfile
 import smof
 import os
+import flutile.motifs as motifs
 from flutile.functions import *
 from flutile.version import __version__
 
@@ -346,16 +347,16 @@ def gapped_indices(seq):
     return indices
 
 
-def aadiff_table(s, consensus=False, consensus_as_ref=False):
+def aadiff_table(s, make_consensus=False, consensus_as_reference=False):
     def find_consensus(i):
         counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
         return counts.most_common()[0][0]
 
     # add the consensus header column, if needed
-    if consensus or consensus_as_ref:
+    if make_consensus or consensus_as_reference:
         consensus_seq = "".join(find_consensus(i) for i in range(len(s[0][1])))
         # the consensus column goes first if it is being used as a reference
-        if consensus_as_ref:
+        if consensus_as_reference:
             s = [("Consensus", consensus_seq)] + s
         # otherwise it goes last
         else:
@@ -385,53 +386,56 @@ def aadiff_table(s, consensus=False, consensus_as_ref=False):
                 break
 
 
-def indexed_aadiff_table(faa_file, ref_file, trim=0, mafft_exe="mafft", **kwargs):
+def referenced_aadiff_table(
+    faa,
+    subtype=None,
+    mafft_exe="mafft",
+    keep_signal=False,
+    **kwargs,
+):
+    if subtype:
+        ref = motifs.get_ha_subtype_nterm_motif(subtype)
+    else:
+        ref = None
+
+    if keep_signal:
+        # each of the reference sequences starts at the signal peptide's
+        # initial methionine, so to keep the signal we trim nothing
+        trim = 0
+    elif subtype:
+        # the motif here is an exact match to the reference signal peptide, we
+        # want to remove the signal peptide, so the trim length is simply the
+        # peptide length
+        trim = len(ref.motif)
 
     # open input sequences
-    entries = smof.open_fasta(faa_file)
+    entries = smof.open_fasta(faa)
     # remove gaps
     entries = list(smof.clean(entries, toseq=True))
-    # load AA reference file
-    ref = list(smof.open_fasta(ref_file))[0]
 
-    # trim off signal peptides or other gunk at the beginning of the reference
-    ref.seq = ref.seq[trim:]
+    if subtype:
+        # trim off signal peptides or other gunk at the beginning of the reference
+        seq = ref.sequence[trim:]
+
+        refseq = smof.FastaEntry(header=ref.defline, seq=seq)
+
+        entries = [refseq] + entries
 
     # align the reference and input protein sequences
-    aln = align([ref] + entries, mafft_exe=mafft_exe)
+    aln = align(entries, mafft_exe=mafft_exe)
     aln = [(s.header, s.seq) for s in aln]
 
     indices = gapped_indices(aln[0][1])
 
-    table = list(aadiff_table(aln[1:], **kwargs))
+    if subtype:
+        # remove the reference sequence
+        aln = aln[1:]
+
+    table = list(aadiff_table(aln, **kwargs))
 
     for i, row in enumerate(table):
         if i == 0:
             yield row
         else:
-            row[0] = indices[int(row[0])-1]
+            row[0] = indices[int(row[0]) - 1]
             yield row
-
-
-def h1_aadiff_table(faa_file, keep_signal=False, **kwargs):
-    # full, un-trimmed pdm protein sequence
-    ref_file = os.path.join(os.path.dirname(__file__), "data", "pdm-ref.faa")
-
-    if keep_signal:
-        trim = 0
-    else:
-        trim = 17
-
-    return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)
-
-
-def h3_aadiff_table(faa_file, keep_signal=False, **kwargs):
-    # full, un-trimmed H3 protein sequence
-    ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ref.faa")
-
-    if keep_signal:
-        trim = 0
-    else:
-        trim = 16
-
-    return indexed_aadiff_table(faa_file, ref_file, trim=trim, **kwargs)

@@ -3,6 +3,7 @@
  * Fix bug in h3 trim
  * Add tests for trim
  * Add sequence samples from all h1 and h3 clades
+ * Add aadiff subcommand with absolute HA indexing against subtype refs
 
 0.4.0 [2020-09-11]
 

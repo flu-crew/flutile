@@ -3,3 +3,6 @@ include flutile/data/h3-ha1-ref.faa
 
 include flutile/data/pdm-ref.faa
 include flutile/data/h3-ref.faa
+
+include flutile/data/subtype-refs.faa
+include flutile/data/subtype-refs.fna

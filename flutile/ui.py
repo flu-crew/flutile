@@ -10,75 +10,39 @@ INT_SENTINEL = 1e9
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
+mafft_exe_opt = click.option(
+    "--mafft-exe",
+    default="mafft",
+    type=str,
+    help="Path to MAFFT alignment tool executable",
+)
 
 @click.command(
-    name="h1",
-    help="Compare AA differences between H1 strains. The input fasta file does NOT need to be aligned. Indexing is relative to the pandemic A/California/07/2009 strain. Optional trimming removes the first 17 residues from the indexing reference. This affects only the index numbering. If you actually want to trim the amino acid sequences, see `flutile trim`.",
-)
-@click.argument("faa", default=sys.stdin, type=click.File())
-@click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
-@click.option(
-    "--consensus-as-reference",
-    is_flag=True,
-    help="Use the consensus as the reference column",
-)
-@click.option(
-    "--keep_signal",
-    is_flag=True,
-    help="Number relative to the initial Methionine (do not trim the signal peptide)",
-)
-def h1_aadiff_cmd(faa, make_consensus, consensus_as_reference, keep_signal):
-    table = h1_aadiff_table(
-        faa_file=faa,
-        keep_signal=keep_signal,
-        consensus=make_consensus,
-        consensus_as_ref=consensus_as_reference,
-    )
-    for row in table:
-        print("\t".join(row))
-
-
-@click.command(
-    name="h3",
-    help="Compare AA differences between H3 strains. The input fasta file does NOT need to be aligned. Indexing is relative to A/Brisbane/10/2007.",
-)
-@click.argument("faa", default=sys.stdin, type=click.File())
-@click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
-@click.option(
-    "--consensus-as-reference",
-    is_flag=True,
-    help="Use the consensus as the reference column",
-)
-@click.option(
-    "--keep_signal",
-    is_flag=True,
-    help="Number relative to the initial Methionine (do not trim the signal peptide)",
-)
-def h3_aadiff_cmd(faa, make_consensus, consensus_as_reference, keep_signal):
-    table = h3_aadiff_table(
-        faa_file=faa,
-        keep_signal=keep_signal,
-        consensus=make_consensus,
-        consensus_as_ref=consensus_as_reference,
-    )
-    for row in table:
-        print("\t".join(row))
-
-
-@click.group(
     name="aadiff",
-    help="Compare AA differences between H1 strains.",
-    context_settings=CONTEXT_SETTINGS,
+    help="Compare differences between sequences. The input fasta file does NOT need to be aligned. If a subtype is specified, indexing will be relative to the index reference (Burke 2014). If no subtype is specified, the numbering will be relative to the first entry in fasta file (or the consensus sequence if --consensus-as-reference is set)",
 )
-def aadiff_grp():
-    pass
+@click.argument("faa", default=sys.stdin, type=click.File())
+@click.option(
+    "--subtype",
+    help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
+)
+@click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
+@click.option(
+    "--consensus-as-reference",
+    is_flag=True,
+    help="Use the consensus as the reference column",
+)
+@click.option(
+    "--keep_signal",
+    is_flag=True,
+    help="Number relative to the initial Methionine (do not trim the signal peptide)",
+)
+@mafft_exe_opt
+def aadiff_cmd(*args, **kwargs):
+    for row in referenced_aadiff_table(*args, **kwargs):
+        print("\t".join(row))
 
 
-aadiff_grp.add_command(h1_aadiff_cmd)
-aadiff_grp.add_command(h3_aadiff_cmd)
-
-
-#      flutile represent [--max-day-sep=<days>] [--min-pident-sep=<pident>] [--same-state] [--print-groups] [<alignment>]
 @click.command(
     name="represent",
     help="Representative subsampling by sequence similarity. The input must be a sequence alignment.",
@@ -126,13 +90,6 @@ def represent_cmd(alignment, max_day_sep, min_pident_sep, same_state, print_grou
             print(">" + header)
             print(seq)
 
-
-mafft_exe_opt = click.option(
-    "--mafft-exe",
-    default="mafft",
-    type=str,
-    help="Path to MAFFT alignment tool executable",
-)
 
 conversion_opt = click.option(
     "--conversion",
@@ -182,7 +139,7 @@ def cli_grp():
     pass
 
 
-cli_grp.add_command(aadiff_grp)
+cli_grp.add_command(aadiff_cmd)
 cli_grp.add_command(represent_cmd)
 cli_grp.add_command(trim_grp)
 
