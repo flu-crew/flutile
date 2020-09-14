@@ -1,0 +1,14 @@
+site	a	b
+-2	A	G
+-1	R	A
+1	A	N
+2	T	D
+3	I	A
+4	C	L
+5	I	F
+32+1	S	F
+32+3	D	T
+32+4	D	C
+32+6	D	T
+226	R	W
+228	N	W
