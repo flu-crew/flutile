@@ -1,4 +1,4 @@
-0.5.0 [2020-xx-xx]
+0.5.0 [2020-09-14]
 
  * Fix bug in h3 trim
  * Add tests for trim
