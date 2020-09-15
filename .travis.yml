@@ -9,4 +9,4 @@ install:
     - pip install -r requirements.txt
     - pip install .
     - pip install smof
-script: ./runtests.py && cd test-data && ./test.sh && cd clades && ./test.sh
+script: ./runtests.py && cd pip install . && test-data && ./test.sh && cd clades && ./test.sh
