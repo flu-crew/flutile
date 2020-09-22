@@ -1,4 +1,4 @@
-smof
+smof>=2.21.0
 biopython
 click
 tqdm
