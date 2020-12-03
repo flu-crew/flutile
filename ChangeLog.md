@@ -1,4 +1,10 @@
+0.6.0 [2020-12-xx]
+
+ [ ] aadiff: add annotations
+ [ ] trim: support HA trimming to HA1 for all subtypes
+
 0.5.0 [2020-09-14]
+------------------
 
  * Fix bug in h3 trim
  * Add tests for trim
@@ -18,6 +24,7 @@ Fix bug in --print-groups
 Bug fixes
 
 0.3.0 [2020-08-06]
+------------------
 
 Changes to represent:
  * Add --print-groups option
@@ -28,9 +35,11 @@ Changes to represent:
  * Do not parse states unless --same-state is given 
 
 0.2.0 [2020-01-06]
+------------------
 
  * add group by USA state
 
 0.1.0 [2019-12-20]
+------------------
 
  * initial release
