@@ -388,26 +388,31 @@ def aadiff_table(s, make_consensus=False, consensus_as_reference=False, **kwargs
 
 def annotate_table(
     table,
-    caton82=False,
     subtype=None,
     annotation_tables="",
     join_annotations=False,
     keep_signal=False,
+    caton82=False,
+    wiley81=False,
     **kwargs,
 ):
+
+    def load_builtin_annotations(name, subtype_exp):
+        if subtype_exp != subtype:
+            err(f"{name} annotation is only defined for {subtype_exp}")
+
+        if keep_signal:
+            err("{name} annotation is incompatible with --keep_signal")
+
+        return os.path.join(os.path.dirname(__file__), "data", f"{name}.txt")
 
     all_anntables = []
 
     if caton82:
-        if subtype != "H1":
-            err("caton82 annotation is only defined for H1")
+      all_anntables.append(load_builtin_annotations("caton82", "H1"))
 
-        if keep_signal:
-            err("caton82 annotation is incompatible with --keep_signal")
-
-        caton82_file = os.path.join(os.path.dirname(__file__), "data", "caton82.txt")
-
-        all_anntables.append(caton82_file)
+    if wiley81:
+      all_anntables.append(load_builtin_annotations("wiley81", "H3"))
 
     annotations = {x[0]: [] for x in table[1:]}
 

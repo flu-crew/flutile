@@ -25,6 +25,9 @@ mafft_exe_opt = click.option(
 @click.argument("faa", default=sys.stdin, type=click.File())
 @click.option(
     "--subtype",
+    type=click.Choice(['H1', 'H2', 'H3', "H4", "H5", 'H6', 'H7', "H8", "H9",
+                       'H10', 'H11', 'H12', "H13", "H14", 'H15', 'H16', "H17", "H18"
+      ], case_sensitive=False),
     help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
 )
 @click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
@@ -40,11 +43,6 @@ mafft_exe_opt = click.option(
 )
 @mafft_exe_opt
 @click.option(
-    "--caton82",
-    is_flag=True,
-    help="Annotate H1 tables with antigenic sites from [Caton 1982]",
-)
-@click.option(
     "--annotation-tables",
     help="One or more TAB-delimited tables containing annotations (separated by commas). The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
 )
@@ -52,6 +50,16 @@ mafft_exe_opt = click.option(
     "--join-annotations",
     help="Join all annotation columns, seperating values with commas",
     is_flag=True,
+)
+@click.option(
+    "--caton82",
+    is_flag=True,
+    help="Add H1 antigenic sites from [Caton 1982]",
+)
+@click.option(
+    "--wiley81",
+    is_flag=True,
+    help="Add H3 antigenic sites from [Wiley 1981]",
 )
 def aadiff_cmd(*args, **kwargs):
     for row in referenced_aadiff_table(*args, **kwargs):

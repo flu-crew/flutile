@@ -8,3 +8,4 @@ include flutile/data/subtype-refs.faa
 include flutile/data/subtype-refs.fna
 
 include flutile/data/caton82.txt
+include flutile/data/wiley81.txt
