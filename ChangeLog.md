@@ -1,7 +1,11 @@
-0.6.0 [2020-12-xx]
+0.6.0 [2020-12-03]
+------------------
 
- [ ] aadiff: add annotations
- [ ] trim: support HA trimming to HA1 for all subtypes
+allow aadiff annotations 
+
+   - `--caton82` for antigenic sites
+   - `--annotation-tables=STR` for list of annotation tables to load
+   - `--join-annotations` to join all annotations into one column
 
 0.5.0 [2020-09-14]
 ------------------
