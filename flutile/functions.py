@@ -386,35 +386,66 @@ def aadiff_table(s, make_consensus=False, consensus_as_reference=False, **kwargs
                 break
 
 
-def annotate_table(table, caton82=False, subtype=None, keep_signal=False, **kwargs):
+def annotate_table(
+    table,
+    caton82=False,
+    subtype=None,
+    annotation_tables="",
+    join_annotations=False,
+    keep_signal=False,
+    **kwargs,
+):
 
-  if caton82:
-    if subtype != "H1":
-        err("caton82 annotation is only defined for H1")
+    all_anntables = []
 
-    if keep_signal:
-        err("caton82 annotation is incompatible with --keep_signal")
+    if caton82:
+        if subtype != "H1":
+            err("caton82 annotation is only defined for H1")
 
-    caton82_file = os.path.join(os.path.dirname(__file__), "data", "caton82.txt")
+        if keep_signal:
+            err("caton82 annotation is incompatible with --keep_signal")
 
-    with open(caton82_file, "r") as f:
-      caton82 = {k : v for k,v in [x.split("\t") for x in f.readlines()]}
+        caton82_file = os.path.join(os.path.dirname(__file__), "data", "caton82.txt")
+
+        all_anntables.append(caton82_file)
+
+    annotations = {x[0]: [] for x in table[1:]}
+
+    new_column_names = []
+
+    if annotation_tables:
+        all_anntables += [f.strip() for f in annotation_tables.split(",")]
+
+    for annotation_file in all_anntables:
+
+        with open(annotation_file, "r") as f:
+            lines = [line.split("\t") for line in f.readlines()]
+            new_annotations = {line[0] : [x.strip() for x in line[1:]] for line in lines}
+
+            new_column_names += lines[0][1:]
+            for k, vs in annotations.items():
+                if k in new_annotations:
+                    annotations[k] += new_annotations[k]
+                else:
+                    annotations[k] += [""] * len(lines[0][1:])
+
+    if join_annotations:
+        annotations = {
+            k: [", ".join([v for v in vs if v])] for (k, vs) in annotations.items()
+        }
+        new_column_names = ["annotations"]
 
     for i, row in enumerate(table):
         if i == 0:
-            table[0].append("caton82")
-        elif row[0] in caton82:
-            table[i].append(caton82[row[0]])
+            table[0] += new_column_names
+        else:
+            table[i] += annotations[row[0]]
 
-  return table
+    return table
 
 
 def referenced_aadiff_table(
-    faa,
-    subtype=None,
-    mafft_exe="mafft",
-    keep_signal=False,
-    **kwargs,
+    faa, subtype=None, mafft_exe="mafft", keep_signal=False, **kwargs
 ):
     if subtype:
         ref = motifs.get_ha_subtype_nterm_motif(subtype)

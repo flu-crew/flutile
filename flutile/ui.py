@@ -17,6 +17,7 @@ mafft_exe_opt = click.option(
     help="Path to MAFFT alignment tool executable",
 )
 
+
 @click.command(
     name="aadiff",
     help="Compare differences between sequences. The input fasta file does NOT need to be aligned. If a subtype is specified, indexing will be relative to the index reference (Burke 2014). If no subtype is specified, the numbering will be relative to the first entry in fasta file (or the consensus sequence if --consensus-as-reference is set)",
@@ -41,7 +42,16 @@ mafft_exe_opt = click.option(
 @click.option(
     "--caton82",
     is_flag=True,
-    help="Annotate H1 tables with antigenic sites from [Caton 1982]"
+    help="Annotate H1 tables with antigenic sites from [Caton 1982]",
+)
+@click.option(
+    "--annotation-tables",
+    help="One or more TAB-delimited tables containing annotations (separated by commas). The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
+)
+@click.option(
+    "--join-annotations",
+    help="Join all annotation columns, seperating values with commas",
+    is_flag=True,
 )
 def aadiff_cmd(*args, **kwargs):
     for row in referenced_aadiff_table(*args, **kwargs):
