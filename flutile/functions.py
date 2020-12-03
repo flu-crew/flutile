@@ -347,7 +347,7 @@ def gapped_indices(seq):
     return indices
 
 
-def aadiff_table(s, make_consensus=False, consensus_as_reference=False):
+def aadiff_table(s, make_consensus=False, consensus_as_reference=False, **kwargs):
     def find_consensus(i):
         counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
         return counts.most_common()[0][0]
@@ -384,6 +384,29 @@ def aadiff_table(s, make_consensus=False, consensus_as_reference=False):
                         row.append(aa)
                 yield row
                 break
+
+
+def annotate_table(table, caton82=False, subtype=None, keep_signal=False, **kwargs):
+
+  if caton82:
+    if subtype != "H1":
+        err("caton82 annotation is only defined for H1")
+
+    if keep_signal:
+        err("caton82 annotation is incompatible with --keep_signal")
+
+    caton82_file = os.path.join(os.path.dirname(__file__), "data", "caton82.txt")
+
+    with open(caton82_file, "r") as f:
+      caton82 = {k : v for k,v in [x.split("\t") for x in f.readlines()]}
+
+    for i, row in enumerate(table):
+        if i == 0:
+            table[0].append("caton82")
+        elif row[0] in caton82:
+            table[i].append(caton82[row[0]])
+
+  return table
 
 
 def referenced_aadiff_table(
@@ -433,9 +456,9 @@ def referenced_aadiff_table(
 
     table = list(aadiff_table(aln, **kwargs))
 
+    # set relative indices
     for i, row in enumerate(table):
-        if i == 0:
-            yield row
-        else:
-            row[0] = indices[int(row[0]) - 1]
-            yield row
+        if i > 0:
+            table[i][0] = indices[int(row[0]) - 1]
+
+    return annotate_table(table, subtype=subtype, keep_signal=keep_signal, **kwargs)

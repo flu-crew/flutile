@@ -6,3 +6,5 @@ include flutile/data/h3-ref.faa
 
 include flutile/data/subtype-refs.faa
 include flutile/data/subtype-refs.fna
+
+include flutile/data/caton82.txt

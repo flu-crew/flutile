@@ -38,6 +38,11 @@ mafft_exe_opt = click.option(
     help="Number relative to the initial Methionine (do not trim the signal peptide)",
 )
 @mafft_exe_opt
+@click.option(
+    "--caton82",
+    is_flag=True,
+    help="Annotate H1 tables with antigenic sites from [Caton 1982]"
+)
 def aadiff_cmd(*args, **kwargs):
     for row in referenced_aadiff_table(*args, **kwargs):
         print("\t".join(row))
