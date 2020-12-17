@@ -1,3 +1,8 @@
+0.7.0 [2020-12-17]
+------------------
+
+`annotate` subcommand for mapping between subtypes
+
 0.6.1 [2020-12-03]
 ------------------
 
