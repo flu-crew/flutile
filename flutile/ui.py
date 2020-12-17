@@ -17,53 +17,86 @@ mafft_exe_opt = click.option(
     help="Path to MAFFT alignment tool executable",
 )
 
-
-@click.command(
-    name="aadiff",
-    help="Compare differences between sequences. The input fasta file does NOT need to be aligned. If a subtype is specified, indexing will be relative to the index reference (Burke 2014). If no subtype is specified, the numbering will be relative to the first entry in fasta file (or the consensus sequence if --consensus-as-reference is set)",
-)
-@click.argument("faa", default=sys.stdin, type=click.File())
-@click.option(
+subtype_opt = click.option(
     "--subtype",
     type=click.Choice(['H1', 'H2', 'H3', "H4", "H5", 'H6', 'H7', "H8", "H9",
                        'H10', 'H11', 'H12', "H13", "H14", 'H15', 'H16', "H17", "H18"
       ], case_sensitive=False),
     help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
 )
-@click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
-@click.option(
+
+make_consensus_opt = click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
+
+consensus_as_reference_opt = click.option(
     "--consensus-as-reference",
     is_flag=True,
     help="Use the consensus as the reference column",
 )
-@click.option(
+
+keep_signal_opt = click.option(
     "--keep_signal",
     is_flag=True,
     help="Number relative to the initial Methionine (do not trim the signal peptide)",
 )
-@mafft_exe_opt
-@click.option(
+
+annotation_tables_opt = click.option(
     "--annotation-tables",
     help="One or more TAB-delimited tables containing annotations (separated by commas). The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
 )
-@click.option(
+
+join_annotations_opt = click.option(
     "--join-annotations",
     help="Join all annotation columns, seperating values with commas",
     is_flag=True,
 )
-@click.option(
+
+caton82_opt = click.option(
     "--caton82",
     is_flag=True,
     help="Add H1 antigenic sites from [Caton 1982]",
 )
-@click.option(
+
+wiley81_opt = click.option(
     "--wiley81",
     is_flag=True,
     help="Add H3 antigenic sites from [Wiley 1981]",
 )
+
+
+@click.command(
+    name="aadiff",
+    help="Compare differences between sequences. The input fasta file does NOT need to be aligned. If a subtype is specified, indexing will be relative to the index reference (Burke 2014). If no subtype is specified, the numbering will be relative to the first entry in fasta file (or the consensus sequence if --consensus-as-reference is set)",
+)
+@click.argument("faa", default=sys.stdin, type=click.File())
+@subtype_opt
+@make_consensus_opt
+@consensus_as_reference_opt
+@keep_signal_opt
+@mafft_exe_opt
+@annotation_tables_opt
+@join_annotations_opt
+@caton82_opt
+@wiley81_opt
 def aadiff_cmd(*args, **kwargs):
     for row in referenced_aadiff_table(*args, **kwargs):
         print("\t".join(row))
+
+@click.command(
+    name="annotate",
+    help="Tabulate differences between sequences. This command is like aadiff, except it returns a table with every position included",
+)
+@click.argument("faa", default=sys.stdin, type=click.File())
+@subtype_opt
+@make_consensus_opt
+@consensus_as_reference_opt
+@keep_signal_opt
+@mafft_exe_opt
+@annotation_tables_opt
+@join_annotations_opt
+@caton82_opt
+@wiley81_opt
+def annotate_cmd(*args, **kwargs):
+  print("not implemented, but thanks for trying")
 
 
 @click.command(
@@ -163,6 +196,7 @@ def cli_grp():
 
 
 cli_grp.add_command(aadiff_cmd)
+cli_grp.add_command(annotate_cmd)
 cli_grp.add_command(represent_cmd)
 cli_grp.add_command(trim_grp)
 
