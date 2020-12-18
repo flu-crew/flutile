@@ -347,10 +347,17 @@ def gapped_indices(seq):
     return indices
 
 
-def aadiff_table(s, make_consensus=False, consensus_as_reference=False, remove_unchanged=True, **kwargs):
+def aadiff_table(
+    s,
+    make_consensus=False,
+    consensus_as_reference=False,
+    remove_unchanged=True,
+    **kwargs,
+):
     """
     From the input alignment s, make an aadiff table
     """
+
     def find_consensus(i):
         counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
         return counts.most_common()[0][0]
@@ -399,7 +406,6 @@ def annotate_table(
     wiley81=False,
     **kwargs,
 ):
-
     def load_builtin_annotations(name, subtype_exp):
         if subtype_exp != subtype:
             err(f"{name} annotation is only defined for {subtype_exp}")
@@ -412,10 +418,10 @@ def annotate_table(
     all_anntables = []
 
     if caton82:
-      all_anntables.append(load_builtin_annotations("caton82", "H1"))
+        all_anntables.append(load_builtin_annotations("caton82", "H1"))
 
     if wiley81:
-      all_anntables.append(load_builtin_annotations("wiley81", "H3"))
+        all_anntables.append(load_builtin_annotations("wiley81", "H3"))
 
     annotations = {x[0]: [] for x in table[1:]}
 
@@ -428,7 +434,7 @@ def annotate_table(
 
         with open(annotation_file, "r") as f:
             lines = [line.split("\t") for line in f.readlines()]
-            new_annotations = {line[0] : [x.strip() for x in line[1:]] for line in lines}
+            new_annotations = {line[0]: [x.strip() for x in line[1:]] for line in lines}
 
             new_column_names += lines[0][1:]
             for k, vs in annotations.items():
@@ -451,8 +457,14 @@ def annotate_table(
 
     return table
 
+
 def referenced_table(
-    faa, subtype=None, mafft_exe="mafft", keep_signal=False, remove_unchanged=True, **kwargs
+    faa,
+    subtype=None,
+    mafft_exe="mafft",
+    keep_signal=False,
+    remove_unchanged=True,
+    **kwargs,
 ):
     if subtype:
         ref = motifs.get_ha_subtype_nterm_motif(subtype)
@@ -499,10 +511,36 @@ def referenced_table(
         if i > 0:
             table[i][0] = indices[int(row[0]) - 1]
 
-    return annotate_table(table, subtype=subtype, keep_signal=keep_signal, **kwargs)
+    return table
+
 
 def referenced_aadiff_table(faa, **kwargs):
-    return referenced_table(faa, remove_unchanged=True, **kwargs)
+    table = referenced_table(faa, remove_unchanged=True, **kwargs)
+    return annotate_table(table, **kwargs)
 
-def referenced_annotation_table(faa, **kwargs):
-    return referenced_table(faa, remove_unchanged=False, **kwargs)
+
+def referenced_annotation_table(faa, subtype, **kwargs):
+
+    table = referenced_table(faa, subtype=subtype, remove_unchanged=False, **kwargs)
+
+    subtype_file = os.path.join(
+        os.path.dirname(__file__), "data", "burke2014-index-map.txt"
+    )
+    subtype_number = int(subtype[1:])
+    subtype_annotation = dict()
+    with open(subtype_file, "r") as f:
+        for line in f.readlines():
+            row = [x.strip() for x in line.split("\t")]
+            try:
+                i = int(row[subtype_number - 1])
+                subtype_annotation[str(i)] = row
+            except:
+                pass
+    table[0] += ["H" + str(i) for i in range(1, 19)]
+    for (idx, row) in enumerate(table[1:]):
+        try:
+            table[idx+1] += subtype_annotation[row[0]]
+        except:
+            table[idx+1] += ["\t"] * 18
+
+    return annotate_table(table, subtype=subtype, **kwargs)

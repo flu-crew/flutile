@@ -19,13 +19,35 @@ mafft_exe_opt = click.option(
 
 subtype_opt = click.option(
     "--subtype",
-    type=click.Choice(['H1', 'H2', 'H3', "H4", "H5", 'H6', 'H7', "H8", "H9",
-                       'H10', 'H11', 'H12', "H13", "H14", 'H15', 'H16', "H17", "H18"
-      ], case_sensitive=False),
+    type=click.Choice(
+        [
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6",
+            "H7",
+            "H8",
+            "H9",
+            "H10",
+            "H11",
+            "H12",
+            "H13",
+            "H14",
+            "H15",
+            "H16",
+            "H17",
+            "H18",
+        ],
+        case_sensitive=False,
+    ),
     help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
 )
 
-make_consensus_opt = click.option("--make-consensus", is_flag=True, help="Add a sequence consensus column")
+make_consensus_opt = click.option(
+    "--make-consensus", is_flag=True, help="Add a sequence consensus column"
+)
 
 consensus_as_reference_opt = click.option(
     "--consensus-as-reference",
@@ -51,15 +73,11 @@ join_annotations_opt = click.option(
 )
 
 caton82_opt = click.option(
-    "--caton82",
-    is_flag=True,
-    help="Add H1 antigenic sites from [Caton 1982]",
+    "--caton82", is_flag=True, help="Add H1 antigenic sites from [Caton 1982]"
 )
 
 wiley81_opt = click.option(
-    "--wiley81",
-    is_flag=True,
-    help="Add H3 antigenic sites from [Wiley 1981]",
+    "--wiley81", is_flag=True, help="Add H3 antigenic sites from [Wiley 1981]"
 )
 
 
@@ -80,6 +98,7 @@ wiley81_opt = click.option(
 def aadiff_cmd(*args, **kwargs):
     for row in referenced_aadiff_table(*args, **kwargs):
         print("\t".join(row))
+
 
 @click.command(
     name="annotate",
