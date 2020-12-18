@@ -102,7 +102,7 @@ def aadiff_cmd(*args, **kwargs):
 
 @click.command(
     name="annotate",
-    help="Tabulate differences between sequences. This command is like aadiff, except it returns a table with every position included",
+    help="Tabulate differences between sequences. This command is like aadiff except it adds columns mapping to indices across subtypes (using Burke 2014 numbering).",
 )
 @click.argument("faa", default=sys.stdin, type=click.File())
 @subtype_opt
