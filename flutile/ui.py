@@ -89,14 +89,14 @@ def aadiff_cmd(*args, **kwargs):
 @subtype_opt
 @make_consensus_opt
 @consensus_as_reference_opt
-@keep_signal_opt
 @mafft_exe_opt
 @annotation_tables_opt
 @join_annotations_opt
 @caton82_opt
 @wiley81_opt
 def annotate_cmd(*args, **kwargs):
-  print("not implemented, but thanks for trying")
+    for row in referenced_annotation_table(*args, **kwargs):
+        print("\t".join(row))
 
 
 @click.command(

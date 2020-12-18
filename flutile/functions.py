@@ -347,7 +347,10 @@ def gapped_indices(seq):
     return indices
 
 
-def aadiff_table(s, make_consensus=False, consensus_as_reference=False, **kwargs):
+def aadiff_table(s, make_consensus=False, consensus_as_reference=False, remove_unchanged=True, **kwargs):
+    """
+    From the input alignment s, make an aadiff table
+    """
     def find_consensus(i):
         counts = collections.Counter(s[j][1][i] for j in range(1, len(s)))
         return counts.most_common()[0][0]
@@ -374,7 +377,7 @@ def aadiff_table(s, make_consensus=False, consensus_as_reference=False, **kwargs
         position = str(i + 1)
         # for each sequence in the alignment
         for j in seq_ids:
-            if s[j][1][i] != ref:
+            if not remove_unchanged or s[j][1][i] != ref:
                 row = [position, ref]
                 for k in seq_ids[1:]:
                     aa = s[k][1][i]
@@ -448,9 +451,8 @@ def annotate_table(
 
     return table
 
-
-def referenced_aadiff_table(
-    faa, subtype=None, mafft_exe="mafft", keep_signal=False, **kwargs
+def referenced_table(
+    faa, subtype=None, mafft_exe="mafft", keep_signal=False, remove_unchanged=True, **kwargs
 ):
     if subtype:
         ref = motifs.get_ha_subtype_nterm_motif(subtype)
@@ -490,7 +492,7 @@ def referenced_aadiff_table(
         # remove the reference sequence
         aln = aln[1:]
 
-    table = list(aadiff_table(aln, **kwargs))
+    table = list(aadiff_table(aln, remove_unchanged=remove_unchanged, **kwargs))
 
     # set relative indices
     for i, row in enumerate(table):
@@ -498,3 +500,9 @@ def referenced_aadiff_table(
             table[i][0] = indices[int(row[0]) - 1]
 
     return annotate_table(table, subtype=subtype, keep_signal=keep_signal, **kwargs)
+
+def referenced_aadiff_table(faa, **kwargs):
+    return referenced_table(faa, remove_unchanged=True, **kwargs)
+
+def referenced_annotation_table(faa, **kwargs):
+    return referenced_table(faa, remove_unchanged=False, **kwargs)
