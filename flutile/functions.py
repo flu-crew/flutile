@@ -539,8 +539,8 @@ def referenced_annotation_table(faa, subtype, **kwargs):
     table[0] += ["H" + str(i) for i in range(1, 19)]
     for (idx, row) in enumerate(table[1:]):
         try:
-            table[idx+1] += subtype_annotation[row[0]]
+            table[idx + 1] += subtype_annotation[row[0]]
         except:
-            table[idx+1] += ["\t"] * 18
+            table[idx + 1] += ["\t"] * 18
 
     return annotate_table(table, subtype=subtype, **kwargs)

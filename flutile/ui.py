@@ -3,7 +3,6 @@ import os
 import click
 from flutile.version import __version__
 import sys
-import click
 from flutile.functions import *
 
 INT_SENTINEL = 1e9
