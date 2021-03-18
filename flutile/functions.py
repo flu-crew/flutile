@@ -216,47 +216,41 @@ def is_aligned(fasta):
         err("Expected all files to be of equal length")
 
 
-def extract_motif(alignment, ref, motif):
-    is_aligned(alignment)
-
-    matches = smof.grep(
-        alignment,
-        pattern=motif,
-        match_sequence=True,
-        gapped=True,
-        perl_regexp=True,
-        gff=True,
-    )
-
-    for row in matches:
-        els = row.split("\t")
-        if ref in els[0]:
-            lower, upper = els[3:5]
-            lower, upper = (int(lower), int(upper))
-            break
-    else:
-        err("The reference does not contain the motif, this is a bug")
-
-    mot = smof.subseq(alignment, lower, upper)
-
-    return (mot, lower, upper)
+def ungap_indices(start, end, fasta):
+    """
+    Map indices in an ungapped sequence to indices in the gapped string
+    """
+    original_index = 0
+    (a, b) = (0, 0)
+    for (i, c) in enumerate(fasta):
+        if c not in "._-":
+            original_index += 1
+            if original_index == start:
+                a = i + 1
+            if original_index == end:
+                b = i + 1
+                break
+    return (a, b)
 
 
-def extract_aa2aa(faa, ref, motif, mafft_exe="mafft"):
+def extract_aa2aa(start, end, faa, ref, mafft_exe="mafft"):
     # add reference sequences to the input seq
     faa = list(ref) + list(faa)
 
     # align the reference and input protein sequences
     aln = align(faa, mafft_exe=mafft_exe)
 
-    # Extract the motif using the first reference.
-    # 'a' and 'b': lower and upper limits of the HA1 segment
-    mot, a, b = extract_motif(aln, ref=ref[0].header, motif=motif)
+    # find reference gapped start and stop positions
+    (gapped_start, gapped_end) = ungap_indices(start, end, list(aln)[0].seq)
 
-    return list(mot)[len(ref) :]
+    # extract the subset region
+    extracted = smof.subseq(aln, gapped_start, gapped_end)
+
+    # return sans reference
+    return list(extracted)[1:]
 
 
-def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
+def extract_dna2dna(start, end, fna, ref, mafft_exe="mafft"):
     # translate the DNA inputs (longest uninterupted CDS)
     faa = smof.translate(fna, all_frames=True)
 
@@ -266,17 +260,16 @@ def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
     fna = list(fna)
     aln = list(align(ref + faa, mafft_exe=mafft_exe))
 
-    # align translated inputs and ref, getting back the motifs and start/end positions
-    mot, a, b = extract_motif(aln, ref[0].header, motif=motif)
+    # find reference gapped start and stop positions
+    (a, b) = ungap_indices(start, end, list(aln)[0].seq)
 
-    k = len(ref)
     # find (start, length) bounds for each DNA entry
     for i in range(len(fna)):
         # start is 0-based
         # whereas 'a' and 'b' above are 1-based
         start, length = smof.find_max_orf(fna[i].seq, from_start=False)
 
-        seq = aln[i + k].seq
+        seq = aln[i + 1].seq
 
         # motif start position, 0-based
         aa_offset = len(seq[0 : (a - 1)].replace("-", ""))
@@ -290,13 +283,18 @@ def extract_dna2dna(fna, ref, motif, mafft_exe="mafft"):
     return fna
 
 
-def _dispatch_extract(fasta_file, ref_file, conversion=None, *args, **kwargs):
+def _dispatch_extract(
+    start, end, subtype, fasta_file, conversion=None, *args, **kwargs
+):
+    # get reference for this subtype
+    ref_file = os.path.join(os.path.dirname(__file__), "data", "subtype-refs.faa")
+    ref_fasta = smof.open_fasta(ref_file)
+    ref = list(smof.grep(ref_fasta, pattern=f"|H{subtype}N"))
+
     # open input sequences
     entries = smof.open_fasta(fasta_file)
     # remove gaps
     entries = list(smof.clean(entries, toseq=True))
-    # load AA reference file
-    ref = list(smof.open_fasta(ref_file))
     # dispatch by sequence type
     if conversion == "aa2aa":
         f = extract_aa2aa
@@ -306,20 +304,18 @@ def _dispatch_extract(fasta_file, ref_file, conversion=None, *args, **kwargs):
     elif conversion == "dna2dna":
         f = extract_dna2dna
     else:
-        err("Well shit, that shouldn't have happened")
+        err("You shouldn't have done that")
 
-    return f(entries, ref, *args, **kwargs)
-
-
-def extract_h1_ha1(fasta_file, motif="DT[LI]C.*QSR", *args, **kwargs):
-    ref_file = os.path.join(os.path.dirname(__file__), "data", "h1-ha1-ref.faa")
-    out = _dispatch_extract(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
-    smof.print_fasta(out)
+    return f(start, end, entries, ref, *args, **kwargs)
 
 
-def extract_h3_ha1(fasta_file, motif="QKL.*QTR", *args, **kwargs):
-    ref_file = os.path.join(os.path.dirname(__file__), "data", "h3-ha1-ref.faa")
-    out = _dispatch_extract(fasta_file, ref_file=ref_file, motif=motif, *args, **kwargs)
+def extract_ha1(subtype, *args, **kwargs):
+    """
+    Get the HA1 range relative to the subtype of interest by mapping the H1 HA1
+    range (18,344) range to the subtype of interest
+    """
+    (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=subtype)
+    out = _dispatch_extract(start=start, end=end, subtype=subtype, *args, **kwargs)
     smof.print_fasta(out)
 
 
@@ -517,6 +513,42 @@ def referenced_table(
 def referenced_aadiff_table(faa, **kwargs):
     table = referenced_table(faa, remove_unchanged=True, **kwargs)
     return annotate_table(table, **kwargs)
+
+
+def map_ha_range(start, end, subtype1, subtype2):
+    """
+    Map AA indices between subtypes using the Burke2014 index map
+
+    @param start integer start position from initial methionine with respect to subtype1
+    @param end integer end position from initial methionine with respect to subtype1
+    @param subtype1 an integer (1-18 currently) for the HA subtype
+    @param subtype2 an integer (1-18 currently) for the HA subtype
+    @return index range with respect to subtype2
+    """
+    subtype_file = os.path.join(
+        os.path.dirname(__file__), "data", "burke2014-index-map.txt"
+    )
+    indices = []
+    with open(subtype_file, "r") as f:
+        i = 0
+        for line in f.readlines():
+            row = [x.strip() for x in line.split("\t")]
+            try:
+                i = int(row[subtype1 - 1])
+            except:
+                pass
+            if i >= start:
+                try:
+                    indices.append(int(row[subtype2 - 1]))
+                except:
+                    pass
+            if i == end:
+                break
+
+    try:
+        return (indices[0], indices[-1])
+    except:
+        return (None, None)
 
 
 def referenced_annotation_table(faa, subtype, **kwargs):

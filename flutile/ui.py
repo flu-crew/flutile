@@ -16,33 +16,45 @@ mafft_exe_opt = click.option(
     help="Path to MAFFT alignment tool executable",
 )
 
+subtypes = [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7",
+    "H8",
+    "H9",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15",
+    "H16",
+    "H17",
+    "H18",
+]
+
 subtype_opt = click.option(
     "--subtype",
     type=click.Choice(
-        [
-            "H1",
-            "H2",
-            "H3",
-            "H4",
-            "H5",
-            "H6",
-            "H7",
-            "H8",
-            "H9",
-            "H10",
-            "H11",
-            "H12",
-            "H13",
-            "H14",
-            "H15",
-            "H16",
-            "H17",
-            "H18",
-        ],
+        subtypes,
         case_sensitive=False,
     ),
     help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
 )
+
+subtype_no_keep_opt = click.option(
+    "--subtype",
+    type=click.Choice(
+        subtypes,
+        case_sensitive=False,
+    ),
+    help="The subtype of all strains in the input fasta file",
+)
+
 
 make_consensus_opt = click.option(
     "--make-consensus", is_flag=True, help="Add a sequence consensus column"
@@ -174,25 +186,16 @@ conversion_opt = click.option(
 
 
 @click.command(
-    name="h1-ha1",
-    help="Trim H1 DNA down to the HA1 AA using Brisbane/10/2007 template.",
+    name="ha1",
+    help="Trim down to the HA1 using using subtype references from (Burke 2014)",
 )
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
+@subtype_no_keep_opt
 @conversion_opt
-def h1_ha1_cmd(fasta_file, mafft_exe, conversion):
-    extract_h1_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
-
-
-@click.command(
-    name="h3-ha1",
-    help="Trim H3 DNA down to the HA1 AA using California/07/2009 template.",
-)
-@click.argument("fasta_file", default=sys.stdin, type=click.File())
-@mafft_exe_opt
-@conversion_opt
-def h3_ha1_cmd(fasta_file, mafft_exe, conversion):
-    extract_h3_ha1(fasta_file, mafft_exe=mafft_exe, conversion=conversion)
+def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
+    subtype = int(subtype[1:])
+    extract_ha1(fasta_file=fasta_file, mafft_exe=mafft_exe, subtype=subtype, conversion=conversion)
 
 
 @click.group(
@@ -204,8 +207,7 @@ def trim_grp():
     pass
 
 
-trim_grp.add_command(h1_ha1_cmd)
-trim_grp.add_command(h3_ha1_cmd)
+trim_grp.add_command(ha1_cmd)
 
 
 @click.group(help="Flu-crew utilities", context_settings=CONTEXT_SETTINGS)

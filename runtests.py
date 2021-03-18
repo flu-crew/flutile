@@ -129,6 +129,200 @@ class TestParsers(unittest.TestCase):
         g, a = f.represent(fasta, max_day_sep=5, min_pident_sep=1.0, same_state=True)
         self.assertEqual(sorted(a), fasta)
 
+    def test_ha_range_map(self):
+        # H1   | H2  | H3  | H4  | H5  | H6  | H7  | H8  | H9  | H10 | H11 | H12 | H13 | H14 | H15 | H16 | H17 | H18 |
+        # ---  | --  | --  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+        #      |     | 1   |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
+        #      |     | 2   |     |     |     |     |     |     |     |     |     |     | 1   |     |     |     |     |
+        #      |     | 3   |     |     |     |     |     |     |     |     |     |     | 2   |     |     |     |     |
+        #      |     | 4   |     |     |     |     |     |     |     |     |     |     | 3   |     |     |     |     |
+        #      |     | 5   | 1   |     |     |     |     |     |     |     |     |     | 4   |     |     |     |     |
+        #      |     | 6   | 2   |     |     |     |     |     |     |     |     |     | 5   |     |     |     |     |
+        #      |     | 7   | 3   |     |     |     |     |     |     |     |     |     | 6   |     |     |     |     |
+        #      |     | 8   | 4   |     |     |     |     |     |     |     |     |     | 7   |     |     |     |     |
+        #      |     | 9   | 5   |     |     |     |     |     |     |     |     |     | 8   |     |     |     |     |
+        #      |     | 10  | 6   |     |     |     | 1   |     | 1   |     | 1   |     | 9   |     |     |     |     |
+        #  1   | 1   | 11  | 7   |  1  | 1   | 1   | 2   | 1   | 2   | 1   | 2   | 1   | 10  | 1   | 1   | 1   |  1  |
+        #  2   | 2   | 12  | 8   |  2  | 2   | 2   | 3   | 2   | 3   | 2   | 3   | 2   | 11  | 2   | 2   | 2   |  2  |
+        #  3   | 3   | 13  | 9   |  3  | 3   | 3   | 4   | 3   | 4   | 3   | 4   | 3   | 12  | 3   | 3   | 3   |  3  |
+        #  4   | 4   | 14  | 10  |  4  | 4   | 4   | 5   | 4   | 5   | 4   | 5   | 4   | 13  | 4   | 4   | 4   |  4  |
+        #  5   | 5   | 15  | 11  |  5  | 5   | 5   | 6   | 5   | 6   | 5   | 6   | 5   | 14  | 5   | 5   | 5   |  5  |
+        #  6   | 6   | 16  | 12  |  6  | 6   | 6   | 7   | 6   | 7   | 6   | 7   | 6   | 15  | 6   | 6   | 6   |  6  |
+        #  7   | 7   | 17  | 13  |  7  | 7   | 7   | 8   | 7   | 8   | 7   | 8   | 7   | 16  | 7   | 7   | 7   |  7  |
+        #  8   | 8   | 18  | 14  |  8  | 8   | 8   | 9   | 8   | 9   | 8   | 9   | 8   | 17  | 8   | 8   | 8   |  8  |
+        #  ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+        #  507 | 505 | 509 | 507 | 510 | 509 | 503 | 508 | 500 | 504 | 506 | 506 | 505 | 510 | 511 | 505 | 504 |  -  |
+        #  508 | 506 | 510 | 508 | 511 | 510 | 504 | 509 | 501 | 505 | 507 | 507 | 506 | 511 | 512 | 506 | 505 |  -  |
+        #  509 | 507 | -   | -   | 512 | 511 | -   | 510 | 502 | -   | 508 | 508 | 507 | -   | -   | 507 | 506 |  -  |
+        #  -   | -   | -   | -   | -   | -   | -   | -   | -   | -   | 509 | -   | 508 | -   | -   | 508 | -   |  -  |
+        #  510 | 508 | 511 | 509 | 513 | 512 | 505 | 511 | 503 | 506 | 510 | 509 | 509 | 512 | 513 | 509 | 507 |  -  |
+        #  511 | 509 | 512 | 510 | 514 | 513 | 506 | 512 | 504 | 507 | 511 | 510 | 510 | 513 | 514 | 510 | 508 |  -  |
+        #  ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+        #  545 | 543 | 546 | 544 | 548 | 547 | 540 | 546 | -   | 541 | 545 | 544 | 544 | 547 | 548 | 544 | 542 |  -  |
+        #  546 | 544 | 547 | 545 | 549 | 548 | 541 | 547 | -   | 542 | 546 | 545 | 545 | 548 | 549 | 545 | 543 |  -  |
+        #  547 | 545 | 548 | 546 | 550 | 549 | 542 | 548 | -   | 543 | 547 | 546 | 546 | 549 | 550 | 546 | 544 |  -  |
+        #  548 | 546 | 549 | 547 | 551 | 550 | 543 | 549 | -   | 544 | 548 | 547 | 547 | 550 | 551 | 547 | 545 |  -  |
+        #  549 | 547 | 550 | 548 | 552 | 551 | 544 | 550 | -   | 545 | 549 | 548 | 548 | 551 | 552 | 548 | 546 |  -  |
+
+        # trivial test that positions map to themselves
+        self.assertEqual(
+            f.map_ha_range(start=1, end=3, subtype1=1, subtype2=1), (1, 3)
+        )
+        # x | x
+        self.assertEqual(
+            f.map_ha_range(start=512, end=512, subtype1=5, subtype2=6), (511, 511)
+        )
+
+        #  H3  | H4
+        #  --  | ---
+        #  1   |
+        #  2   |
+        #  3   |
+        #  4   |
+        #  5   | 1
+        #  6   | 2
+        self.assertEqual(
+            f.map_ha_range(start=1, end=3, subtype1=3, subtype2=4), (None,None)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=3, end=5, subtype1=3, subtype2=4), (1,1)
+        )
+        self.assertEqual(f.map_ha_range(start=1, end=2, subtype1=4, subtype2=3), (5, 6))
+
+        #  H12 | H13
+        #  --- | ---
+        #  508 | 507
+        #  -   | 508
+        #  509 | 509
+        self.assertEqual(
+            f.map_ha_range(start=508, end=509, subtype1=12, subtype2=13),
+            (507, 509),
+        )  # H12->H13
+        self.assertEqual(
+            f.map_ha_range(start=507, end=509, subtype1=13, subtype2=12),
+            (508, 509),
+        )  # H13->H12
+
+        #  H1  | H2
+        #  --- | ---
+        #  508 | 506
+        #  509 | 507
+        #  -   | -
+        self.assertEqual(
+            f.map_ha_range(start=508, end=509, subtype1=1, subtype2=2), (506, 507)
+        )
+
+        #  H1  | H2
+        #  --- | ---
+        #  -   | -
+        #  510 | 508
+        #  511 | 509
+        self.assertEqual(
+            f.map_ha_range(start=510, end=511, subtype1=1, subtype2=2), (508, 509)
+        )
+
+        #  H10 | H11
+        #  --- | ---
+        #  -   | 509
+        #  506 | 510
+        #  507 | 511
+        self.assertEqual(
+            f.map_ha_range(start=506, end=507, subtype1=10, subtype2=11), (510, 511)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=510, end=511, subtype1=11, subtype2=10), (506, 507)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=509, end=511, subtype1=11, subtype2=10),
+            (506, 507),
+        )
+
+        # H12 | H13
+        # --- | ---
+        # 507 | 506
+        # 508 | 507
+        # -   | 508
+        self.assertEqual(
+            f.map_ha_range(start=507, end=508, subtype1=12, subtype2=13), (506, 507)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=506, end=507, subtype1=13, subtype2=12), (507, 508)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=506, end=508, subtype1=13, subtype2=12),
+            (507, 508),
+        )
+
+        # === End Studies ===
+        # H1   | H2  | H3  | H4  | H5  | H6  | H7  | H8  | H9  | H10 | H11 | H12 | H13 | H14 | H15 | H16 | H17 | H18 |
+        # ---  | --  | --  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+        #  549 | 547 | 550 | 548 | 552 | 551 | 544 | 550 | -   | 545 | 549 | 548 | 548 | 551 | 552 | 548 | 546 |  -  |
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=2), (547,547)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=3), (550,550)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=4), (548,548)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=5), (552,552)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=6), (551,551)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=7), (544,544)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=8), (550,550)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=9), (None,None)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=10), (545,545)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=11), (549,549)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=12), (548,548)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=13), (548,548)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=14), (551,551)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=15), (552,552)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=16), (548,548)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=17), (546,546)
+        )
+        self.assertEqual(
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=18), (None,None)
+        )
+
+    def test_ungap_indices(self):
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A"), (1,1))
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A-"), (1,1))
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="-A"), (2,2))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GATACA-"), (2,3))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="-GATACA"), (3,4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="G-ATACA"), (3,4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GA-TACA"), (2,4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GAT-ACA"), (2,3))
+        # alternative gap characters work
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta=".GA_TACA"), (3,5))
+        # end studies
+        self.assertEqual(f.ungap_indices(start=4, end=6, fasta="-GA-TACA"), (6,8))
+
 
 if __name__ == "__main__":
     unittest.main()

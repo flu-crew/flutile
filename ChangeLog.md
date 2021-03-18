@@ -2,6 +2,7 @@
 ------------------
 
  * Fix type in Caton82 annotations
+ * Generalize trim ha1 to work for all 18 HA subtypes 
 
 0.7.0 [2020-12-17]
 ------------------
