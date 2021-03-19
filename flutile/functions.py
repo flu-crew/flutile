@@ -232,7 +232,7 @@ def ungap_indices(start, end, fasta):
                 break
     # truncate to sequence length if the end index is greater than sequence length
     else:
-      b = i + 1
+        b = i + 1
     return (a, b)
 
 
@@ -322,27 +322,33 @@ def extract_ha1(subtype, *args, **kwargs):
     smof.print_fasta(out)
 
 
-def extract_bounds(bounds, *args, **kwargs):
+def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     """
     Extract a motif
     """
     bounds = [(min(xs), max(xs)) for xs in bounds]
 
+    if not keep_signal:
+        offset = len(motifs.NTERM_MOTIFS["H" + str(subtype)])
+        bounds = [(a + offset, b + offset) for (a, b) in bounds]
+
     # extract the interval defined by the largest and smallest indices
     min_idx = sys.maxsize
     max_idx = 0
-    for (a,b) in bounds:
-      min_idx = min(min_idx, a)
-      max_idx = max(max_idx, b)
-    out = _dispatch_extract(start=min_idx, end=max_idx, *args, **kwargs)
+    for (a, b) in bounds:
+        min_idx = min(min_idx, a)
+        max_idx = max(max_idx, b)
+    out = _dispatch_extract(
+        start=min_idx, end=max_idx, subtype=subtype, *args, **kwargs
+    )
 
     intervals = [(a - min_idx, b - min_idx + 1) for (a, b) in bounds]
 
     pairs = []
     for s in out:
         defline = s.header
-        motifs = [s.seq[a:b] for (a, b) in intervals]
-        pairs.append((defline, motifs))
+        motif_seqs = [s.seq[a:b] for (a, b) in intervals]
+        pairs.append((defline, motif_seqs))
 
     return pairs
 

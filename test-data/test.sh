@@ -13,3 +13,11 @@ diff .obs-h3-aadiff .exp-h3-aadiff
 
 flutile annotate --subtype=H1 --caton82 --annotation-tables=rbs.txt --join-annotations  1B.2.1-aadiff-test.faa > .obs-annotate
 diff .obs-annotate .exp-annotate
+
+flutile trim ha1 --subtype=H1 1B.2.1.fna > .obs.ha1
+
+# ha1 can also be extracts as a motif relative to the start of the mature protein
+diff .obs.ha1 <(flutile trim motif --subtype=H1 -b 1 327 --fasta 1B.2.1.fna)
+
+# or the motif can be numbered relative to initial methionine
+diff .obs.ha1 <(flutile trim motif --subtype=H1 -b 18 344 --keep-signal --fasta 1B.2.1.fna)

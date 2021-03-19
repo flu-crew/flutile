@@ -55,6 +55,12 @@ subtype_no_keep_opt = click.option(
     help="The subtype of all strains in the input fasta file",
 )
 
+as_fasta_opt = click.option(
+    "--fasta",
+    is_flag=True,
+    default=False,
+    help="Return motif as a FASTA file with all motifs concatenated",
+)
 
 make_consensus_opt = click.option(
     "--make-consensus", is_flag=True, help="Add a sequence consensus column"
@@ -67,7 +73,7 @@ consensus_as_reference_opt = click.option(
 )
 
 keep_signal_opt = click.option(
-    "--keep_signal",
+    "--keep-signal",
     is_flag=True,
     help="Number relative to the initial Methionine (do not trim the signal peptide)",
 )
@@ -91,9 +97,21 @@ wiley81_opt = click.option(
     "--wiley81", is_flag=True, help="Add H3 antigenic sites from [Wiley 1981]"
 )
 
-multi_bound_opt = click.option("--bounds", "-b", type=(int, int), multiple=True)
+multi_bound_opt = click.option(
+    "--bounds",
+    "-b",
+    type=(int, int),
+    multiple=True,
+    help="motif range, 1-based, so '-b 1 2' would extract 'AB' from the sequence 'ABC'. The stop index is truncated at the length of the target, so '-b 2 10' would extract 'BC' from 'ABC'",
+)
 
-multi_named_bound_opt = click.option("--named-bounds", "-B", type=(str, int, int), multiple=True)
+multi_named_bound_opt = click.option(
+    "--named-bounds",
+    "-B",
+    type=(str, int, int),
+    multiple=True,
+    help="named motif range, see help for '--bounds'. The range has a name, for example, '-B Foo 32 42' where 'Foo' will be the name of the column in the output motif table.",
+)
 
 
 @click.command(
@@ -209,27 +227,46 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
 
 @click.command(
     name="motif",
-    help="Extract a motif based on indices relative to the reference (Burke 2014)",
 )
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
+@keep_signal_opt
 @mafft_exe_opt
+@as_fasta_opt
 @multi_bound_opt
 @multi_named_bound_opt
 @subtype_no_keep_opt
 @conversion_opt
-def motif_cmd(fasta_file, mafft_exe, bounds, named_bounds, subtype, conversion):
+def motif_cmd(
+    fasta_file, keep_signal, fasta, mafft_exe, bounds, named_bounds, subtype, conversion
+):
+    """
+    Extract a motif based on indices relative to the reference (Burke 2014).
+
+    Example:
+
+      flutile trim motif --subtype=H1 -B Cb 69 75 -B Sa.1 124 125  myfile.fna
+
+    This would create a table with the fasta deflines in the first column and
+    the Cb and Sa.1 motifs in the next two columns
+    """
+
+
     if bounds and named_bounds:
-        raise click.ClickException("Don't use --named-bounds and --bounds together, either name them all or none of them")
-      
+        raise click.ClickException(
+            "Don't use --named-bounds and --bounds together, either name them all or none of them"
+        )
+
     if bounds:
-        named_bounds = [(None,a,b) for (a,b) in bounds]
+        named_bounds = [(None, a, b) for (a, b) in bounds]
 
     subtype = int(subtype[1:])
     write_bounds(
         named_bounds=named_bounds,
+        keep_signal=keep_signal,
+        tabular=not (fasta),
+        subtype=subtype,
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
-        subtype=subtype,
         conversion=conversion,
     )
 
