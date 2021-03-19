@@ -195,7 +195,12 @@ conversion_opt = click.option(
 @conversion_opt
 def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
     subtype = int(subtype[1:])
-    extract_ha1(fasta_file=fasta_file, mafft_exe=mafft_exe, subtype=subtype, conversion=conversion)
+    extract_ha1(
+        fasta_file=fasta_file,
+        mafft_exe=mafft_exe,
+        subtype=subtype,
+        conversion=conversion,
+    )
 
 
 @click.group(
