@@ -322,6 +322,7 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(f.ungap_indices(start=2, end=3, fasta=".GA_TACA"), (3,5))
         # end studies
         self.assertEqual(f.ungap_indices(start=4, end=6, fasta="-GA-TACA"), (6,8))
+        self.assertEqual(f.ungap_indices(start=4, end=600, fasta="-GA-TACA"), (6,8))
 
 
 if __name__ == "__main__":

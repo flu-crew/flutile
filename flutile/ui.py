@@ -91,6 +91,10 @@ wiley81_opt = click.option(
     "--wiley81", is_flag=True, help="Add H3 antigenic sites from [Wiley 1981]"
 )
 
+multi_bound_opt = click.option("--bounds", "-b", type=(int, int), multiple=True)
+
+multi_named_bound_opt = click.option("--named-bounds", "-B", type=(str, int, int), multiple=True)
+
 
 @click.command(
     name="aadiff",
@@ -203,6 +207,33 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
     )
 
 
+@click.command(
+    name="motif",
+    help="Extract a motif based on indices relative to the reference (Burke 2014)",
+)
+@click.argument("fasta_file", default=sys.stdin, type=click.File())
+@mafft_exe_opt
+@multi_bound_opt
+@multi_named_bound_opt
+@subtype_no_keep_opt
+@conversion_opt
+def motif_cmd(fasta_file, mafft_exe, bounds, named_bounds, subtype, conversion):
+    if bounds and named_bounds:
+        raise click.ClickException("Don't use --named-bounds and --bounds together, either name them all or none of them")
+      
+    if bounds:
+        named_bounds = [(None,a,b) for (a,b) in bounds]
+
+    subtype = int(subtype[1:])
+    write_bounds(
+        named_bounds=named_bounds,
+        fasta_file=fasta_file,
+        mafft_exe=mafft_exe,
+        subtype=subtype,
+        conversion=conversion,
+    )
+
+
 @click.group(
     name="trim",
     help="Trim flu sequences in various ways. The trim operations use subtype-specific templates that are stored in the flutile package. You should not need to change these.",
@@ -213,6 +244,7 @@ def trim_grp():
 
 
 trim_grp.add_command(ha1_cmd)
+trim_grp.add_command(motif_cmd)
 
 
 @click.group(help="Flu-crew utilities", context_settings=CONTEXT_SETTINGS)

@@ -1,4 +1,9 @@
-0.8.0 [2021-03-xx]
+0.9.0 [2021-03-2x]
+------------------
+
+ * Add `trim motif` command for extracting motifs
+
+0.8.0 [2021-03-19]
 ------------------
 
  * Fix type in Caton82 annotations
