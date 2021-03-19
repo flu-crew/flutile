@@ -1,4 +1,4 @@
-0.9.0 [2021-03-2x]
+0.9.0 [2021-03-19]
 ------------------
 
  * Add `trim motif` command for extracting motifs
