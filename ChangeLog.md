@@ -1,8 +1,16 @@
+0.10.0 [2021-03-24]
+-------------------
+
+ * Extract motifs by parsing interval expressions such as:
+   - "motif=34,56-60"
+   - "34"
+   - "162,166,167-190"
+ * Raise a nice error message when `--subtype` is missing 
+
 0.9.0 [2021-03-19]
 ------------------
 
  * Add `trim motif` command for extracting motifs
- * Raise a nice error message when `--subtype` is missing 
 
 0.8.0 [2021-03-19]
 ------------------
