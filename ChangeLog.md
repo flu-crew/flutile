@@ -2,6 +2,7 @@
 ------------------
 
  * Add `trim motif` command for extracting motifs
+ * Raise a nice error message when `--subtype` is missing 
 
 0.8.0 [2021-03-19]
 ------------------

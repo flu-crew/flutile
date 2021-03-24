@@ -43,6 +43,7 @@ subtype_opt = click.option(
         subtypes,
         case_sensitive=False,
     ),
+    required=True,
     help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
 )
 
@@ -52,6 +53,7 @@ subtype_no_keep_opt = click.option(
         subtypes,
         case_sensitive=False,
     ),
+    required=True,
     help="The subtype of all strains in the input fasta file",
 )
 
