@@ -353,17 +353,22 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     return pairs
 
 
-def write_bounds(named_bounds, tabular=True, *args, **kwargs):
+def write_bounds(named_bounds, tabular=True, join=False, *args, **kwargs):
     bounds = [(a, b) for (name, a, b) in named_bounds]
     pairs = extract_bounds(bounds, *args, **kwargs)
 
     names = [name for (name, a, b) in named_bounds]
 
+    if join:
+      separator=""
+    else:
+      separator="\t"
+
     if tabular:
         if [x for x in names if x is not None]:
-            print("\t" + "\t".join(names))
+            print("\t" + separator.join(names))
         for (defline, motifs) in pairs:
-            print(defline + "\t" + "\t".join(motifs))
+            print(defline + "\t" + separator.join(motifs))
     else:
         smof.print_fasta(
             [smof.FastaEntry(defline, "".join(motifs)) for (defline, motifs) in pairs]

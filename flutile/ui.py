@@ -115,6 +115,11 @@ multi_named_bound_opt = click.option(
     help="named motif range, see help for '--bounds'. The range has a name, for example, '-B Foo 32 42' where 'Foo' will be the name of the column in the output motif table.",
 )
 
+join_motif_opt = click.option(
+    "--join",
+    help="join all intervals into one motif",
+    is_flag=True,
+)
 
 @click.command(
     name="aadiff",
@@ -238,8 +243,9 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
 @multi_named_bound_opt
 @subtype_no_keep_opt
 @conversion_opt
+@join_motif_opt
 def motif_cmd(
-    fasta_file, keep_signal, fasta, mafft_exe, bounds, named_bounds, subtype, conversion
+    fasta_file, keep_signal, fasta, mafft_exe, bounds, named_bounds, subtype, conversion, join
 ):
     """
     Extract a motif based on indices relative to the reference (Burke 2014).
@@ -269,6 +275,7 @@ def motif_cmd(
         subtype=subtype,
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
+        join=join,
         conversion=conversion,
     )
 
