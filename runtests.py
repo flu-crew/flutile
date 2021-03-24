@@ -165,9 +165,7 @@ class TestParsers(unittest.TestCase):
         #  549 | 547 | 550 | 548 | 552 | 551 | 544 | 550 | -   | 545 | 549 | 548 | 548 | 551 | 552 | 548 | 546 |  -  |
 
         # trivial test that positions map to themselves
-        self.assertEqual(
-            f.map_ha_range(start=1, end=3, subtype1=1, subtype2=1), (1, 3)
-        )
+        self.assertEqual(f.map_ha_range(start=1, end=3, subtype1=1, subtype2=1), (1, 3))
         # x | x
         self.assertEqual(
             f.map_ha_range(start=512, end=512, subtype1=5, subtype2=6), (511, 511)
@@ -182,11 +180,9 @@ class TestParsers(unittest.TestCase):
         #  5   | 1
         #  6   | 2
         self.assertEqual(
-            f.map_ha_range(start=1, end=3, subtype1=3, subtype2=4), (None,None)
+            f.map_ha_range(start=1, end=3, subtype1=3, subtype2=4), (None, None)
         )
-        self.assertEqual(
-            f.map_ha_range(start=3, end=5, subtype1=3, subtype2=4), (1,1)
-        )
+        self.assertEqual(f.map_ha_range(start=3, end=5, subtype1=3, subtype2=4), (1, 1))
         self.assertEqual(f.map_ha_range(start=1, end=2, subtype1=4, subtype2=3), (5, 6))
 
         #  H12 | H13
@@ -258,71 +254,111 @@ class TestParsers(unittest.TestCase):
         # ---  | --  | --  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
         #  549 | 547 | 550 | 548 | 552 | 551 | 544 | 550 | -   | 545 | 549 | 548 | 548 | 551 | 552 | 548 | 546 |  -  |
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=2), (547,547)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=2), (547, 547)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=3), (550,550)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=3), (550, 550)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=4), (548,548)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=4), (548, 548)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=5), (552,552)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=5), (552, 552)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=6), (551,551)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=6), (551, 551)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=7), (544,544)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=7), (544, 544)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=8), (550,550)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=8), (550, 550)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=9), (None,None)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=9), (None, None)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=10), (545,545)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=10), (545, 545)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=11), (549,549)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=11), (549, 549)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=12), (548,548)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=12), (548, 548)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=13), (548,548)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=13), (548, 548)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=14), (551,551)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=14), (551, 551)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=15), (552,552)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=15), (552, 552)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=16), (548,548)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=16), (548, 548)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=17), (546,546)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=17), (546, 546)
         )
         self.assertEqual(
-            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=18), (None,None)
+            f.map_ha_range(start=549, end=549, subtype1=1, subtype2=18), (None, None)
         )
 
     def test_ungap_indices(self):
-        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A"), (1,1))
-        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A-"), (1,1))
-        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="-A"), (2,2))
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GATACA-"), (2,3))
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="-GATACA"), (3,4))
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="G-ATACA"), (3,4))
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GA-TACA"), (2,4))
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GAT-ACA"), (2,3))
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A"), (1, 1))
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="A-"), (1, 1))
+        self.assertEqual(f.ungap_indices(start=1, end=1, fasta="-A"), (2, 2))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GATACA-"), (2, 3))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="-GATACA"), (3, 4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="G-ATACA"), (3, 4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GA-TACA"), (2, 4))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta="GAT-ACA"), (2, 3))
         # alternative gap characters work
-        self.assertEqual(f.ungap_indices(start=2, end=3, fasta=".GA_TACA"), (3,5))
+        self.assertEqual(f.ungap_indices(start=2, end=3, fasta=".GA_TACA"), (3, 5))
         # end studies
-        self.assertEqual(f.ungap_indices(start=4, end=6, fasta="-GA-TACA"), (6,8))
-        self.assertEqual(f.ungap_indices(start=4, end=600, fasta="-GA-TACA"), (6,8))
+        self.assertEqual(f.ungap_indices(start=4, end=6, fasta="-GA-TACA"), (6, 8))
+        self.assertEqual(f.ungap_indices(start=4, end=600, fasta="-GA-TACA"), (6, 8))
+
+    def test_parse_motifs(self):
+        self.assertEqual(
+            f.parse_motifs(motif_strs=[" 1 "], subtype="H1"), {"H1:1": [(1, 1)]}
+        )
+        self.assertEqual(
+            f.parse_motifs(motif_strs=["x = 1 "], subtype="H1"), {"x": [(1, 1)]}
+        )
+        self.assertEqual(
+            f.parse_motifs(motif_strs=["x= 1 , 3"], subtype="H1"), {"x": [(1, 1), (3, 3)]}
+        )
+        self.assertEqual(
+            f.parse_motifs(motif_strs=[" x=1, 3 -5"], subtype="H1"),
+            {"x": [(1, 1), (3, 5)]},
+        )
+        self.assertEqual(
+            f.parse_motifs(motif_strs=["x=1,3- 5", "162"], subtype="H1"),
+            {"x": [(1, 1), (3, 5)], "H1:162": [(162, 162)]},
+        )
+
+    def test_concat(self):
+        self.assertEqual(f.concat([]), [])
+        self.assertEqual(f.concat([[1]]), [1])
+        self.assertEqual(f.concat([[1,2],[3,4,5],[]]), [1,2,3,4,5])
+
+    def test_unconcat(self):
+        self.assertEqual(f.unconcat([], [1,1]), [])
+        self.assertEqual(f.unconcat(["1234","567"], [1,1]), ["1234", "567"])
+        self.assertEqual(f.unconcat(["1234","567"], [2]), ["1234567"])
+        self.assertEqual(f.unconcat(["1", "234", "567"], [2,1]), ["1234", "567"])
+        # it isn't entirely obvious what to do if the widths don't sum to the expected size
+        # perhaps this should raise an error?
+        self.assertEqual(f.unconcat(["1", "234", "567"], [2]), ["1234"])
+        # and if there are extra width terms, I just ignore them
+        self.assertEqual(f.unconcat(["1", "234", "567"], [1,2,10]), ["1", "234567"])
+        self.assertEqual(f.unconcat(["1", "234", "567"], [1,10]), ["1", "234567"])
+        # 0's do nothing
+        self.assertEqual(f.unconcat(["1", "234", "567"], [0,1,10,0]), ["1", "234567"])
+        # negative values do nothing
+        self.assertEqual(f.unconcat(["1", "234", "567"], [-42,1,10,0]), ["1", "234567"])
 
 
 if __name__ == "__main__":

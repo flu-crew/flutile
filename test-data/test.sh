@@ -17,7 +17,10 @@ diff .obs-annotate .exp-annotate
 flutile trim ha1 --subtype=H1 1B.2.1.fna > .obs.ha1
 
 # ha1 can also be extracts as a motif relative to the start of the mature protein
-diff .obs.ha1 <(flutile trim motif --subtype=H1 -b 1 327 --fasta 1B.2.1.fna)
+diff .obs.ha1 <(flutile trim motif --subtype=H1 -m "1-327" --fasta 1B.2.1.fna)
 
 # or the motif can be numbered relative to initial methionine
-diff .obs.ha1 <(flutile trim motif --subtype=H1 -b 18 344 --keep-signal --fasta 1B.2.1.fna)
+diff .obs.ha1 <(flutile trim motif --subtype=H1 -m "18-344" --keep-signal --fasta 1B.2.1.fna)
+
+flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189" clade4.fna > .obs-h3-motif
+diff .obs-h3-motif .exp-h3-motif

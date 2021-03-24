@@ -99,27 +99,14 @@ wiley81_opt = click.option(
     "--wiley81", is_flag=True, help="Add H3 antigenic sites from [Wiley 1981]"
 )
 
-multi_bound_opt = click.option(
-    "--bounds",
-    "-b",
-    type=(int, int),
+motif_range_opt = click.option(
+    "--motif",
+    "-m",
+    type=str,
     multiple=True,
-    help="motif range, 1-based, so '-b 1 2' would extract 'AB' from the sequence 'ABC'. The stop index is truncated at the length of the target, so '-b 2 10' would extract 'BC' from 'ABC'",
+    help="A string describing the range of a motif. It can be an integer ('162'), a range ('162-169'), or a composite ('162,165-169'). The motif can also be given a name ('bob=162,165-169').",
 )
 
-multi_named_bound_opt = click.option(
-    "--named-bounds",
-    "-B",
-    type=(str, int, int),
-    multiple=True,
-    help="named motif range, see help for '--bounds'. The range has a name, for example, '-B Foo 32 42' where 'Foo' will be the name of the column in the output motif table.",
-)
-
-join_motif_opt = click.option(
-    "--join",
-    help="join all intervals into one motif",
-    is_flag=True,
-)
 
 @click.command(
     name="aadiff",
@@ -239,43 +226,35 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
 @keep_signal_opt
 @mafft_exe_opt
 @as_fasta_opt
-@multi_bound_opt
-@multi_named_bound_opt
+@motif_range_opt
 @subtype_no_keep_opt
 @conversion_opt
-@join_motif_opt
-def motif_cmd(
-    fasta_file, keep_signal, fasta, mafft_exe, bounds, named_bounds, subtype, conversion, join
-):
+def motif_cmd(fasta_file, keep_signal, fasta, mafft_exe, motif, subtype, conversion):
     """
     Extract a motif based on indices relative to the reference (Burke 2014).
 
     Example:
 
-      flutile trim motif --subtype=H1 -B Cb 69 75 -B Sa.1 124 125  myfile.fna
+      flutile trim motif --subtype=H1 -m "Cb=69-75" -m "Ca2=154-159,163-164"
 
     This would create a table with the fasta deflines in the first column and
-    the Cb and Sa.1 motifs in the next two columns
+    the Cb and Ca2 motifs in the next two columns
+
+    If no name is given, for example in `-m "69-79"`, the column name will
+    default to the name of the subtype followed by the bounds ("H1:69-79").
+
+   You can get the H3 antigenic motif as so:
+
+      flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
     """
 
-
-    if bounds and named_bounds:
-        raise click.ClickException(
-            "Don't use --named-bounds and --bounds together, either name them all or none of them"
-        )
-
-    if bounds:
-        named_bounds = [(None, a, b) for (a, b) in bounds]
-
-    subtype = int(subtype[1:])
     write_bounds(
-        named_bounds=named_bounds,
-        keep_signal=keep_signal,
         tabular=not (fasta),
+        motif_strs=motif,
+        keep_signal=keep_signal,
         subtype=subtype,
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
-        join=join,
         conversion=conversion,
     )
 

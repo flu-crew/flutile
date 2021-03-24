@@ -353,26 +353,72 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     return pairs
 
 
-def write_bounds(named_bounds, tabular=True, join=False, *args, **kwargs):
-    bounds = [(a, b) for (name, a, b) in named_bounds]
-    pairs = extract_bounds(bounds, *args, **kwargs)
+def parse_motifs(motif_strs, subtype):
+    motifs = dict()
+    for (i, motif_str) in enumerate(motif_strs):
+        motif_str = motif_str.strip()
+        pair = motif_str.split("=")
+        if len(pair) == 1:
+            name = subtype + ":" + motif_str
+            ranges_str = pair[0]
+        elif len(pair) == 2:
+            (name, ranges_str) = pair
+        else:
+            raise InputError("There should be only one equal sign per motif")
+        name = name.strip()
+        submotif_strs = ranges_str.strip().split(",")
+        bounds = []
+        for submotif_str in [s.strip() for s in submotif_strs]:
+            pair = submotif_str.split("-")
+            if len(pair) == 1:
+                (a, b) = (submotif_str, submotif_str)
+            elif len(pair) == 2:
+                (a, b) = pair
+            else:
+                raise InputError("Badly formed motif string")
+            bounds.append((int(a), int(b)))
+        motifs[name] = bounds
+    return motifs
 
-    names = [name for (name, a, b) in named_bounds]
 
-    if join:
-      separator=""
-    else:
-      separator="\t"
+def concat(xss):
+    return [x for xs in xss for x in xs]
 
+
+def unconcat(xs, widths, joiner=lambda ys: "".join(ys)):
+    i = 0
+    collapsed = []
+    for w in [w for w in widths if w > 0]:
+        if i >= len(xs):
+            break
+        collapsed.append(joiner(xs[i : (i + w)]))
+        i += w
+    return collapsed
+
+
+def make_motifs(motif_strs, subtype, *args, **kwargs):
+    motifs = parse_motifs(motif_strs=motif_strs, subtype=subtype)
+    subtype = int(subtype[1:])
+    bounds = concat(motifs.values())
+    pairs_flat = extract_bounds(bounds, subtype=subtype, *args, **kwargs)
+
+    widths = [len(v) for v in motifs.values()]
+    pairs = []
+    for (defline, segs) in pairs_flat:
+        pairs.append((defline, unconcat(segs, widths)))
+
+    return (motifs.keys(), pairs)
+
+
+def write_bounds(tabular=False, *args, **kwargs):
+    (names, pairs) = make_motifs(*args, **kwargs)
     if tabular:
-        if [x for x in names if x is not None]:
-            print("\t" + separator.join(names))
+        print("\t" + "\t".join(names))
         for (defline, motifs) in pairs:
-            print(defline + "\t" + separator.join(motifs))
+            print(defline + "\t" + "\t".join(motifs))
     else:
-        smof.print_fasta(
-            [smof.FastaEntry(defline, "".join(motifs)) for (defline, motifs) in pairs]
-        )
+        pairs = [(header, "".join(motifs)) for (header, motifs) in pairs]
+        smof.print_fasta(pairs)
 
 
 def gapped_indices(seq):
