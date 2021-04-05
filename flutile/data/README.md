@@ -31,3 +31,29 @@ Contents:
     A/black-headedgull/Turkmenistan/13/1976
     A/little-yellow-shoulderedbat/Guatemala/060/2010
     A/flat-faced/bat/Peru/033/2010
+
+ * NA subtype refs - chosen based on existence of good crystal structures
+
+  | subtype | pdb  | strain
+  +---------+------+----------------
+  | H1N1    | 3NSS | A/California/04/2009
+  | H2N2    | 1NN2 | A/Tokyo/3/1967
+  | H2N3    | 4HZV | A/swine/Missouri/2124514/2006
+  | H10N4   | 2HTV | A/Mink/Sweden/3900/1984
+  | H12N5   | 3SAL | A/duck/Alberta/60/1976
+  | H3N6    | 4QN4 | A/chicken/Nanchang/7-010/2000
+  | H10N7   | 4QN3 | A/mallard/ALB/196/1996
+  | H3N8    | 2HT5 | A/duck/Ukraine/1/1963
+  | H11N9   | 7NN9 | A/tern/Australia/G70C/1975
+  | H17N10  | 4FVK | A/little_yellow-shouldered_bat/Guatemala/153/2009
+  | H18N11  | 4K3Y | A/flat-faced_bat/Peru/033/2010
+
+  Here are some alternatives I considered:
+
+    H5N1 2HTY A/Viet_Nam/1204/2004
+    N1   6LXI A/Brevig_Mission/1/1918
+    N2   4GZX A/Tanzania/205/2010
+    N2   5HUK A/Northern_pintail/Washington/40964/2014
+    N2   1IVE A/Tokyo/3/1967
+    N8   5HUF A/gyrfalcon/Washington/41088-6/2014
+    N9   7NN9 A/tern/Australia/G70C/1975
