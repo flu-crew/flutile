@@ -10,6 +10,9 @@ include flutile/data/subtype-refs.fna
 include flutile/data/na-subtype-refs.fna
 include flutile/data/na-subtype-refs.faa
 
+include flutile/data/internal-refs.fna
+include flutile/data/internal-refs.faa
+
 include flutile/data/caton82.txt
 include flutile/data/wiley81.txt
 
