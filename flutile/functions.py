@@ -191,6 +191,36 @@ def components(pairs):
     return groups
 
 
+def get_ref(subtype):
+    if subtype[0] == "H":
+        try:
+            i = int(subtype[1])
+        except:
+            err("Expected HA, but H was not followed by an integer")
+        ref_file = os.path.join(os.path.dirname(__file__), "data", "subtype-refs.faa")
+        ref_fasta = smof.open_fasta(ref_file)
+        ref = list(smof.grep(ref_fasta, pattern=f"|H{i}N"))
+    elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
+        ref_file = os.path.join(
+            os.path.dirname(__file__), "data", "internal-refs.faa"
+        )
+        ref_fasta = smof.open_fasta(ref_file)
+        ref = list(smof.grep(ref_fasta, perl_regexp=True, pattern=f"\\|{subtype}$"))
+    elif subtype[0] == "N":
+        try:
+            i = int(subtype[1])
+        except:
+            err("Expected NA, but N was not followed by an integer")
+        ref_file = os.path.join(
+            os.path.dirname(__file__), "data", "na-subtype-refs.faa"
+        )
+        ref_fasta = smof.open_fasta(ref_file)
+        ref = list(smof.grep(ref_fasta, perl_regexp=True, pattern=f"\\|H[0-9]+N{i}"))
+    else:
+        err("Unexpected subtype")
+    return ref
+
+
 def align(seq, mafft_exe="mafft"):
     from Bio.Align.Applications import MafftCommandline
 
@@ -290,9 +320,7 @@ def _dispatch_extract(
     start, end, subtype, fasta_file, conversion=None, *args, **kwargs
 ):
     # get reference for this subtype
-    ref_file = os.path.join(os.path.dirname(__file__), "data", "subtype-refs.faa")
-    ref_fasta = smof.open_fasta(ref_file)
-    ref = list(smof.grep(ref_fasta, pattern=f"|H{subtype}N"))
+    ref = get_ref(subtype)
 
     # open input sequences
     entries = smof.open_fasta(fasta_file)
@@ -317,7 +345,7 @@ def extract_ha1(subtype, *args, **kwargs):
     Get the HA1 range relative to the subtype of interest by mapping the H1 HA1
     range (18,344) range to the subtype of interest
     """
-    (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=subtype)
+    (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=int(subtype[1]))
     out = _dispatch_extract(start=start, end=end, subtype=subtype, *args, **kwargs)
     smof.print_fasta(out)
 
@@ -328,8 +356,8 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     """
     bounds = [(min(xs), max(xs)) for xs in bounds]
 
-    if not keep_signal:
-        offset = len(motifs.NTERM_MOTIFS["H" + str(subtype)])
+    if subtype[0] == "H" and not keep_signal:
+        offset = len(motifs.NTERM_MOTIFS[subtype])
         bounds = [(a + offset, b + offset) for (a, b) in bounds]
 
     # extract the interval defined by the largest and smallest indices
@@ -398,7 +426,6 @@ def unconcat(xs, widths, joiner=lambda ys: "".join(ys)):
 
 def make_motifs(motif_strs, subtype, *args, **kwargs):
     motifs = parse_motifs(motif_strs=motif_strs, subtype=subtype)
-    subtype = int(subtype[1:])
     bounds = concat(motifs.values())
     pairs_flat = extract_bounds(bounds, subtype=subtype, *args, **kwargs)
 

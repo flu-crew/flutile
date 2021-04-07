@@ -17,6 +17,7 @@ mafft_exe_opt = click.option(
 )
 
 subtypes = [
+    # HA
     "H1",
     "H2",
     "H3",
@@ -35,6 +36,25 @@ subtypes = [
     "H16",
     "H17",
     "H18",
+    # NA
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5",
+    "N6",
+    "N7",
+    "N8",
+    "N9",
+    "N10",
+    "N11",
+    # Internal genes
+    "PB2",
+    "PB1",
+    "PA",
+    "NP",
+    "M1",
+    "NS1",
 ]
 
 subtype_opt = click.option(
@@ -44,7 +64,7 @@ subtype_opt = click.option(
         case_sensitive=False,
     ),
     required=True,
-    help="Currently HA subtypes from H1 to H18 are supported and will number relative to the start of the mature peptide, using the offsets described in (Burke 2014). If the flag --keep-signal is set, then numbering is relative to the initial methionine.",
+    help="The segment subtype of all entries in the input fasta file. For HA subtypes, the numbering will be relative to the start of the mature peptide, with offsets as defined by (Burke 2014). When the `--keep-signal` flag is set for an HA subtype, and for all NA and internal gene segments, indexing is from the initial methionine. For NA, you may use N1 to index by conventional WNS numbering.",
 )
 
 subtype_no_keep_opt = click.option(
@@ -54,7 +74,7 @@ subtype_no_keep_opt = click.option(
         case_sensitive=False,
     ),
     required=True,
-    help="The subtype of all strains in the input fasta file",
+    help="The segment subtype of all strains in the input fasta file",
 )
 
 as_fasta_opt = click.option(
@@ -210,7 +230,6 @@ conversion_opt = click.option(
 @subtype_no_keep_opt
 @conversion_opt
 def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
-    subtype = int(subtype[1:])
     extract_ha1(
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
@@ -231,21 +250,21 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
 @conversion_opt
 def motif_cmd(fasta_file, keep_signal, fasta, mafft_exe, motif, subtype, conversion):
     """
-    Extract a motif based on indices relative to the reference (Burke 2014).
+     Extract a motif based on indices relative to the reference (Burke 2014).
 
-    Example:
+     Example:
 
-      flutile trim motif --subtype=H1 -m "Cb=69-75" -m "Ca2=154-159,163-164"
+       flutile trim motif --subtype=H1 -m "Cb=69-75" -m "Ca2=154-159,163-164"
 
-    This would create a table with the fasta deflines in the first column and
-    the Cb and Ca2 motifs in the next two columns
+     This would create a table with the fasta deflines in the first column and
+     the Cb and Ca2 motifs in the next two columns
 
-    If no name is given, for example in `-m "69-79"`, the column name will
-    default to the name of the subtype followed by the bounds ("H1:69-79").
+     If no name is given, for example in `-m "69-79"`, the column name will
+     default to the name of the subtype followed by the bounds ("H1:69-79").
 
-   You can get the H3 antigenic motif as so:
+    You can get the H3 antigenic motif as so:
 
-      flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
+       flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
     """
 
     write_bounds(
