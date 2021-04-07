@@ -194,28 +194,28 @@ def components(pairs):
 def get_ref(subtype):
     if subtype[0] == "H":
         try:
-            i = int(subtype[1])
+            i = int(subtype[1:])
         except:
             err("Expected HA, but H was not followed by an integer")
         ref_file = os.path.join(os.path.dirname(__file__), "data", "subtype-refs.faa")
         ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, pattern=f"|H{i}N"))
+        ref = list(smof.grep(ref_fasta, no_color=True, pattern=f"|H{i}N"))
     elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
         ref_file = os.path.join(
             os.path.dirname(__file__), "data", "internal-refs.faa"
         )
         ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, perl_regexp=True, pattern=f"\\|{subtype}$"))
+        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"))
     elif subtype[0] == "N":
         try:
-            i = int(subtype[1])
+            i = int(subtype[1:])
         except:
             err("Expected NA, but N was not followed by an integer")
         ref_file = os.path.join(
             os.path.dirname(__file__), "data", "na-subtype-refs.faa"
         )
         ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, perl_regexp=True, pattern=f"\\|H[0-9]+N{i}"))
+        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|H[0-9]+N{i}\\|"))
     else:
         err("Unexpected subtype")
     return ref
@@ -266,24 +266,26 @@ def ungap_indices(start, end, fasta):
     return (a, b)
 
 
-def extract_aa2aa(start, end, faa, ref, mafft_exe="mafft"):
+def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
     # add reference sequences to the input seq
     faa = list(ref) + list(faa)
 
     # align the reference and input protein sequences
     aln = align(faa, mafft_exe=mafft_exe)
 
+
     # find reference gapped start and stop positions
-    (gapped_start, gapped_end) = ungap_indices(start, end, list(aln)[0].seq)
+    intervals = [ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds]
 
-    # extract the subset region
-    extracted = smof.subseq(aln, gapped_start, gapped_end)
+    # extract the subset regions
+    extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
 
-    # return sans reference
-    return list(extracted)[1:]
+    for extracted in extracts:
+        # return sans reference
+        yield list(extracted)[1:]
 
 
-def extract_dna2dna(start, end, fna, ref, mafft_exe="mafft"):
+def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
     # translate the DNA inputs (longest uninterupted CDS)
     faa = smof.translate(fna, all_frames=True)
 
@@ -293,31 +295,33 @@ def extract_dna2dna(start, end, fna, ref, mafft_exe="mafft"):
     fna = list(fna)
     aln = list(align(ref + faa, mafft_exe=mafft_exe))
 
-    # find reference gapped start and stop positions
-    (a, b) = ungap_indices(start, end, list(aln)[0].seq)
+    for (gapped_start, gapped_stop) in bounds:
+        # find reference gapped start and stop positions
+        (a, b) = ungap_indices(gapped_start, gapped_stop, list(aln)[0].seq)
 
-    # find (start, length) bounds for each DNA entry
-    for i in range(len(fna)):
-        # start is 0-based
-        # whereas 'a' and 'b' above are 1-based
-        start, length = smof.find_max_orf(fna[i].seq, from_start=False)
+        motif = []
+        # find (start, length) bounds for each DNA entry
+        for i in range(len(fna)):
+            # start is 0-based
+            # whereas 'a' and 'b' above are 1-based
+            start, length = smof.find_max_orf(fna[i].seq, from_start=False)
 
-        seq = aln[i + 1].seq
+            seq = aln[i + 1].seq
 
-        # motif start position, 0-based
-        aa_offset = len(seq[0 : (a - 1)].replace("-", ""))
-        aa_length = len(seq[(a - 1) : b].replace("-", ""))
+            # motif start position, 0-based
+            aa_offset = len(seq[0 : (a - 1)].replace("-", ""))
+            aa_length = len(seq[(a - 1) : b].replace("-", ""))
 
-        dna_start = start + aa_offset * 3
-        dna_end = dna_start + aa_length * 3 + 1
+            dna_start = start + aa_offset * 3
+            dna_end = dna_start + aa_length * 3 + 1
 
-        fna[i].seq = fna[i].seq[dna_start:dna_end]
+            motif[i].seq = fna[i].seq[dna_start:dna_end]
 
-    return fna
+        yield motif
 
 
 def _dispatch_extract(
-    start, end, subtype, fasta_file, conversion=None, *args, **kwargs
+    bounds, subtype, fasta_file, conversion=None, *args, **kwargs
 ):
     # get reference for this subtype
     ref = get_ref(subtype)
@@ -337,7 +341,7 @@ def _dispatch_extract(
     else:
         err("You shouldn't have done that")
 
-    return f(start, end, entries, ref, *args, **kwargs)
+    return f(bounds, entries, ref, *args, **kwargs)
 
 
 def extract_ha1(subtype, *args, **kwargs):
@@ -346,7 +350,9 @@ def extract_ha1(subtype, *args, **kwargs):
     range (18,344) range to the subtype of interest
     """
     (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=int(subtype[1]))
-    out = _dispatch_extract(start=start, end=end, subtype=subtype, *args, **kwargs)
+    outs = _dispatch_extract(bounds=[(start, end)], subtype=subtype, *args, **kwargs)
+    # for ha1 extract, there will be exactly one region extracted for sequence
+    out = list(outs)[0]
     smof.print_fasta(out)
 
 
@@ -360,23 +366,13 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
         offset = len(motifs.NTERM_MOTIFS[subtype])
         bounds = [(a + offset, b + offset) for (a, b) in bounds]
 
-    # extract the interval defined by the largest and smallest indices
-    min_idx = sys.maxsize
-    max_idx = 0
-    for (a, b) in bounds:
-        min_idx = min(min_idx, a)
-        max_idx = max(max_idx, b)
-    out = _dispatch_extract(
-        start=min_idx, end=max_idx, subtype=subtype, *args, **kwargs
-    )
-
-    intervals = [(a - min_idx, b - min_idx + 1) for (a, b) in bounds]
+    extracts = [list(seq) for seq in _dispatch_extract(bounds=bounds, subtype=subtype, *args, **kwargs)]
 
     pairs = []
-    for s in out:
-        defline = s.header
-        motif_seqs = [s.seq[a:b] for (a, b) in intervals]
-        pairs.append((defline, motif_seqs))
+    for n_seq in range(len(extracts[0])):
+      defline = extracts[0][n_seq].header
+      motif_seqs = [motif[n_seq].seq for motif in extracts]
+      pairs.append((defline, motif_seqs))
 
     return pairs
 

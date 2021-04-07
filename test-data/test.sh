@@ -24,3 +24,6 @@ diff .obs.ha1 <(flutile trim motif --subtype=H1 -m "18-344" --keep-signal --fast
 
 flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189" clade4.fna > .obs-h3-motif
 diff .obs-h3-motif .exp-h3-motif
+
+diff <(smof subseq -b 36 59 wsn33.faa) \
+     <(cat N1.fna wsn33.fna | flutile trim motif --subtype=N1 -m "stalk=36-59" --fasta | smof grep WSN | smof clean -x)
