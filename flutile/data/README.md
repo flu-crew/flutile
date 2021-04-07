@@ -36,7 +36,7 @@ Contents:
 
   | subtype | pdb  | strain
   +---------+------+----------------
-  | H1N1    | 3NSS | A/California/04/2009
+  | H1N1    |      | A/WSN/33
   | H2N2    | 1NN2 | A/Tokyo/3/1967
   | H2N3    | 4HZV | A/swine/Missouri/2124514/2006
   | H10N4   | 2HTV | A/Mink/Sweden/3900/1984
@@ -50,6 +50,7 @@ Contents:
 
   Here are some alternatives I considered:
 
+    H1N1 3NSS A/California/04/2009
     H5N1 2HTY A/Viet_Nam/1204/2004
     N1   6LXI A/Brevig_Mission/1/1918
     N2   4GZX A/Tanzania/205/2010
