@@ -190,9 +190,14 @@ def components(pairs):
 
     return groups
 
+def is_ha(subtype):
+  return bool(re.fullmatch("H\d+", subtype))
+
+def is_na(subtype):
+  return bool(re.fullmatch("N\d+", subtype))
 
 def get_ref(subtype):
-    if subtype[0] == "H":
+    if is_ha(subtype):
         try:
             i = int(subtype[1:])
         except:
@@ -206,7 +211,7 @@ def get_ref(subtype):
         )
         ref_fasta = smof.open_fasta(ref_file)
         ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"))
-    elif subtype[0] == "N":
+    elif is_na(subtype):
         try:
             i = int(subtype[1:])
         except:
@@ -362,7 +367,7 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     """
     bounds = [(min(xs), max(xs)) for xs in bounds]
 
-    if subtype[0] == "H" and not keep_signal:
+    if is_ha(subtype) and not keep_signal:
         offset = len(motifs.NTERM_MOTIFS[subtype])
         bounds = [(a + offset, b + offset) for (a, b) in bounds]
 
@@ -587,33 +592,33 @@ def referenced_table(
     remove_unchanged=True,
     **kwargs,
 ):
-    if subtype:
+    # if this is an HA and we want to trim off the signal peptide
+    if is_ha(subtype) and not keep_signal:
         ref = motifs.get_ha_subtype_nterm_motif(subtype)
-    else:
-        ref = None
-
-    if keep_signal:
-        # each of the reference sequences starts at the signal peptide's
-        # initial methionine, so to keep the signal we trim nothing
-        trim = 0
-    elif subtype:
         # the motif here is an exact match to the reference signal peptide, we
         # want to remove the signal peptide, so the trim length is simply the
         # peptide length
         trim = len(ref.motif)
 
-    # open input sequences
-    entries = smof.open_fasta(faa)
-    # remove gaps
-    entries = list(smof.clean(entries, toseq=True))
-
-    if subtype:
         # trim off signal peptides or other gunk at the beginning of the reference
         seq = ref.sequence[trim:]
 
-        refseq = smof.FastaEntry(header=ref.defline, seq=seq)
+        refseq = [smof.FastaEntry(header=ref.defline, seq=seq)]
+    # if we aren't trimming, we can use the default (M-initialized) full protein references
+    elif subtype:
+        refseq = get_ref(subtype)
+    # unless we aren't given a reference, then we do nothing special
+    else:
+        refseq = []
 
-        entries = [refseq] + entries
+    # open input sequences
+    entries = smof.open_fasta(faa)
+
+    # remove gaps
+    entries = list(smof.clean(entries, toseq=True))
+
+    # prepend any references
+    entries = refseq + entries
 
     # align the reference and input protein sequences
     aln = align(entries, mafft_exe=mafft_exe)
@@ -621,9 +626,8 @@ def referenced_table(
 
     indices = gapped_indices(aln[0][1])
 
-    if subtype:
-        # remove the reference sequence
-        aln = aln[1:]
+    # remove any reference sequences (1 or 0)
+    aln = aln[len(refseq):]
 
     table = list(aadiff_table(aln, remove_unchanged=remove_unchanged, **kwargs))
 
@@ -642,7 +646,7 @@ def referenced_aadiff_table(faa, **kwargs):
 
 def map_ha_range(start, end, subtype1, subtype2):
     """
-    Map AA indices between subtypes using the Burke2014 index map
+    Map AA indices between HA subtypes using the Burke2014 index map
 
     @param start integer start position from initial methionine with respect to subtype1
     @param end integer end position from initial methionine with respect to subtype1
@@ -677,6 +681,9 @@ def map_ha_range(start, end, subtype1, subtype2):
 
 
 def referenced_annotation_table(faa, subtype, **kwargs):
+    """
+    This is just for HA
+    """
 
     table = referenced_table(faa, subtype=subtype, remove_unchanged=False, **kwargs)
 

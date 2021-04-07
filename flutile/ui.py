@@ -16,8 +16,7 @@ mafft_exe_opt = click.option(
     help="Path to MAFFT alignment tool executable",
 )
 
-subtypes = [
-    # HA
+ha_subtypes = [
     "H1",
     "H2",
     "H3",
@@ -36,7 +35,9 @@ subtypes = [
     "H16",
     "H17",
     "H18",
-    # NA
+]
+
+na_subtypes = [
     "N1",
     "N2",
     "N3",
@@ -48,7 +49,9 @@ subtypes = [
     "N9",
     "N10",
     "N11",
-    # Internal genes
+]
+
+internal_subtypes = [
     "PB2",
     "PB1",
     "PA",
@@ -57,10 +60,20 @@ subtypes = [
     "NS1",
 ]
 
+ha_subtype_opt = click.option(
+    "--subtype",
+    type=click.Choice(
+        ha_subtypes,
+        case_sensitive=False,
+    ),
+    required=True,
+    help="The HA segment subtype of all entries in the input fasta file. The numbering will be relative to the start of the mature peptide, with offsets as defined by (Burke 2014).",
+)
+
 subtype_opt = click.option(
     "--subtype",
     type=click.Choice(
-        subtypes,
+        ha_subtypes + na_subtypes + internal_subtypes,
         case_sensitive=False,
     ),
     required=True,
@@ -70,7 +83,7 @@ subtype_opt = click.option(
 subtype_no_keep_opt = click.option(
     "--subtype",
     type=click.Choice(
-        subtypes,
+        ha_subtypes + na_subtypes + internal_subtypes,
         case_sensitive=False,
     ),
     required=True,
@@ -149,10 +162,10 @@ def aadiff_cmd(*args, **kwargs):
 
 @click.command(
     name="annotate",
-    help="Tabulate differences between sequences. This command is like aadiff except it adds columns mapping to indices across subtypes (using Burke 2014 numbering).",
+    help="Tabulate differences between HA sequences. This command is like aadiff except it adds columns mapping to indices across subtypes (using Burke 2014 numbering).",
 )
 @click.argument("faa", default=sys.stdin, type=click.File())
-@subtype_opt
+@ha_subtype_opt
 @make_consensus_opt
 @consensus_as_reference_opt
 @mafft_exe_opt
