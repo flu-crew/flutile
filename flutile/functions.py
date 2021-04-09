@@ -197,6 +197,14 @@ def is_na(subtype):
   return bool(re.fullmatch("N\d+", subtype))
 
 def get_ref(subtype):
+    synonyms = {
+        "M" : "M1",
+        "MP" : "M1",
+        "NS" : "NS1",
+      }
+    if subtype in synonyms:
+      subtype = synonyms[subtype]
+
     if is_ha(subtype):
         try:
             i = int(subtype[1:])
@@ -205,12 +213,6 @@ def get_ref(subtype):
         ref_file = os.path.join(os.path.dirname(__file__), "data", "subtype-refs.faa")
         ref_fasta = smof.open_fasta(ref_file)
         ref = list(smof.grep(ref_fasta, no_color=True, pattern=f"|H{i}N"))
-    elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
-        ref_file = os.path.join(
-            os.path.dirname(__file__), "data", "internal-refs.faa"
-        )
-        ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"))
     elif is_na(subtype):
         try:
             i = int(subtype[1:])
@@ -221,6 +223,12 @@ def get_ref(subtype):
         )
         ref_fasta = smof.open_fasta(ref_file)
         ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|H[0-9]+N{i}\\|"))
+    elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
+        ref_file = os.path.join(
+            os.path.dirname(__file__), "data", "internal-refs.faa"
+        )
+        ref_fasta = smof.open_fasta(ref_file)
+        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"))
     else:
         err("Unexpected subtype")
     return ref

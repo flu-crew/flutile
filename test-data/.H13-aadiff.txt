@@ -1,0 +1,152 @@
+site	MF147040|A/black-headed_gull/Netherlands/13/2014|H13N2|2014	KP033522|A/gull/Maryland/16/1985|H13N2|1985	KR087596|A/herring_gull/Astrakhan/458/1985|H13N6|1985	MF146202|A/black-headed_gull/Netherlands/44/2008|H13N8|2008	MF147981|A/black-headed_gull/Netherlands/14/2014|H13N6|2014	MF145897|A/black-headed_gull/Netherlands/16/2012|H13N6|2012	CY014720|A/gull/Minnesota/945/1980|H13N6|1980	MF682816|A/black-headed_gull/Netherlands/94/2012|H13N6|2012	CY042607|A/laughing_gull/New_Jersey/Sg-00568/2008|H13N9|2008	MF147079|A/black-headed_gull/Netherlands/49/2008|H13N8|2008
+-31	A		-	Q	Q	Q	S	Q	-	Q
+-30	K		-						-	
+-29	A		-	Q	Q	Q	S	Q	-	Q
+-28	G						R		-	
+-27	E		R	R	R	R	G	R	-	K
+-26	K	I	F	I	I	I	N	I	-	I
+-25	S	L	L	Q	Q	Q	I	K	-	L
+-24	K	T	Q	Q	Q	Q	N	Q	-	Q
+-23	T	N					K		-	
+-22	D	R			E	E	P	E	-	
+-21	T	N		M			N		-	
+-20	R	K					K		-	
+-19	K		E	E	E	E		E	-	E
+-18	M								-	
+-17	D			E	E	E		E	-	
+-16	I			V	V			V	-	
+-15	P	R	Q				R		-	
+-14	A	S		V	V	V		V	-	I
+-13	I		V	F	F	F		F	-	V
+-12	A	I		V		V	V	V	-	
+-11	L	I	F				I		-	
+-10	L	S					S		-	
+-9	I	L		M	V	V	L	V	-	M
+-8	L								-	
+-7	T	I					I		-	
+-6	S								-	
+-5	V	T	T	I	I	I	T	I	-	I
+-4	C								-	
+-3	V								-	
+-2	Q								-	K
+-1	A								-	
+1	D								-	
+2	R								K	
+13	S	T					T			
+15	R	K	K				K		K	K
+22	N						S			
+23	N	D	D				D			
+30	V	I					I			
+36	N		S							
+45	D			G	G	G		G	N	G
+62	V	I			L	L		L		
+66	A								S	
+68	A	T					T			
+71	L	F					F			
+96	D					E		E		
+109	R								K	
+115	E								Q	
+117	I				F					
+120	D	T	T	T	T	T	S	T	T	T
+124	G	E	A	E	A	E	E	E	A	E
+126	K	N	N	N	N	N	N	N	N	N
+129	V	A					A			
+130	S	T		T	T	T	T	T		
+131	A	S	S				S		S	S
+134	K	R	Q	Q	Q	Q	R	Q	Q	Q
+136	K	N		R	R	R	N	R		
+137	-	T					T			
+139	A	T	V				T			
+140	S	N								
+141	S					G		G		
+147	V						I			I
+151	A	K	E		K		K		E	G
+152	S	K	R	R	R	R	K	R	R	R
+153	Q	N	G	E	G	G	D	G	G	G
+154	N		K						K	
+155	K	R	Q		N		R			
+160	R	S					S			
+161	G	R					R			
+174	I	M	M				M		M	
+177	I									M
+181	V						I			
+183	T								E	
+184	E	D	D	D	A	D	D	D	D	D
+186	A	T					T	V		
+187	R	K					K			
+188	N	S	K	K	E	K	L	K	K	K
+191	V			A	A	A		A	I	A
+192	N			K	K	K		K		K
+193	N	S		D	D	D	S	D	S	D
+194	N	D			D		D			
+199	V			A	A	A		A		
+200	S						T			
+202	S		G						G	
+206	R	K			K	K	K	K	K	
+209	N	K					K			
+212	T		I						I	
+214	V		I	T	T	T		T	I	
+222	K	R					R			
+227	I			M						
+230	Y	V	S				V		S	
+236	E			D	D	D		D		
+239	S	T					T			
+243	S	N	N	N	N	N	N	N	N	N
+250	K	R		R	R		R	R	R	
+267	R	P					P		H	
+270	I								A	
+271	A								G	
+272	K	R					R			
+276	K	R					R			
+288	R	K	K	K	K	K	K	K	K	K
+298	L			I						
+300	D	N					N			
+321	A								T	
+322	I						T			
+323	S								A	
+324	N		T						S	
+357	V			T	T	T		T		
+359	I		M	M						M
+371	N	D	D	D	D	D	D	D	D	D
+382	E	D					D			
+396	N	S	S	S	S	S	S	S		S
+400	Q								N	
+407	N	D	D	D	D	D	D	D	D	D
+416	V				I	I		I		
+445	D	E					E			
+449	R						K			
+450	V	T	A				T		S	
+452	K			R	R	R		R		R
+453	T	A					A			
+475	E	D								
+485	T	A		I	I	I	S	I		
+488	E	A					A			
+504	K						E			
+506	D	E			G		E		E	
+508	N								G	S
+512	A			T						
+523	I	V							V	
+525	L		-							
+526	V		-							
+527	G		-							
+528	L		-							
+529	V	I	-	I	I	I	I	I	I	I
+530	L		-							
+531	A		-							
+532	F		-							
+533	I		-							
+534	M		-							
+535	W		-							
+536	A		-				T	T		
+537	C		-							
+538	S		-				N		N	
+539	S		-							
+540	G		-							
+541	N		-		S					
+542	C		-							
+543	R		-							
+544	F		-							
+545	N		-							
+546	L	V	-	I	I	I	V	I	I	I
+547	C		-							
+548	I		-							

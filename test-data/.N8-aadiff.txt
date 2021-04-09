@@ -1,0 +1,129 @@
+site	CY049798|A/gadwall/Altai/1325/2007|H3N8|2007	CY076031|A/teal/Oregon/44336-122/2007|H3N8|2007	CY127074|A/mallard/Alberta/4/1994|H6N8|1994	CY125287|A/blue-winged_teal/Prince_Edward_Island/03927/2009|H3N8|2009	CY005045|A/pintail_duck/ALB/169/1980|H3N8|1980	MH165694|A/chicken/South_Africa/17080561/2017|H5N8|2017	MH998463|A/chicken/Egypt/M14081D/2017|H5N8|2017	MH396573|A/equine/Colina/2012|H3N8|2012	MT421549|A/mallard/Maine/UGAI16-5418/2016|H3N8|2016	MN937760|A/blue-winged_teal/Texas/UGAI18-986/2018|H10N8|2018
+8	I					V	A	M		
+9	T							A		
+10	I					V				
+12	S							F		
+13	I	V	V	V	V			A	V	V
+17	L							I		
+18	V	A						L		
+19	V							I		
+20	F	L	L	L	L		L	I	I	I
+22	V	I	I	I	I				I	I
+23	L	I						I	I	I
+26	V	I	I	I	I	A	A		I	I
+30	I	T	T	A	T				T	T
+31	V	I	I		I	L	L			
+32	T					M	M			
+35	V				I	A	A	A		
+37	G	P	P	P	P			N	P	P
+38	R	G	G	G	G	K	K	N	G	G
+39	G	N	N	N	N	S	S	N	D	D
+40	G			R		E	E	R		
+41	N							T		
+42	N			D				D		
+43	G							L		
+44	V	S	S	S	N	I	I	N	S	S
+46	N					K	K	K	S	S
+47	E					G	G	G		
+49	I	V	V	V						
+50	V	I	I	I	I			I	I	I
+59	I	V						V		
+61	K				R					
+62	V							I		
+66	H					Y	Y	Y		
+69	S	N	N	N	N				N	N
+70	V							T		
+71	V	I	I	I	I			I	I	I
+72	E							K		
+73	Y					H				
+74	V	I	I	I				I	I	I
+75	P	E	E	E	E			E	E	E
+76	Y	R	R	R	R	H	H	R	R	R
+77	W	S	P	P	P			P	S	S
+78	S	E	E	E	E	N	N		E	E
+79	E	S	S	S	S			N	S	S
+80	G	D	D		D			E		D
+81	T	Q	H	H	H	A		Y	Q	Q
+82	Y	F	F	F	F				F	L
+83	M					I	I			V
+88	A	T	P	P	P	P	P	P		
+89	I	L	L	L	L			L	L	L
+91	D							E		
+92	V		A	A	A			A		
+93	K							Q		
+106	I					V	V			
+112	V					I	I			
+125	I	T	A	T	T	V	V	S	T	T
+136	S					A	A			
+153	F	Y	Y	Y	Y			Y	Y	Y
+160	E							K		
+161	V	I	I	I	I			I	I	I
+174	A							S		
+191	V	I	I	I	I	I	I		I	I
+193	V			I						
+198	S	A	A	A	A			N	A	A
+199	K							Q		
+201	V							I		
+205	H							S		
+209	V	I	I	I					I	I
+211	T				S			V		
+213	V							I		
+214	I		V			V	V			
+220	D	N								
+233	Q							K		
+235	D	E	E	E	E	N	N		E	E
+250	Q							K		
+252	R		K	K						
+253	I	A	A	A	A				A	A
+254	Y	F	F	F	F			F	F	F
+257	N	K	K	K	K			K	K	K
+258	Q							D		R
+260	R	K	K	K	K	K	K	K	K	K
+261	I			V				V		
+262	V	I	T	I	I	I	I	I	I	I
+263	S	G	G	G	G	D	D	G	G	G
+265	T	V							I	V
+266	D	E	E	E	E				E	E
+267	V	I	I	I	I			I	I	I
+268	N		S	S	S	S	S	S	S	S
+270	N					S	S			
+283	D	E	E	E	E			E	E	E
+289	V							I		
+301	V							I		
+306	P				S			S		
+311	R			K				T	K	
+319	L							I		
+321	S							T		
+329	A	S	S	S	G			S	S	S
+332	T		K			V	V			
+337	S							N		
+339	M							L		
+342	Q							K		
+355	T	N	N	N	N				N	N
+359	M					V	V	A		
+374	L					I	I	I		
+375	R		K	K	K			K	K	K
+376	I	V	V	V					V	V
+377	K	R	R	R				R	R	R
+381	T	V	V	V	I				V	V
+383	T	N	N	N	N			N	N	N
+386	E							D		
+388	V	I	I	T		I	I	I	I	I
+389	R	K	K	K	K				K	K
+390	K	R		R	R	R	R	R	R	R
+392	I	V	V	V	V	V	V	V	V	V
+393	V							I		
+394	V							I		
+396	N							D		
+397	L							P		
+413	T					S	S			
+414	G	K	K	K				K	K	K
+415	K	R	R	R	R	R	R		R	R
+416	D		N	N		E	E	E		
+430	K					R	R			
+434	K		Q			R	R	T		
+450	Y	H	H	H	H	H	H	H	H	H
+451	E							K		
+452	V	I	I	I	I	I	I	I	I	I
+454	D							S		
+462	I			T						

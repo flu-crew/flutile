@@ -57,7 +57,10 @@ internal_subtypes = [
     "PA",
     "NP",
     "M1",
+    "M",
+    "MP",
     "NS1",
+    "NS",
 ]
 
 ha_subtype_opt = click.option(

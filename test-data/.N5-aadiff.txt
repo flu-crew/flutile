@@ -1,0 +1,322 @@
+site	MT624330|A/Mallard_duck/Alberta/585/2019|H6N5|2019	MN653398|A/Anas_platyrhynchos/Belgium/1011_H170479/2015|H3N5|2015	GU052218|A/Duck/Alberta/60/1976|H12N5|1976	CY014657|A/shearwater/Australia/1/1973|H6N5|1973	CY177225|A/mallard/California/1392/2013|H5N5|2013	MN911202|A/Ruddy_Turnstone/Delaware/530/2019|H11N5|2019	MF755239|A/mallard_duck/Netherlands/59/2015|H6N5|2015	MH598240|A/ruddy_turnstone/New_Jersey/AI00-679/2000|H12N5|2000	CY241831|A/environment/New_Jersey/UGAI16-2301/2016|H10N5|2016	CY077168|A/mallard/Alberta/224/2006|H12N5|2006
+1	M	-								
+2	N	-								
+3	P	-								
+4	N	-								
+5	Q	-								
+6	K	-								
+7	I	-								
+8	I	-								
+9	T	-								
+10	I	-								
+11	G	-								
+12	S	-								
+13	V	-		A		I	I		I	
+14	S	-								
+15	L	-								
+16	A	-		G		G	G		G	
+17	L	-								
+18	V	-								
+19	V	-	I	I						
+20	L	-	F	F		F	F	F	F	F
+21	N	-								
+22	I	-				T			T	
+23	L	-								
+24	L	-								
+25	H	-								
+26	I	-		V		V	V		V	
+27	A	-								
+28	S	-								
+29	I	-								
+30	V	-	A	T		A	A	A	A	
+31	I	-		L		L	L		L	
+32	G	-								
+33	I	-								
+34	I	-								V
+35	S	-								
+36	V	-								
+37	T	-								
+38	K	-								
+39	E	-		D		D	D		D	
+40	S	-		N		H	H		P	
+41	S	-		K		K	K		K	G
+42	I	-	V	V		A	A		A	
+43	S	-		H		Y	Y		Y	P
+44	S	-		I		T	T		T	
+45	P	-	S	-		-	-		-	
+46	C	-								
+47	N	-								
+48	T	-								
+49	T	-								
+50	E	-								
+51	V	-						I		I
+52	Y	-								
+53	N	-								
+54	E	-								
+55	T	-								
+56	V	-								
+57	R	-								
+58	L	-		V		V	V		V	
+59	E	-								
+60	T	-				I			I	
+61	I	-		V		A	V		A	
+62	T	-		V			I			
+63	I	-								
+64	P	-								
+65	I	-		V		V	V		V	
+66	N	-								
+67	N	-								
+68	T	-								
+69	V	-		I		I	I		I	
+70	Y	-								
+71	I	-		-						
+72	E	-		-						
+73	R	-		-						
+74	E	-		-						
+75	S	-	L	L		V	L		L	
+76	R	-	H	N		A	T	D	T	H
+77	K	-	Q	H	Q	H	H	Q	H	Q
+78	E	-					D	K		
+79	P	-								
+80	E	-								
+81	F	-								
+82	L	-								
+83	N	-								
+84	N	-								
+85	T	-								
+86	E	-								
+87	P	-								
+88	L	-								
+89	C	-								
+90	N	-		D		E	E		E	
+91	V	-								
+92	S	-								
+93	G	-								
+94	F	-								
+95	A	-								
+96	I	-							V	
+97	V	-								
+98	S	-								
+99	K	-								
+100	D	-								
+101	N	-					S			
+102	G	-								
+103	I	-								
+104	R	-								
+105	I	-								
+106	G	-								
+107	S	-								
+108	R	-								
+109	G	-								
+110	H	-								
+111	V	-		I						
+112	F	-								
+113	V	-								
+114	I	-								
+115	R	-								
+116	E	-								
+117	P	-								
+118	F	-								
+119	V	-								
+120	A	-								
+121	C	-								
+122	G	-								
+123	P	-								
+124	T	-		S		S	S		S	
+125	E	-								
+126	C	-								
+127	R	-								
+128	T	-								
+129	F	-								
+130	F	-								
+131	L	-								
+132	T	-								
+133	Q	-								
+134	G	-								
+135	A	-								
+136	L	-								
+137	L	-								
+138	N	-								
+139	D	-								
+140	K	-								
+141	H	-								
+142	S	-								
+143	N	-								
+144	N	-								
+145	T	-								
+146	V	-								
+147	K	-								
+148	D	-								
+149	R	-								
+150	S	-								
+151	P	-								
+152	Y	-								
+153	R	-								
+154	A	-								
+155	L	-								
+156	M	-								
+157	S	-								
+158	V	-								
+159	P	-								
+160	L	-								
+161	G	-								
+162	S	-								
+163	S	-								
+164	P	-								
+165	N	-								
+166	A	-								
+167	Y	-								
+168	Q	-								
+169	A	-								
+170	K	-								
+171	F	-								
+172	E	-								
+173	S	-								
+174	V	-								
+175	A	-		G		G	G		G	
+176	W	-								
+177	S	-								
+178	A	-								
+179	T	-								
+180	A	-								
+181	C	-								
+182	H	-								
+183	D	-								
+184	G	-								
+185	K	-								
+186	E	-	K	K			K			
+187	W	-								
+188	L	-		M		M	M		M	
+189	A	-								
+190	I	-	V		V			V		V
+191	G	-								
+192	I	-		V		V	V		V	
+193	S	-								
+194	G	-								
+195	A	-								
+196	D	-								
+197	D	-								
+198	D	-								
+199	A	-								
+200	Y	-								
+201	A	-								
+202	V	-								
+203	I	-								
+204	H	-								
+205	Y	-								
+206	G	-								
+207	G	-								
+208	M	-		V		I	V		I	V
+209	P	-								
+210	T	-								
+211	D	-								
+212	V	-								
+213	V	-		I						
+214	R	-								
+215	S	-								
+216	W	-								
+217	R	-								
+218	K	-								
+219	Q	-								
+220	I	-								
+221	L	-								
+222	R	-								
+223	T	-								
+224	Q	-								
+225	E	-								
+226	S	-								
+227	S	-								
+228	C	-								
+229	V	-								
+230	C	-								
+231	M	-		I	V					
+232	K	-	N						R	
+233	G	-								
+234	H	-	N	E		E	E	D	E	S
+235	C	-								
+236	Y	-								
+237	W	-								
+238	V	-								
+239	M	-								
+240	T	-								
+241	D	-								
+242	G	-								
+243	P	-								
+244	A	-								
+245	N	-				S	S		S	
+246	N	-	S							
+247	Q	-								
+248	A	-								
+249	S	-								
+250	Y	-								
+251	K	-								
+252	I	-								
+253	F	-								
+254	K	-								
+255	S	-								
+256	H	-		Q		Q	Q		Q	
+257	K	-	E					R		
+258	G	-								
+259	M	-				L	L		L	I
+260	V	-								
+261	T	-		V		I	V		V	
+262	N	-		D		D	D		D	D
+263	E	-								
+264	R	-		K			K		K	
+265	E	-								
+266	V	-		I		I	I		I	
+267	S	-								
+268	F	-								
+269	Q	-								
+270	G	-								
+271	G	-								
+272	H	-								
+273	I	-								
+274	E	-								
+275	E	-								
+276	C	-								
+277	S	-								
+278	C	-								
+279	Y	-								
+280	P	-								
+281	N	-								
+282	L	-		M		M	M		T	
+283	G	-								
+284	K	-								
+285	V	-								
+286	E	-								
+287	C	-								
+288	V	-								
+289	C	-								
+290	R	-								
+291	D	-								
+292	N	-								
+293	W	-								
+294	N	-								
+295	G	-								
+302	T		I	I				I		V
+306	D	N		K		N	N		N	
+308	K	E	D	E	N	E	E	N	E	N
+326	Q					P				
+328	S					N			N	N
+331	S	T	T	T		T	T	T	T	T
+338	V							I		
+356	G					R				
+365	V			I		I			I	
+367	I			V						
+375	I	V		V			V		V	
+383	T	I	I	I		V	I		I	A
+384	K	R	R	R		R	R		R	
+385	T	P		P		P	P		P	
+388	N	T	T	T		T	T	T	T	T
+389	V	I	I	I		I	I		I	
+390	V	S		S		S	S		S	
+391	K				R					
+393	V	I				I	I		I	
+407	A	S				S	S		S	
+412	I	T		T		T	T		T	
+413	T	A		A		A	A		A	
+416	N	S	S	S		S	S	S	S	S
+418	Q	S		N		S	S		S	
+420	L			I						
+437	T								A	

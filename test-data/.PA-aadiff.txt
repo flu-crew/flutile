@@ -1,0 +1,74 @@
+site	KP286268|A/chicken/Jiangxi/13197/2014|H10N6|PA	AY619972|A/swine/Ontario/42729A/01|H3N3|PA	KX412186|A/Alaska/177/2015|H3N2|PA	CY238954|A/Arizona/33/2017|H1N1|PA	KU290076|A/mallard/Nebraska/A00709657/2009|H7N3|PA	MH598010|A/ruddy_turnstone/New_Jersey/650584/2002|mixed|PA	GU186506|A/turkey/VA/31409/1991|H10N7|PA	CY140588|A/mallard/Minnesota/Sg-01040/2008|H3N2|PA	MK927783|A/Germany/8921/2019|H3N2|PA	MW096308|A/chicken/Hunan/10.31_YYGK4C3-OC/2017|H9N2|PA
+28	P		L						L	
+37	S	A	A	A	A	A	A	A	A	
+55	D		N						N	
+57	R	Q	Q						Q	
+60	S									P
+61	T	I	I	I	I	M	I	V	I	
+62	I		V						V	
+63	I	V	V	V	V	V	V	V	V	
+65	S		L				Y		L	
+66	G		D						D	
+70	A									V
+85	T			I						
+100	V		A	I					A	
+101	E		G						G	
+109	L	M								
+120	I									V
+142	K		N						N	
+158	K								R	
+183	A				S					
+184	S		N						N	
+186	G			S						
+204	R		K	K					K	
+213	R			K						
+225	S		C						C	
+256	R		Q	K					Q	
+262	K			R						
+267	P				S					
+268	L		I						I	
+269	R	K	K		K				K	
+272	N	D	S	D	D	E	D	D	S	
+275	P			L						
+277	S		Y	H					Y	
+311	M		I						I	
+321	N		Y	K					Y	
+323	I		V	V		V			V	
+330	I			V						
+332	P		S						S	
+336	L			M						
+337	T	A	S	A	A	A	A	A	S	
+343	S	A		A	A	A	A	A		
+348	I	L			L					
+350	N	S								
+356	R	K			K	K	K	K		
+379	V					M				
+382	E			D				D		
+383	D		N						N	
+385	K		R						R	
+387	V	I	I				I		I	
+388	N	G	S	G	G	S	S	S	S	
+391	K					R				
+396	D		E				E		E	
+400	P	H	L			Q			L	
+404	A		S						S	
+405	C	S	S	S	S	S	S	S	S	
+407	I			V						
+409	N	S	S		S	S	S	S	S	
+419	E	D	D	D	D	D	D	D	D	D
+421	S		V						V	
+423	V	I	I	I	I	I	I	I	I	
+424	E				D					
+504	I						L			
+545	I				V					
+552	T		S						S	
+554	V	I	I	I	I	I	I	I	I	
+557	V		I						I	
+573	I		V						V	
+580	E	G								
+607	L	M	M	M	M	M	M	M	M	
+618	T		A						A	
+626	K	R		R	R					
+675	N		K						K	
+684	E	G	G	G	G	G	G	G	G	
+716	R	K	K	K	K	K	K	K	K	

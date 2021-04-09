@@ -1,0 +1,144 @@
+site	MN301243|A/Basel/USB003302.6/2017|H3N2|2017	KF357843|A/duck/Zhejiang/D485/2013|H9N2|2013	MN081388|A/North_Carolina/9700/2019|H3N2|2019	CY213948|A/Wyoming/34/2016|H3N2|2016	MN561355|A/Thailand/B29296/2018|H3N2|2018	CY001634|A/New_York/268/2003|H3N2|2003	KT888845|A/Kabul/1514A01305430N/2013|H3N2|2013	CY252377|A/South_Australia/36/2015|H3N2|2015	MN054348|A/Santiago/PUC-MVL_UNK005-2018/2018|H3N2|2018	MK358869|A/swine/Iowa/A02269804/2018|H1N2|2018
+1	M	-								
+2	N	-								
+3	P	-								
+4	N	-								
+5	Q	-								
+6	K	-								
+7	I	-								
+8	I	-								
+9	T	-								
+10	I	-								
+11	G	-								
+12	S	-								
+13	V	-								I
+14	S	-								
+15	L	-								
+16	T	-								
+17	I	-								L
+18	S	-				A				A
+19	T	-								A
+20	I	-								M
+21	C	-								
+22	F	-								
+23	F	-				L				L
+26	I									T
+30	I	T				V				V
+32	T									N
+33	V	M								
+38	K	R								N
+40	Y	N				H				C
+42	F	C				C				C
+43	N	S								H
+44	S	N								
+45	P						S			
+46	P	S								
+51	M									I
+52	L	P								
+56	T	I								
+59	E									K
+62	I	T								T
+63	T	-								
+64	E	-								K
+65	I	-								
+67	Y	H								
+69	T	N								
+75	K	R	R							
+77	I									K
+81	P	V				L				L
+85	R	K								
+93	G	Q				N				K
+101	S	T								
+125	D	S								
+126	P				L					
+140	L		I							
+141	N	K								D
+143	V	K				G				R
+147	N	G								
+149	V	T	A					A		F
+150	R	H				H				H
+155	Y	H	H							
+161	N		S							
+165	V									I
+172	K					R				
+176	I								M	
+192	V	I								
+194	I	V				V				
+197	D									H
+199	K									E
+205	F	I								I
+208	N	D								
+210	R	M								
+215	V	I				I				I
+216	V	G				G				G
+220	K				N					
+221	D	N				K	E			K
+238	T	A								
+245	N	S				S	S			S
+247	T	S				S	S			S
+249	K	V								R
+253	K	R								
+254	I	V								
+258	E	R								
+263	V	I								I
+264	H	N								
+265	T	I				I				I
+267	K	P				T	T			P
+269	S									I
+286	G	E								
+290	V									I
+302	I									V
+303	V	I			I					
+304	D	Y								
+307	I	M				V				V
+308	K	A								
+310	H	Y				Y				Y
+312	I			V						
+313	V	E								
+328	K	N								
+329	S	D	T	N		N	T	N		D
+331	S									K
+332	S					F				
+336	H	N								N
+338	L	R								
+339	N	D		D		D	D	D		
+344	E	R	K							K
+346	G	A								E
+347	H	P								
+356	D		E							
+358	N									K
+367	N	K				S				
+368	E	N								
+369	T	G				K				
+370	S					L				V
+372	L	S				S				S
+378	K	R								
+380	V			I		I	I			I
+381	E	N								
+384	S	T								
+385	N	M				K				K
+386	P	A	S						S	S
+387	K	N				N				N
+390	L	S								
+399	D					E				E
+400	R	S								K
+401	G	D								S
+402	D					N				
+403	R	W								
+412	V									I
+414	G	S								N
+416	S	K								
+431	K	P								
+432	E	Q								Q
+434	T	P								N
+435	E	R								A
+437	L	W				W				W
+441	N									S
+444	V	I								
+463	D	N								
+464	L	-				I				I
+465	N	-								
+466	L	-								
+467	M	-								
+468	H	-				P	P	P		P
+469	I	-								V

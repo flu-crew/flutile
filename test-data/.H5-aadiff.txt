@@ -1,0 +1,165 @@
+site	MN209573|A/duck/Bangladesh/35672/2018|H5N1|2018	MN875091|A/duck/France/172057/2017|H5N8|2017	KF001486|A/chicken/Cambodia/X0124310/2013|H5N1|2013	CY028983|A/duck/Yunnan/4645/2003|H5N1|2003	CY166298|A/mallard/Illinois/11OS5576/2011|H5N3|2011	KY635800|A/chicken/Bangladesh/24944/2015|H5N1|2015	KY171716|A/duck/Vietnam/NCVD-15A57/2015|H5N6|2015	MH068319|A/environment/South_Carolina/UGAI17-2513/2017|H5N2|2017	KC616473|A/chicken/Bangladesh/12VIR-7140-12/2012|H5N1|2012	KJ162748|A/duck/Taiwan/4360/2013|H5N2|2013
+-21	V	-	-	-		-	-		-	-
+-20	H	-	-	-	Q	-	-	Q	-	-
+-19	S	-	-		T			T	-	-
+-18	V	-	-		M			M	-	-
+-17	K	-							-	-
+-16	M	-							-	
+-15	E	-							-	R
+-14	K	-			R			R	-	
+-13	I	-		T					-	
+-12	V	-								
+-11	L	-			I			I		
+-10	L	-			A			A	F	F
+-9	F	-		L	L		L	L		L
+-8	A	-								S
+-7	A	-	I	I	I		I	I		I
+-6	T	-	V	V	I	I	V	I	I	A
+-5	S	-								
+-4	L	-			I			I		
+-3	V	-					I			
+-2	K	-								
+-1	S	-			G		G	G		
+2	H	Q	Q	Q	Q		Q	Q		K
+14	K	E	E	E	E		E			A
+15	Q									K
+30	Q									K
+36	T				K			E		K
+43	D				S			S		G
+45	N		D	D	K			K		
+48	K		R		R					
+53	K		R	R						R
+54	D									X
+71	I				L	T		L		L
+72	N	R					R			M
+82	K	R					R			
+83	A				D			D		N
+84	N									K
+86	A		V		V			V		T
+88	G	D	D	D			D			
+94	N	S	A		D			D		D
+95	F	L					L			
+96	N				S			S		Q
+105	L				M			M		
+107	R				S			S		S
+108	I				T			T		T
+109	N									T
+114	I					V				
+115	R	L	Q	Q	Q		L	Q		Q
+117	I									F
+119	K				R			R		R
+120	D	S	S	S	S		S	S		N
+123	S	P	P				T			P
+124	D	N	S		N		N	N		Q
+126	E				D			D		D
+127	A	T					T			T
+129	L			S	S			S		-
+132	S									T
+133	A			S	S			S		
+136	P									Q
+137	Y									F
+138	Q				N			L		S
+140	N	T	Q	K	R		T	R		M
+141	S	P					P			
+147	V									M
+148	V						I			
+151	I									T
+154	D	N	N	N	N		N	N		N
+155	N	D		S			D			
+156	A		T			T				E
+158	P									L
+162	K	I	R	R	R		I	R		R
+163	S				T			T		
+165	N									K
+169	Q	R			V			V		
+174	I		V	V					V	
+175	L		M		I			I		I
+181	P	S					S			
+182	N									S
+183	D	N					N			H
+184	E	A	A	A	A		A	A		D
+185	A	K								E
+188	T									V
+189	K	N		R		Q	D		R	R
+192	Q	K					K			K
+194	P				S			S		
+195	T				N	I		N		R
+198	I				V			V		
+200	I	V	V	V	V		V	V		V
+209	L				S			S		
+210	V		T		I			I		S
+212	K		R		E			E		I
+214	A									T
+215	T									G
+217	S				P			P		P
+218	K	Q					Q			Q
+219	I	V	V	V	V		V	V		V
+220	S	N	N	N	N	N	N	N	N	N
+223	S	R					R			
+226	I	M	M	M	M		M	M		M
+227	D		E					E		S
+229	F									Y
+235	P				S			S		
+236	N									R
+238	A									T
+240	H		N	N	S			S		N
+243	S									T
+247	F								L	
+249	A									P
+254	Y									F
+257	V									A
+261	D							N		
+263	T			A	A			A		A
+265	M									I
+266	K		R		R	R		R		R
+268	E	G								
+269	V		L	L	L			L		L
+270	G	E	E	E	E	E	E	E	E	E
+273	N	H					H			
+275	N				D			D		
+277	R	K	K	K	K		K	N		
+282	I	V	M	M	L			L		M
+285	I									L
+288	S							T		
+292	H									Q
+294	I				V			V		
+297	L									I
+309	N		T		D			D		
+310	K		R	R						
+320	S				I		N	I		I
+322	Q	L					L			
+323	K	R	R	R	R	R	R	R	R	I
+325	-		E							
+326	R	K			-		K	-	K	-
+327	R				-			-		-
+328	R		K	K	-			-		-
+329	K				T			T		T
+359	E									D
+362	S			R						
+373	K									R
+378	V				I			I		I
+395	A				T					
+398	R				K			K		K
+408	E									G
+421	V									I
+440	F									L
+446	R	K	K	K			K	K		K
+450	D									E
+457	K	R	R	R	R			R		
+471	Y									H
+475	D					N			N	
+476	N				D			D		
+483	R									K
+488	D									N
+491	Q					R				H
+496	A				S			S		
+499	K				N			N		
+504	S	G			D			D		
+511	I				M					
+513	I	T	V	T	T		T	T		T
+523	V									A
+524	A		T							
+528	V	A	A	A	A		A	A		
+532	M						I			
+533	M	V	V	V	I		V	I		I
+538	L				F			F		F

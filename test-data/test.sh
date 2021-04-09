@@ -27,3 +27,28 @@ diff .obs-h3-motif .exp-h3-motif
 
 diff <(smof subseq -b 36 59 wsn33.faa) \
      <(cat N1.fna wsn33.fna | flutile trim motif --subtype=N1 -m "stalk=36-59" --fasta | smof grep WSN | smof clean -x)
+
+for seq in `seq 1 18`
+do
+    smof sample --seed=42 --number=10 H${seq}.faa |
+        flutile aadiff --subtype=H${seq} > .obs-H${seq}-aadiff.txt
+    diff .obs-H${seq}-aadiff.txt .H${seq}-aadiff.txt
+done
+
+for seq in `seq 1 11`
+do
+    smof sample --seed=42 --number=10 N${seq}.fna |
+        smof translate -sf |
+        flutile aadiff --subtype=N${seq} > .obs-N${seq}-aadiff.txt
+    diff .obs-N${seq}-aadiff.txt .N${seq}-aadiff.txt
+done
+
+for seq in PB1 PB2 PA NP M NS
+do
+    smof sample --seed=42 --number=10 ${seq}.fna |
+        smof translate -sf |
+        flutile aadiff --subtype=${seq} > .obs-${seq}-aadiff.txt
+    diff .obs-${seq}-aadiff.txt .${seq}-aadiff.txt
+done
+
+rm .obs-*

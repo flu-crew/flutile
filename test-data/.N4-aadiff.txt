@@ -1,0 +1,201 @@
+site	MN988072|A/green-winged_teal/Alaska/AK18-WB1-015A/2018|H8N4|2018	MK637153|A/ruddy_turnstone/Delaware_Bay/151/2014|H12N4|2014	GQ247857|A/Turkey/Ontario/6118/1968|H8N4|1968	MF959954|A/mallard_duck/Netherlands/30/2009|H10N4|2009	LC496317|A/duck/Shimane/321103/2010|H10N4|2010	KR862693|A/mallard/Netherlands/30/2011|H6N4|2011	CY183501|A/mallard/Sweden/7996/2005|H8N4|2005	CY004717|A/mallard_duck/ALB/299/1977|H4N4|1977	MH598175|A/ruddy_turnstone/New_Jersey/AI00-1185/2000|H10N4|2000	CY195891|A/gull/Massachusetts/14WP00065/2014|H4N4|2014
+1	M		-			-				
+2	N		-			-				
+3	P		-			-				
+4	N		-			-				
+5	Q		-			-				
+6	K		-			-				
+7	I		-			-				
+8	I		-			-				
+9	T		-			-				
+10	I		-			-				
+11	G		-			-				
+12	S	N	-			-				
+13	I		-	V	V	-	V	A	V	
+14	S		-			-				
+15	I		-			-				
+16	V	I	-			-			I	I
+17	L		-			-				
+18	T		-			-				
+19	T		-			-				
+20	V		-		I	-		I	I	
+21	G		-			-				
+22	L		-			-				
+23	L		-			-				
+24	L		-			-				
+25	Q		-			-				
+26	I		-			-				
+27	T		-			-				
+28	S		-			-				
+29	L		-			-				
+30	C		-			-				
+31	S		-			-				
+32	I		-			-				
+33	W		-			-				
+34	F		-			-				
+35	S		-			-				
+36	H		-			-				
+37	Y		-			-				
+38	N		-			-				
+39	Q		-			-				
+40	V		-			-				
+41	T		-			-				
+42	Q		-			-				
+43	T		-			-				
+44	H		-	S	S	-	S			
+45	E		-			-				
+46	Q		-			-				
+47	P		-			-				
+48	C		-			-				
+49	S		-			-				
+50	N		-			-				
+51	N		-			-				S
+52	T		-			-				
+53	T		-			-				
+54	N		-			-				
+55	Y		-			-				
+56	Y		-			-				
+57	N		-			-				
+58	E		-			-				K
+59	T		-			-				
+60	F		-			-				
+61	V		-			-				
+62	N		-			-				
+63	V		-			-				
+64	T		-			-				
+65	N		-			-				
+66	V		-			-				
+67	Q		-			-				
+68	N		-			-				
+69	N		-			-				
+70	Y		-			-				
+71	T		-			-				
+72	T		-			-				
+73	I		-			-		V	V	
+74	T	A	-	N		-		I	I	
+75	E		-			-				
+76	P		-			-				
+77	S		-			-				
+78	A		-	S	S	-	S			
+79	P		-			-				
+80	D	N	-	Q	Q	-	Q			
+81	V		-	I	I	M	I			
+82	A	V	-	I	I	I	I	V	V	V
+83	H		-							
+84	Y		-							
+85	S		-							
+86	S		-							
+87	G		-							
+88	R		-	K			K			
+89	D		-				G			
+90	L		-							
+91	C		-							
+92	P		-							
+93	I		-	V	V	V	V			
+94	R		-	K	K	I	K	K		
+95	G		-							
+96	W		-							
+97	A		-							
+98	P		-							
+99	L		-							
+100	S		-							
+101	K		-							
+102	D		-							
+103	N		-							
+104	G		-							
+105	I		-							
+106	R		-							
+107	I		-							
+108	G		-							
+109	S		-							
+110	R		-							
+111	G		-							
+112	E		-							
+113	V		-							
+114	F		-							
+115	V		-							
+116	I		-							
+117	R		-							
+118	E		-							
+119	P		-							
+120	F		-							
+121	I		-							
+122	S		-							
+123	C		-							
+124	S		-							
+125	I		-							
+126	S		-	N	N	G	N	N		
+127	E		-							
+128	C		-							
+129	R		-							
+130	T		-							
+131	F		-							
+132	F		-							
+133	L		-							
+134	T		-							
+135	Q		-							
+136	G		-							
+137	A		-							
+138	L		-							
+139	L		-							
+140	N		-							
+141	D		-							
+142	K		-							
+143	H		-							
+144	S		-							
+145	N		-							
+146	G		-							
+147	T		-							
+148	V		-							
+149	K		-							
+150	D		-							
+151	R		-							
+152	S		-							
+153	P		-							
+154	F		-							
+155	R		-							
+156	T		-							
+157	L		-							
+162	I		M					V		
+199	A	S		S	S	S	S			
+205	L			I	I	I	I			
+221	N			D						
+236	F									S
+247	D		N							
+263	V				M					I
+265	M		V	V	V	V	V	V		
+266	K					R				
+269	D		N							
+283	S					N				
+285	M	T	T	E	E	E	E	T	T	T
+286	D			N	N	N	N			
+287	I		V	V	V	V	V	V		
+308	D					N			N	
+316	V			I		I	I			
+320	I			V	V	V	V			
+328	V								M	
+331	T		I					I		
+335	N				S					
+336	S	G		G	G	G	G			
+338	V			I	I	I	I			
+375	V			I			T			
+398	D		N							
+411	G		W							
+413	K	T	T	T	T	T	T	T	T	T
+416	R	K			K					
+435	K							R		
+444	I						V			
+450	N				D					
+458	W		-							
+459	P		-							
+460	D		-							
+461	G		-							
+462	A		-							
+463	L		-							
+464	L		-							
+465	P		-							
+466	F		-			-				
+467	D		-			-				
+468	I		-			-				
+469	D		-			-				
+470	K		-			-				

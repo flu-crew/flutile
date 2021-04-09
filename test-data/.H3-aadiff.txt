@@ -1,0 +1,385 @@
+site	KC295966|A/equine/Newmarket/1/1993|H3N8|1993	KY509590|A/Cheongju/G1525/2014|H3N2|2014	MN222442|A/Maryland/25/2019|H3N2|2019	CY032176|A/Washington/AF1683/2008|H3N2|2008	CY001405|A/New_York/213/2003|H3N2|2003	CY107894|A/Tianjin/70/2001|H3N2|2001	MK677262|A/New_York/57/2018|H3N2|2018	EF541431|A/equine/Leicestershire/2/00|H3N8|2000	FJ519975|A/swine/Minnesota/761/2007|H3N2|2007	KT841458|A/New_York/09/2015|H3N2|2015
+-25	-				Q				R	
+-24	-				K				K	
+-23	-				Q				Q	
+-22	-				G				G	
+-21	-		I		I		I		I	
+-20	-		I		I		I	F	F	
+-19	-		L		L		L	L	L	
+-18	-		L		L		L	S	L	
+-17	-		T		T		T	I	T	
+-16	M	-		-		-				
+-15	K	-		-		-				
+-14	T	-		-		-				
+-13	T	-	I	-	I	-	I		I	I
+-12	I	-		-		-				
+-11	I	-	A	-	A	-	A		A	A
+-10	L	-		-		-			F	
+-9	I	-	S	-	S	-	S		S	S
+-8	L	-	C	-	Y	-	C		Y	Y
+-7	L	-	I	-	I	-	I		I	I
+-6	T	-	L	-	L	-	L		L	L
+-5	H	-	C	-	C	-	C		C	C
+-4	W	L	L	-	L	-	L		L	L
+-3	V			-		-			I	
+-2	Y	F	F	-	F	-	F		F	F
+-1	S	A	A	-	A	-	A		A	A
+2	N	K	K	K	K	K	K		K	K
+3	-	L	I	L	L	L	I		L	I
+5	T	G	G	G	G	G	G	I	G	G
+6	S	N	N	N	N	N	N			N
+7	G	D	D	D	D	D	D		D	D
+9	N	S	S	S	S	S	S		S	S
+10	T								M	
+21	A	P	P	P	P	P	P		P	P
+25	L	I	I	I			I			I
+31	D	N	N	N	N	N	N			N
+33	Q	R					R			R
+45	S	N	N				N			N
+46	I	S	S	S	S	S	S		S	S
+48	I			T		T		M	T	
+50	K	E	E	E	R	G	E		R	E
+53	N	D	D	D	D	D	D			D
+54	N	S	S	S	S	S	S		S	S
+55	S	P	P	P	P	P	P		P	P
+56	Y	H	H	H	H	H	H		H	H
+57	R	Q	Q	Q	Q	Q	Q		Q	Q
+58	V	I	I	I	I	I	I		I	I
+62	R	E	E	E	E	E	E		K	E
+70	M	L	L	L	L	L	L		L	L
+75	H	Q	Q	Q			Q			Q
+78	V	G	G	G	G	G	G	D	D	G
+81	Y	N	N	N	N	N	N		N	N
+82	E	K	K	K	K	K	K		K	K
+83	N	K	K	K	E	K	K		E	K
+88	I	V	V	V	V	V	V		V	V
+91	S		N				N			
+92	S	K	K	K	K	K	K		T	K
+94	F	Y	Y	Y	Y	Y	Y		Y	Y
+101	D								Y	
+102	I	V	V	V	V	V	V		V	V
+106	A				V					
+111	I	L	L	L	L	L	L		L	L
+121	T	N	N	N	N	N	N			N
+122	A	N	N	N	N	N	N		Q	N
+124	G	S	S	S	S	S	S		S	S
+126	T	N	N	N	N	N	N	A	N	N
+128	T	A	A				A			
+131	T				A	A			A	
+133	N								D	
+135	R	T	T	T	T	T	T		S	T
+137	G	S	S	S	S	S	S		Y	S
+138	A	S	S		S		S		T	
+140	K	I	I	I			I		R	I
+142	G			R	R	R			K	R
+144	A	N	K	N	D	N	K		V	S
+145	D	S	S	N	K	K	S		N	S
+155	T				H	H			H	
+156	K	H	H	H	Q	Q	H		N	H
+157	S	L	L	L	L	L	L		L	L
+158	G	N	N	K	K	K	N		D	N
+159	N	S	S	F	Y	Y	S		Y	Y
+160	S	K	K	K	K	K	K		K	T
+163	T	A	A	A	A	A	A	I	A	A
+172	K	E	E	E	E	E	E		D	E
+173	N	Q	Q	Q	K	K	Q		K	Q
+182	I	V	V	V	V	V	V		V	V
+183	H					L				
+186	S	G	G	G	G	G	G		G	G
+187	S	T	T	T	T	T	T		T	T
+188	N	D	D	D	D	D	D		D	D
+189	Q	K	K	N	S	S	K	K	K	K
+190	Q	D	D	D	D	D	D	E	D	D
+192	T	I	I	I	I	I	I			I
+193	E	F	S	F	S	S	S	K	N	F
+196	I	A	A	A	A	A	A		V	A
+198	E	S	S	A	A	A	S		A	S
+202	V	I	I	I		I	I			I
+207	K							E		
+212	T	A	A				A			A
+213	I	V	V	V	V	V	V	V	V	V
+222	W	R	R	R		R	R			R
+223	V	I	I				I			I
+225	G	D	D	N		D	D			D
+226	Q	I	I	I	V	V	I		V	I
+227	S	P	P	P			P	P		P
+228	G	S	S	S	S	S	S		S	S
+229	R								I	
+242	I							V		
+244	M	L	L	L	L	L	L		L	L
+248	N	T	T	T	T	T	T		T	T
+252	V	I	I	I	I	I	I		I	I
+260	L	I	I	I	I	I	I		I	I
+261	K	R	R	R	R	R	R	R	Q	L
+262	T	S	S	S	S	S	S		S	S
+267	V	I	I	I	I	I	I		I	I
+273	P							L		
+275	D	G	G	G	G	G	G		G	G
+276	I	K	K	K	K	K	K	T	N	K
+278	V	K	K	N	N	N	K		N	K
+280	E							K		
+284	P						X			
+287	-	S	S	S	S	S	S	S	S	S
+288	-	I	I	I	I	I	I	I	I	I
+289	-	P	P	P	P	P	P	P	P	P
+290	-	N	N	N	N	N	N	N	N	N
+291	-	D	D	D	D	D	D	N	D	D
+292	-	K	K	K	K	K	K	K	K	K
+293	-	P	P	P	P	P	P	P	P	P
+294	-	F	F	F	F	F	F	F	F	F
+295	-	Q	Q	Q	Q	Q	Q	Q	Q	Q
+296	-	N	N	N	N	N	N	N	N	N
+297	-	V	V	V	V	V	V	V	V	V
+298	-	N	N	N	N	N	N	N	N	N
+299	-	R	R	R	R	R	R	K	R	R
+300	-	I	I	I	I	I	I	I	I	I
+301	-	T	T	T	T	T	T	T	T	T
+302	-	Y	Y	Y	Y	Y	Y	Y	Y	Y
+303	-	G	G	G	G	G	G	G	G	G
+304	-	A	A	A	P	A	A	Q	A	A
+305	-	C	C	C	C	C	C	C	C	C
+306	-	P	P	P	P	P	P	P	P	P
+307	-	R	R	R	R	R	R	K	R	R
+308	-	Y	Y	Y	Y	Y	Y	Y	Y	Y
+309	-		V	V	V	V	V	I	V	V
+310	-		K	K	K	K	K	R	K	K
+311	-		Q	Q	Q	Q	Q	Q	Q	H
+312	-		S	N	N	N	S	N	N	S
+313	-		T	T	T	T	T	T	T	T
+314	-		L	L	L	L	L	L	L	L
+315	-		K	K	K	K	K	K	K	K
+316	-		L	L	L	L	L	L	L	L
+317	-		A	A	A	A	A	A	A	A
+318	-		T	T	T	T	T	T	T	T
+319	-		G	G	G	G	G	G	G	G
+320	-		M	M	M	M	M	M	M	M
+321	-		R	R	R		R	R	R	R
+322	-		N	N	N		N	N	N	N
+323	-		V	V	V		V	V	V	V
+324	-		P	P	P		P	P	P	P
+325	-		E	E	E		E	E	E	E
+326	-		R	K	K		R	K	K	K
+327	-		Q	Q	Q		Q	Q	Q	Q
+328	-		T	T	T		T	I	T	T
+329	-		R	R	R		R	R	R	R
+330	-		G	G	G		G	G	G	G
+331	-		I	I	I		I	I	I	I
+332	-		F	F	F		F	L	F	F
+333	-		G	G	G		G	G	G	G
+334	-		A	A	A		A	S	A	A
+335	-		I	I	I		I		I	I
+336	-		A	A	A		A		A	A
+337	-		G	G	G		G		G	G
+338	-		F	F	F		F		F	F
+339	-		I	I	I		I		I	I
+340	-		E	E	E		E		E	E
+341	-		N	N	N		N		N	N
+342	-		G	G	G		G		G	G
+343	-		W	W	W		W		W	W
+344	-		E	E	E		E		E	E
+345	-		G	G	G		G		G	G
+346	-		L	M	M		L		M	M
+347	-		V		M		V		V	V
+348	-		D		D		D		D	D
+349	-		G		G		G		G	G
+350	-		W		W		W		W	W
+351	-		Y		Y		Y		Y	Y
+352	-		G		G		G		G	G
+353	-		F		F		F		F	F
+354	-		R		R		R		R	R
+355	-		H		H		H		H	H
+356	-		Q		Q		Q		Q	Q
+357	-		N		N		N	N	N	N
+358	-		S		S		S	S	S	S
+359	-		E		E		E		E	E
+360	-		G		G		G		G	G
+361	-		R		T		R		T	R
+362	-		G		G		G		G	G
+363	-		Q		Q		Q		Q	Q
+364	-		A		A		A		A	A
+365	-		A		A		A		A	A
+366	-		D		D		D		D	D
+367	-		L		L		L		L	L
+368	-		K		K		K		K	K
+369	-		S		S		S		S	S
+370	-		T		T		T		T	T
+371	-		Q		Q		Q		Q	Q
+372	-		A		A		A		A	A
+373	-		A		A		A		A	A
+374	-		I		I		I		I	I
+375	-		D		N		D		N	D
+376	-		Q		Q		Q		Q	Q
+377	-		I		I		I		I	I
+378	-		N		N		N		T	N
+379	-		G		G		G		G	G
+380	-		K		K		K		K	K
+381	-		L		L		L		L	L
+382	-		N		N		N		N	N
+383	-		R		R		R		R	R
+384	-		L		L		L		V	L
+385	-		I		I		I		I	I
+386	-		G		E		G		K	G
+387	-		K		K		K		K	K
+388	-		T		T		T		T	T
+389	-		N		N		N		N	N
+390	-		E		E		E		E	E
+391	-		K		K		K		K	K
+392	-		F		F		F		F	F
+393	-		H		H		H		H	H
+394	-		Q		Q		Q		Q	Q
+395	-		I		I		I		I	I
+396	-		E		E		E		E	E
+397	-		K		K		K		K	K
+398	-		E		E		E		E	E
+399	-		F		F		F		F	F
+400	-		S		S		S		S	S
+401	-		E		E		E		E	E
+402	-		V		V		V		V	V
+403	-		E		E		E		E	E
+404	-		G		G		G		G	G
+405	-		R		R		R		R	R
+406	-		I		I		I		I	I
+407	-		Q		Q		Q		Q	Q
+408	-		D		D		D		D	D
+409	-		L		L		L		L	L
+410	-		E		E		E		E	E
+411	-		K		K		K		K	K
+412	-		Y		Y		Y		Y	Y
+413	-		V		V		V		V	V
+414	-		E		E		E		E	E
+415	-		D		D		D		D	D
+416	-		T		T		T		T	T
+417	-		K		K		K		K	K
+418	-		I		I		I		I	I
+419	-		D		D		D		D	D
+420	-		L		L		L		L	L
+421	-		W		W		W		W	W
+422	-		S		S		S		S	S
+423	-		Y		Y		Y		Y	Y
+424	-		N		N		N		N	N
+425	-		A		A		A		A	A
+426	-		E		E		E		E	E
+427	-		L		L		L		L	L
+428	-		L		L		L		L	L
+429	-		V		V		V		V	V
+430	-		A		A		A		A	A
+431	-		L		L		L		L	L
+432	-		E		E		E		E	E
+433	-		N		N		N		N	N
+434	-		Q		Q		Q		Q	Q
+435	-		H		H		H		H	H
+436	-		T		T		T		T	T
+437	-		I		I		I		I	I
+438	-		D		D		D		D	D
+439	-		L		L		L		L	L
+440	-		T		T		T		T	T
+441	-		D		D		D		D	D
+442	-		S		S		S		S	S
+443	-		E		E		E		E	E
+444	-		M		M		M		M	M
+445	-		N		N		N		N	N
+446	-		K		K		K		K	K
+447	-		L		L		L		L	L
+448	-		F		F		F		F	F
+449	-		E		E		E		E	E
+450	-		K		K		K		R	K
+451	-		T		T		T		T	T
+452	-		K		K		K		R	K
+453	-		K		K		K		K	K
+454	-		Q		Q		Q		Q	Q
+455	-		L		L		L		L	L
+456	-		R		R		R		R	R
+457	-		E		E		E		E	E
+458	-		N		N		N		N	N
+459	-		A		A		A		A	A
+460	-		E		E		E		E	E
+461	-		D		D		D		D	D
+462	-		M		M		M		M	M
+463	-		G		G		G		G	G
+464	-		N		N		N		N	N
+465	-		G		G		G		G	G
+466	-		C		C		C		C	C
+467	-		F		F		F		F	F
+468	-		K		K		K		K	K
+469	-		I		I		I		I	I
+470	-		Y		Y		Y		Y	Y
+471	-		H		H		H		H	H
+472	-		K		K		K		K	K
+473	-		C		C		C		C	C
+474	-		D		D		D		D	D
+475	-		N		N		N		N	N
+476	-		A		A		A		A	A
+477	-		C		C		C		C	C
+478	-		M		I		M		I	I
+479	-		G		G		G		G	G
+480	-		S		S		S		S	S
+481	-		I		I		I		I	I
+482	-		R		R		R		R	R
+483	-		N		N		N		N	N
+484	-		G		G		G		G	G
+485	-		T		T		T		T	T
+486	-		Y		Y		Y		Y	Y
+487	-		D		D		D		D	D
+488	-		H		H		H		H	H
+489	-		N		D		N		N	N
+490	-		V		V		V		V	V
+491	-		Y		Y		Y		Y	Y
+492	-		R		R		R		R	R
+493	-		D		D		D		D	D
+494	-		E		E		E		E	E
+495	-		A		A		A		A	A
+496	-		L		L		L		L	L
+497	-		N		N		N		N	N
+498	-		N		N		N		N	N
+499	-		R		R		R		R	R
+500	-		F		F		F		F	F
+501	-		Q		Q		Q		Q	Q
+502	-		I		I		I		I	I
+503	-		K		K		K		K	K
+504	-		G		G		G		G	G
+505	-		V		V		V		V	V
+506	-		E		E		E		Q	E
+507	-		L		L		L		L	L
+508	-		K		K		K		K	K
+509	-		S		S		S		S	S
+510	-		G		G		G		G	G
+511	-		Y		Y		Y		Y	Y
+512	-		K		K		K		K	K
+513	-		D		D		D		D	D
+514	-		W		W		W		W	W
+515	-		I		I		I		I	I
+516	-		L		L		L		L	L
+517	-		W		W		W		W	W
+518	-		I		I		I		I	I
+519	-		S		S		S		S	S
+520	-		F		F		F		F	F
+521	-		A		A		A		A	A
+522	-		I		I		I		I	I
+523	-		S		S		S		S	S
+524	-		C		C		C		C	C
+525	-		F		F		F		F	F
+526	-		L		L		L		L	L
+527	-		L		L		L		L	L
+528	-		C		C		C		C	C
+529	-		V		I		V		V	V
+530	-		V		V		V		V	A
+531	-		L		L		L		L	L
+532	-		L		L		L		L	L
+533	-		G		G		G		G	G
+534	-		F		F		F		F	F
+535	-		I		I		I		I	I
+536	-		M		M		M		M	M
+537	-		W		W		W		W	W
+538	-		A		A		A		A	A
+539	-		C		C		C		C	C
+540	-		Q		Q		Q		Q	Q
+541	-		K		K		K		K	K
+542	-		G		G		G		G	G
+543	-		N		N		N		N	N
+544	-		I		I		I		I	I
+545	-		R		R		R		R	R
+546	-		C		C		C		C	C
+547	-		N		N		N		N	N
+548	-		I		I		I		I	I
+549	-		C		C		C		C	C
+550	-		I		I		I		I	I

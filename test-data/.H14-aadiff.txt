@@ -1,0 +1,50 @@
+site	CY130094|A/mallard/Astrakhan/263/1982|H14N5|1982	FJ975075|A/herring_gull/Astrakhan/267/1982|H14N5|1982	MK326819|A/blue-winged_teal/Guatemala/CIP049-S_H117-13/2013|H14N3|2013	MG280044|A/Northern_shoveler/Missouri/16OS6248/2016|H14N7|2016	KX960451|A/blue-winged_teal/Guatemala/CIP049H109-76/2012|H14N3|2012	KY644258|A/blue-winged_teal/Guatemala/CIP049H113-76/2013|H14N4|2013	CY133553|A/long-tailed_duck/Wisconsin/10OS3918/2010|H14N8|2010	CY133381|A/northern_shoveler/Missouri/10OS4673/2010|H14N6|2010	KY644243|A/blue-winged_teal/Guatemala/CIP049H110-31/2012|H14N3|2012	JN696314|A/long-tailed_duck/Wisconsin/10OS3912/2010|H14N6|2010
+-22	-	Q	Q		Q	R				Q
+-21	-	K	K		K	K			A	K
+-20	-	Q	Q		Q	Q			Q	Q
+-19	-	G	G		G	G			G	G
+-14	L		F	F	F	F	F	F	F	F
+-13	I							T		
+-12	L		V	V	V	V	V	V	V	V
+-11	V		T	T	T	T	I	I	T	I
+-3	A		T	T	T	T	T	T	T	T
+6	T		S	S	S	S	N	N	S	N
+11	I		V	V	V	V	V	V	V	V
+24	S		Y	Y	Y	Y		F	Y	
+32	H		Q	Q	Q	Q		Q	Q	
+33	V		I	I	I	I	I		I	I
+47	T		I	I	I	I	I		I	I
+48	D						N	N		N
+66	I			V						
+77	R		H	H	H	H	H	H	H	H
+81	T			N						
+93	V		M		M	M	M	M	M	M
+114	S		T		T	T			T	
+130	K						T			T
+145	S						G			G
+148	S		T	T	T	T	T	T	T	T
+155	K						R			R
+156	A						V			V
+157	T		A	A		A	K	A		K
+158	N				T				T	
+175	V			A						
+189	N		T	R	T	T	T	S	T	T
+192	T		A			A				
+214	V		I	I		I	I	I		I
+246	N								S	
+261	S						N			N
+265	K		R	R	R	R			R	
+266	S						G	G		G
+270	K		R	R	R	R		R	R	
+274	R		K	K	K	K	K	K	K	K
+283	L		I	I	I	I			I	
+326	G		D	D	D	D	D	D	D	D
+329	A		T	T	T	T	T	T	T	T
+330	K		R							
+407	I							L		
+410	L								I	
+507	T		N	N	N	N	N	N	N	N
+515	I				V				V	
+532	I			T						
+537	L								F	
+541	Q		K	K	K	K	K	K	K	K

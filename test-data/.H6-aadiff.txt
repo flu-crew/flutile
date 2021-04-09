@@ -1,0 +1,158 @@
+site	CY136654|A/mallard/Alberta/186/1987|H6N2|1987	CY110393|A/duck/Shantou/16144/2006|H6N6|2006	CY109957|A/duck/Shantou/4980/2006|H6N6|2006	MN052792|A/herring_gull/Delaware_Bay/27/2014|H6N2|2014	KR862455|A/white-fronted_goose/Netherlands/2/2008|H6N8|2008	CY109925|A/duck/Guizhou/1102/2007|H6N6|2007	KJ200765|A/duck/Guangdong/S1155/2011|H6N6|2011	MW097185|A/duck/Jiangxi/08.26_NCNP43Y3-C/2016|H6N6|2016	CY110965|A/duck/Hubei/5/2010|H6N6|2010	CY109250|A/duck/Guangxi/2140/2006|H6N2|2006
+-17	K	-	-	-	-	-	-	-	-	-
+-16	M				-					
+-15	I				-					
+-14	A			V	-					
+-13	I	F			-		F	F	F	
+-12	I				-					
+-11	I	V		V	-	V	V	V	V	V
+-10	L	I	I	I	-	I	I	I	I	I
+-9	A		T		-					
+-8	I				-					
+-7	V	L	L	L	-	L	L	L	L	L
+-6	V			A	-		A			A
+-5	S	A	A	A	-	T	A	A	T	A
+-4	T			A	-					A
+-3	S	G	G	G	-	G	G	G	G	G
+-2	K			R	-					R
+2	R	K	K	K	K	K	K	K	K	K
+5	I								V	
+15	Q	K	K			K	K	T	K	
+30	V									I
+36	Q					H				
+39	S	E	K	E	E	E	E	E	E	E
+43	R	K	K	K	K	K	K	K	K	K
+44	V	I	I	I	I	I	I	I	I	I
+45	L	S	S			S	S	S	S	
+53	M	R	K	R	R	R	R	R	R	R
+54	D		E	G	G					G
+56	T	S								
+57	T	L	L	I	I	L	L	L	L	I
+66	R		Q	Q	Q					Q
+68	D	G				G	G	G	G	
+69	N	I	L	L	L	I	I	I	I	L
+71	L							I		
+72	G	A				A	A	A	A	
+84	D	N	N	T	T	N	N	N	N	T
+86	Q	R	R			R	R	R	R	
+89	I					V				
+94	V	T	T	A		T	I	T	T	A
+96	K	N	N	S	N	N	N	N	N	N
+98	T	A	V	V	V	V	A	A	V	V
+108	I	G	G	G	G	G	G	G	G	G
+109	D	E	E	E	E	E	E	E	E	E
+110	S	R	R	R	R	R	R	R	R	R
+111	I	V	V	V	V	V	V	V	V	V
+112	Q	E	E	E	E	E	E	E	E	E
+120	S								N	
+123	T	A	A	A	A	A	A	A	A	
+128	N				S		D	D		S
+129	S							R		
+132	T	S		S		S	S	S	S	
+133	S			M	R					K
+134	A		S							
+136	P		R							
+137	Y	L	F			L	L	L	L	
+138	-			N						
+139	N	G	G			G	G	G	G	
+140	G	N	S	S	T	N	N	N	E	S
+142	S	P				P	P	P	P	
+154	I	T	H	T	T	P	R	R	H	T
+155	R	K	T	K	K	K	K	Q	T	K
+156	S		T						T	
+157	D	S	S	A	A	S	S	S	S	A
+158	P	E	S	A	A	E	A	E	G	A
+160	S	P	P	P	P	P	P	P	P	P
+161	L	V	V	V	V	V	V	V	V	V
+163	K						R	R		
+166	Y	F	F			F	F	F		
+167	T	N	R	N	N	R	N	N		N
+171	S	D	D	N	N	D	D	D	D	N
+172	Q	K	K			K	K	K	K	
+173	P	S	S			S	S	S	S	
+174	I	V	V			V			V	
+184	P		S							
+185	D						V	V		
+186	E	T	T	T	T	T	T	T	T	T
+187	V	T	T	N	N	T	T	T	T	N
+190	A	N	N	N	N	N	E	E	N	N
+191	N	V	V	T	T	I	A	A	V	T
+195	I	S	S	S	S	S	S	S	S	S
+197	T	N	N	D	D	N	N	D	N	D
+206	S	R								
+211	K	R	R				R	R	R	
+212	G	S	S	S	S	S	N	S	S	
+217	D	A	A	A	A	A	A	A	A	A
+220	P	A	L		A	A	A	A	A	A
+221	A	V	V	V	V	V	V	V	V	V
+222	N			K						
+231	Y	F	F			F	F	F	F	
+234	V	I	I			I	I	I	I	
+243	V						I			
+257	K	R	R			R	R	R	R	
+258	F									I
+259	T	V	V	V	V	V	V	V	V	V
+260	S	N	N			N	N	N	N	
+261	S	K	K	T	T	K	K	K	K	T
+262	R	D	D	N	N	D	D	D	D	N
+263	N	S	S	T		S	S	S	S	
+267	I			V	V					V
+269	K	R	R			R	R	R	R	
+271	D	N	N	N	N	N	N		N	N
+276	N						D			
+280	V	T	T	K	T	T	S	T	T	T
+284	L	T	I	I	I	T	T	A	A	I
+285	A	E	E			E	E	E	E	
+287	A	V	V	V	V	V	V	V	V	V
+288	I			L	L			L		L
+289	N	R	R	R	R	R	R	R	R	R
+297	I	V	V	V	V	V	V	V	V	V
+300	V	L	L	L	L	L	L	L	L	L
+312	K		E	E	G			N		E
+315	K	R	R	R	R	R	R	R	R	R
+326	A	I	I	I	I	I	I	I	I	I
+327	Q	E	E	E	E	E	E	E	E	E
+328	T				N					
+329	R			K						
+347	V	I	I	I	I	I	I	I	I	I
+367	K	R	R		R	R	R		R	
+372	K		R							
+379	N		T							
+381	V			I						
+396	E	G	G	D	G	G	G	G	G	D
+401	S	N	N	N	N	N	N	N	N	N
+407	D							G		
+420	V			I						
+439	M	L	L	L	L	L	L	L	L	L
+445	K					R				
+448	H			Y	Y					Y
+450	K	R	R			R			R	
+452	K						R	R	R	
+453	S								A	
+456	K	R	R	R	R	R	R	R	R	R
+460	K	N	N	N	N	N	N	N	N	N
+475	D	N	N	N	N	N	N	N	N	N
+476	E	D								
+478	I	M	M			M	M	M	M	
+479	N	E	E	E	E	E	E	E	E	E
+487	D		N						N	
+493	E		A	D	D	A	A	A	A	D
+496	R			K	K					K
+499	R		K			K			K	
+501	E	K	K			K	K	K	K	
+503	K	E	E	E	E	E	E	E	E	E
+506	M	K	K	K	K	K	K	K	K	K
+509	N								E	
+510	L	F	F			F	F	F	F	
+511	G	D	D			D	D	D		
+522	V								I	
+533	I	M	L		L	M	M	L	M	
+535	M			L						
+544	S				Q					
+545	M				-					
+546	Q				-					
+547	C				-					
+548	K	R	R	R	-	R	R	R	R	R
+549	I				-					
+550	C				-					
+551	I				-					

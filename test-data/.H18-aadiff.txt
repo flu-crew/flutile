@@ -1,0 +1,7 @@
+site	CY125945|A/flat-faced_bat/Peru/033/2010|H18N11|2010	MH682203|A/Artibeus_lituratus/Brazil/2301/2012|H18N11|2012	MH682211|A/Artibeus_lituratus/Brazil/2344/2012|H18N11|2012	KR077932|A/dark_fruit-eating_bat/Bolivia/PBV780-781/2011|H18N11|2011
+-18	L	-	-	
+-17	L	-	-	
+-16	F	-	-	
+-15	R	-	-	K
+153	N	T	T	
+237	F	L	L	

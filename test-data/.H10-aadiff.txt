@@ -1,0 +1,79 @@
+site	MH500965|A/ruddy_turnstone/New_Jersey/AI13-2214/2013|H10N2|2013	EU743426|A/ruddy_turnstone/NJ/1602/2001|H10N7|2001	CY178935|A/mallard/Wisconsin/455/1979|H10N7|1979	MK627969|A/ruddy_turnstone/Delaware_Bay/291/2013|H10N8|2013	KP285405|A/chicken/Jiangxi/28113/2013|H10N8|2013	CY005996|A/pintail_duck/ALB/584/1984|H10N6|1984	CY204730|A/mallard/Maryland/13OS3313/2014|H10N7|2014	CY146360|A/ruddy_turnstone/Delaware/AI09-1268/2009|H10N7|2009	EU743386|A/ruddy_turnstone/NJ/203/2004|H10N7|2004	CY136379|A/mallard/Alberta/553/1986|H10N7|1986
+-22	-					A				
+-21	-					K				
+-20	-					A				
+-19	-					G				
+-18	V			-	-				-	
+-17	T			-	-				-	
+-13	I		T							
+-11	L				V					
+-10	V				I					
+-9	L				I		F			
+-6	F	L	L		L	L	L	L	L	L
+-2	H		N		K	N	N			N
+-1	C	G	G		G	G	G	G	G	G
+12	S	P	P		A	P			P	P
+22	N					T				
+24	K				Q					
+37	K				T					
+38	S		T		G					
+39	L				I					
+40	D				N					
+41	K	R	R		R	R				R
+46	S	N	G		G	G				G
+48	N				K					
+49	Y				H					
+53	G									D
+61	I	V			L	V			V	V
+72	T							I		
+82	N	D	E		E	D	D	D	D	G
+84	S				A					
+92	A						T	T		
+96	E				V					
+109	I		V							
+120	S			P						
+129	A	R	K		R	K	K	Q	R	K
+130	A								S	
+134	N					Y			S	
+150	S							N	N	
+158	T		I							
+159	T								A	
+167	S				T					
+172	I						V			
+173	I		V		M	V				V
+187	D							N		
+193	S									P
+204	Q				R					
+230	M	V	V		L	V				V
+232	Q							K		
+255	K				I					
+257	R							I		
+264	G				D					
+265	A		S							
+266	S	L	L		P	L				L
+267	V				I					
+270	D				N		N			
+278	K				R					
+285	K				R					
+305	K				R					
+306	R	K					K	K	K	
+309	L				M					
+320	V	I	I		L	I				I
+321	V	A			I					
+322	Q									K
+334	I				L					
+363	K						R			
+380	I				V					
+395	S					N	N			N
+435	A							T		
+467	K				A					
+469	D						N			
+470	D				N					
+471	N		S		S	S				S
+484	S	T	T			T	T	T	T	T
+490	A					S				
+496	N		S			S				S
+501	K				T					
+509	V				I					
+526	I				V					
+530	V				F					

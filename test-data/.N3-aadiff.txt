@@ -1,0 +1,255 @@
+site	KY971195|A/chicken/Zhejiang/7418/2015|H1N3|2015	MN207997|A/northern_shoveler/Egypt/MB-D-690OP/2016|H7N3|2016	CY157200|A/mallard/California/2885/2012|H2N3|2012	MK071390|A/silver_teal/Argentina/CIP051-1737/2009|H5N3|2009	CY035833|A/chicken/Pakistan/34668/1995|H7N3|1995	MF147378|A/mallard_duck/Netherlands/24/2014|H7N3|2014	CY042143|A/mallard/Minnesota/Sg-00178/2007|H10N3|2007	KY551255|A/American_green-winged_teal/Louisiana/AH0036368/2016|H7N3|2016	MW100367|A/duck/Zhejiang/04.29_HZBX003-O/2018|H9N3|2018	MH744645|A/Duck/Mongolia/782/2017|H7N3|2017
+1	M						-			
+2	N						-			
+3	P						-			
+4	N						-			
+5	Q						-			
+6	K						-			
+7	I						-			
+8	I						-			
+9	T						-			
+10	I						-			
+11	G						-			
+12	V						-			
+13	V						-			
+14	N						-			
+15	T						-			
+16	T						-			
+17	L						-			
+18	S						-			
+19	T						-			
+20	I						-			
+21	A						-			
+22	L						-			
+23	L						-			
+24	I						-			
+25	G						-			
+26	I	V	M	V			-	V		V
+27	G						-			
+28	N						-			
+29	L						-			
+30	I	V	V		V		-	V		V
+31	F						-			
+32	N						-			
+33	T						-			
+34	V						-			
+35	I						-			
+36	H						-			
+37	E				X		-			
+38	K						-			
+39	I				V		-			
+40	G						-			
+41	V	D	N	D	E	D	-	D		D
+42	H				Q	Q	-			
+43	Q				K		-			
+44	T		I	S			-			
+45	V			T		A	-			
+46	V		T	A	A		-	T		
+47	C	F	H	Y	Y	Y	-	H		F
+48	P						-			
+49	S	T	T	T	T	T	-	T		T
+50	I			A	V		-			
+51	T						-			
+52	P	T	T	A	S	A	-	T		T
+53	P						-			
+54	V		A	A			-	A		
+55	V			F			-	I		
+56	P						-			
+57	N						-			
+58	C						-			
+59	S						-			N
+60	D						-			
+61	T						-			
+62	T	I	I	I	I	I	-	I		I
+63	I						-			
+64	T						-			
+65	Y						-			
+66	N						-			
+67	N				S		-			
+68	T						-			
+69	V						-			
+70	V		I	I			-	I		
+71	N						-			
+72	N						-			
+73	I						-			
+74	T						-			
+75	T						-			
+76	T						-			
+77	I						-			
+78	V	I	I	I		I	-	I	I	I
+79	N	T	T	T	T	A	-	T		T
+80	K	R	E	E	E		-	E		R
+81	A					E	-			
+82	E						-			
+83	K		R	R	R		-	R		
+84	Q		P	P	L	H	-	P		H
+85	F						-			
+86	K						-			
+87	S			P			-			
+88	S		P			P	-	P		
+89	L						-			
+90	P						-			
+91	L						-			
+92	C						-			
+93	P						-			
+94	F						-			
+95	R						-			
+96	G						-			
+97	F						-			
+98	F						-			
+99	P						-			
+100	F						-			
+101	H						-			
+102	K						-			
+103	D						-			
+104	N						-			
+105	A						-			
+106	I						-			
+107	R						-			
+108	L						-			
+109	G						-			
+110	E						-			
+111	N						-			
+112	K						-			
+113	D						-			
+114	V						-			
+115	I						-			
+116	V						-			
+117	T						-			
+118	R						-			
+119	E						-			
+120	P						-			
+121	Y						-			
+122	V			I			-	I		
+123	S						-			
+124	C						-			
+125	D						-			
+126	N				Y		-			
+127	D				N		-			
+128	D	N	N	H		G	-	N		N
+129	C						-			
+130	W						-			
+131	S						-			
+132	F						-			
+133	A						-			
+134	L						-			
+135	A						-			
+136	Q						-			
+137	G						-			
+138	A						-			
+139	L						-			
+140	L						-			
+141	G						-			
+142	T						-			
+143	K				N		-			
+144	H						-			
+145	S						-			
+146	N						-			
+147	G						-			
+148	T						-			
+149	I						-			
+150	K						-			
+151	D						-			
+152	R						-			
+153	T						-			
+154	P						-			
+155	Y						-			
+156	R						-			
+157	S						-			
+158	L						-			
+159	I						-			
+160	R						-			
+161	F						-			
+162	P	Q					-			
+163	I						-			
+164	G						-			
+165	T	A			V		-			A
+166	A						-			
+167	P						-			
+168	V						-			
+169	L						-			
+170	G						-			
+171	N						-			
+172	Y						-			
+173	K			R			-			
+174	E						-			
+175	I						-			
+176	C						-			
+177	V		I	I			-	I		
+178	A						-			
+179	W						-			
+180	S						-			
+181	S						-			
+182	S						-			
+183	S						-			
+184	C						-			
+185	F						-			
+186	D						-			
+187	G						-			
+188	K						-			
+189	E						-			
+190	W						-			
+193	I	V	V	V	V	V	V	V		V
+196	A	T	T	T	T	T	T	T	T	T
+200	N			K						
+204	G		A	A	A		A	A		
+207	I							V		
+209	A		G							
+211	K		R				R	R		
+221	R	K	K	K	K	K	K			K
+229	S				X					
+235	D			G						
+239	I	V	V	V	V	V	V	V		V
+242	I	V	V	V	V	V	V	V		V
+249	S	N	N	N	N	N	N	N		N
+250	S				N					N
+255	I		V				V	V		
+260	E				K					
+262	K		R	R	R		R	R		
+263	I	V		V	V					V
+264	I	M		L						M
+268	N							D		
+269	I		V	V			V	V		
+275	Q				K					
+304	M			I						
+308	N					K				
+329	A			V	D	V				
+333	T			V						
+334	V		M	I		I	M	M		
+342	I	V	V		V	V	V			V
+354	K								R	
+355	A	T		V	T	T				T
+357	N	D								D
+367	T				N					
+368	T	S	S	S	S	S	S	S		S
+375	V	I	I		I	I	I			I
+384	N			D						
+386	L	P	P	P	P	P	P	P	P	P
+387	N			S						
+388	H			Q						
+389	A		V				V			
+392	I	V			V	V				V
+400	S	N	N	N	N	N	N	N		N
+412	E		K	Q			K	K		
+413	N		A	T	S	S	A	T		
+414	N		K	G			K	K		
+415	G		D				D	D		
+423	I		V	V			V	V		
+425	L			I						
+429	R				K					
+432	R	K	K	K	K	K	K	K		K
+435	D				N					
+449	L								X	
+457	N						-			
+458	W						-			
+459	P						-			
+460	D						-			
+461	G						-			
+462	S						-			
+463	N						-			
+464	I						-			
+465	G						-			
+466	F						-			
+467	M						-			
+468	P						-			
+469	K						-			

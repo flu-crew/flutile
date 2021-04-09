@@ -1,0 +1,96 @@
+site	CY239288|A/glaucous-winged_gull/Southcentral_Alaska/13MB01431/2013|H16N3|2013	KX978651|A/black-headed_gull/Netherlands/9/2010|H16N3|2010	KT338609|A/glaucous-winged_gull/Alaska/915/2014|H16N3|2014	MF147650|A/black-headed_gull/Netherlands/1/2015|H16N3|2015	MF103719|A/black-headed_gull/Netherlands/24/2009|H16N3|2009	MN210187|A/Glaucous-Winged_Gull/Southcentral_Alaska/17MB03725/2017|H16N3|2017	CY196764|A/glaucous-winged_gull/Southcentral_Alaska/12NH01518/2008|H16N3|2008	KX978709|A/black-headed_gull/Netherlands/22/2009|H16N3|2009	KX978525|A/black-headed_gull/Netherlands/4/2015|H16N3|2015	MF147061|A/European_herring_gull/Netherlands/2/2014|H16N3|2014
+-30	-	A						A	A	A
+-29	-	K		Q	Q			K	K	K
+-28	-	A		K	K			A	A	A
+-27	-	G		Q	Q			G	G	G
+-26	D		-	G	G					
+-25	I		-							
+-24	V		-	L	L				F	
+-23	K		-	S	S					
+-22	T		-	N	N					
+-21	A		-	K	K					
+-20	E		-	T	M					
+-18	M			T	T	T				V
+-17	V			I	-					
+-15	V	L	A	I	I	L		L	L	
+-12	L	F						F	F	
+-11	L			I						
+-10	I			V	V					
+-9	I			L	L					
+-8	V			I	I	A			L	
+-7	L	F		F	F			F	F	
+-6	G			L	V					
+-5	R			K	K			G		
+-4	Y			H	H					
+-2	K			R	R				R	
+15	K			T						
+24	V						I			
+30	V			I	I					
+47	I	V		V	V			V	V	
+50	V	I		I	I					
+69	T			S	S					
+87	N	H		H	H	H		H	H	
+91	F	Y	Y					Y		
+95	L			V	V					
+118	S	N		P	P			N	N	
+119	P		L							
+120	S	N								
+124	A	N		D	D	N		N	N	D
+125	V			I	I					
+127	D			E	E					
+129	V			T	T					
+134	L			Q	Q					
+135	D			N	N					
+136	R	K								
+139	S			N	N					
+146	V			I	I					
+150	K			N	H					
+151	Q	K		K	K					
+152	N	D		L	L					
+154	E	G	D	N	N	D		G	G	D
+155	K	R	R	R			R			R
+158	V	I						T	I	
+159	V	I						I	I	
+160	R	K		K	K		K	K	K	
+162	D			E	E					
+174	I	L		L	L			L	L	
+182	S			T	T					
+184	A	T						T		
+187	T			N	N					
+188	K	N						N	N	
+206	K			R	R					
+216	I								V	
+221	K	R		R	R			R	R	R
+226	I	L						L	L	
+232	R			H	H	S				
+246	L	I						I	I	
+259	S			T	T					
+269	M	V		L	L			V	V	
+271	K	R						R	R	
+275	K	R								
+280	V			L	L					
+293	D			E	E					
+297	L	I						I	I	
+299	E	D		D	D			D	D	
+323	N			V	V					
+343	V	I	I	I	I	I	I	I	I	I
+364	A			T	T			V		
+371	N	D						D	D	
+381	I							V		
+396	N					S				
+405	L			I	I					
+416	V			I	I			I	I	
+427	L			I	I					
+430	G			D	D					
+445	D			E	E					
+447	V			I	I		I			
+450	V	A		A	A			A	A	
+453	D	N						N		
+460	N	D		D	D			D	D	D
+464	N				S				S	
+465	L			I	I					
+488	K	Q						Q	R	
+494	N	K		K	K			K	K	
+508	N	T								
+523	T	I		V	V				V	
+534	M			L	L					

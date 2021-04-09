@@ -1,0 +1,209 @@
+site	CY034238|A/guinea_fowl/New_York/32084/2006|H7N2|2006	MF629957|A/chicken/Fujian/S4215/2014|H7N9|2014	LC374952|A/duck/Japan/AQ-HE29-52/2017|H7N9|2017	CY036628|A/chicken/New_Jersey/Sg-00439/2005|H7N2|2005	KX130803|A/tree_sparrow/Gangcha/02/2006|H7N2|2006	JX307150|A/duck/Thailand/CU-LM7308T/2010|H7N6|2010	MK027371|A/chicken/Puebla/CPA-03191/2016|H7N3|2016	CY024882|A/turkey/Italy/3185/1999|H7N1|1999	CY031747|A/chicken/New_York/31621-9/2005|H7N2|2005	KJ413675|A/blue-winged_teal/LA/AI13-1420/2013|H7N7|2013
+-25	-						S			
+-24	-						K			
+-23	-						S			
+-22	-		R				R			
+-21	-		G				G			
+-20	-		Y				Y			
+-19	-		K				K	E	K	
+-18	M			-						-
+-17	N			-						-
+-16	I	T	T	-	T	T	T	T		-
+-15	Q			-						-
+-14	I			-	T					
+-13	L			-						
+-12	A	V	V		I	V		V		
+-11	F						L			L
+-10	I	A	A		A	A		A		
+-9	A	L	L		L	L		L		
+-8	C	I	I		V	V	Y	V		
+-7	V	A	A		A	A	M	A		M
+-6	L	I	I		I	I		I		
+-5	T	I	I	I	I	I	I	I		I
+-4	G	P	P		P	P		P		
+-3	A	T	T		T	T		T		
+-2	K	N	N		N	N		N		R
+-1	G	A	A		A	A		A		
+11	A	S	S		S	S		S		
+16	V				I					
+22	K	R			R	R	R	R	R	R
+24	I	V	V		V	V		V		
+35	T	R	R		R	R		R		
+36	A	T	T		T	T		T	T	
+37	D	S	N		N	N	N	N	N	N
+38	V	I	T		L	I	I		I	I
+39	K	P	P		P	P		P		
+40	K	R	R			R		R		
+43	T	S	S		S	S		S		
+44	Q	K	K		K	K		K		
+47	R					K				
+48	A	T	T	P	T	T	P	T	P	P
+49	T	V	V	I	I	V	I	V		
+52	G						R			
+53	R	Q	H		Q	Q	Q	Q	Q	Q
+59	T				A					
+60	L	I	I		V	I		T		
+61	I	T	T		T	T		T		
+68	Q						R			
+71	E						K			
+73	S						N			D
+74	S	A	A		A	A	A	A		A
+82	E	G								
+84	T	S	S		N	S		S		
+86	V								I	
+91	R	K	K		K	K	K	K		K
+93	T	V	V		V	V		V		
+95	E				G					
+97	S	A	A		A			A		
+104	R	E	E		E	E		E		G
+109	G	D	D		D	D	D	D	S	D
+112	S	A	P		T	T		T		
+114	G						D			
+118	S		N				N			
+125	A		V				T			
+126	A	T	T	T	T	T	T	T	T	T
+130	T	R	R		K	R		R		R
+133	G						N			
+134	S						P			
+147	S	T	T		T	T		T		
+150	S	A	A		A	A	A	A	A	A
+151	A						T	T		
+155	M					T		L		
+157	K						M			
+158	A	S	S		S	S	S	S		S
+160	R	K	K		K	K		K		
+162	P	T	T		T	T		T		
+164	N	K	E		K	K		K	D	
+165	K	S	S		D	D		D		
+166	P						S			
+168	L	I	I							
+169	I		V							
+170	I	V	V		V					
+173	V	I	I		I	I		I		
+177	E	V	V		G	G	G	V		G
+179	A	T	T	V	T	T	T	T	V	
+180	S	A	A		T	A	T	T		T
+188	S							G		
+190	N						D			
+191	K				M					
+192	L						F			
+193	I	V	V							
+196	R	G	G		G	G	G	G		G
+199	K	N	N		N	N		N		
+201	Q						L			
+205	T	V	V	I	V	V		V		
+208	P							L		
+210	T	A	A	A	A	A	A	A	A	A
+212	-	P	P		P	P	P	P		P
+213	-	Q	Q		Q	Q	K	Q		Q
+214	-	V	V		V	V	V	V		V
+215	-	N	N		N	N	N	N		N
+216	-	G	G		G	G	G	G		G
+217	-	L	Q		Q	Q	Q	Q		Q
+218	-	S	S		S	S	S	S		S
+219	-	G	G		G	G	G	G		G
+227	L	M	I		I	I		M		
+229	D	N	N		N	N		N		
+230	P				S					
+237	T	S	S		S	S		S		
+251	F	L	L		L	L		L		
+254	E	K	K	G	K	K		K		
+256	L	M	M		M	I	I	M		
+258	V	I	I		I	I	I	I	I	
+261	D	G	G			G		G		
+262	A	V	V		V	V		V		V
+263	P	Q	K		Q	Q		Q		
+264	L	V	V		V	V		V		
+266	F	A	A	S	A	A	P	A	S	S
+267	S	N	N		N	G	D	N	N	G
+269	R	E	E		E	E	K	E		E
+271	D					N				
+273	F	Y	Y		Y	Y		Y		
+275	S					N	N			N
+280	V	I	I		I	I		I		
+281	S	N								
+282	S	N	N		N	N		N		
+289	N	D	D							
+290	S						P			P
+292	T	A	A		A	A		A		
+295	R	K	K	K	K	K	K	K	K	K
+303	K	R	R		E	E	T	E		T
+312	R	K	K		K	K		K		
+317	K	I	V		I	I	N	I		N
+319+1	-						D			
+319+2	-						R			
+319+3	-						K			
+319+4	-						N			
+320	-		R				R			
+320+1	-		K				H			
+320+2	-		R				R			
+321	-		T				R			
+322	P	G	A		G	G	T	G		T
+341	I				V					
+342	N	D	D		D	D	D	D		D
+369	D						N			
+371	I							V		
+380	G	A	A		E	E	D	E		D
+387	E		K							
+394	N				T	T	S	T		S
+396	I	V	V		V	V		V		
+398	Q	K	K		K	K		K		
+405	N		S							
+410	A	S	S		S	S	S	S		S
+411	M	I	I		I					
+414	I	V	V		V	V	V	V		V
+423	V						I			
+434	A								T	
+439	S	D	D		N	N	N	N		N
+446	K				R	R	R			R
+447	K	R	R		R	R		R		
+470	Q	D	D		D	D		D	H	
+473	E	A	A		A	A		A		
+483	T	R	R		S	S		S		
+484	Q	K	K		R	K		K		
+487	T	E	E		E	E	A	E		
+489	S	A	A		A	A		A		
+490	L	I	M		M	M		M		
+502	S									-
+503	S									-
+504	G									-
+505	Y									-
+506	K									-
+507	D								N	-
+508	I	V	V		V	V		V		-
+509	I									-
+510	L									-
+511	W									-
+512	F									-
+513	S									-
+514	F									-
+515	G									-
+516	A									-
+517	S									-
+518	C									-
+519	F									-
+520	I			L			L		L	-
+521	L									-
+522	L									-
+523	A									-
+524	I									-
+525	A	V	V							-
+526	M									-
+527	G									-
+528	L									-
+529	V									-
+530	F									-
+531	I				M					-
+532	C									-
+533	I	V	V		V	V		V		-
+534	K									-
+535	N									-
+536	G									-
+537	N									-
+538	M									-
+539	Q	R	R		R	R	R	R		-
+540	C									-
+541	T									-
+542	I									-
+543	C									-
+544	I									-

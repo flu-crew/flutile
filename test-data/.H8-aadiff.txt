@@ -1,0 +1,59 @@
+site	CY096696|A/blue-winged_teal/Guatemala/CIP049-07/2010|H8N4|2010	LC339675|A/duck/Hokkaido/W285/2007|H8N4|2007	MW183231|A/Shelduck/Ukraine/Arabatska_Strilka-1-10-10/2010|H8N4|2010	CY183515|A/mallard/Sweden/50055/2006|H8N4|2006	MK995833|A/Northern_Shoveler/California/D1715961/2017|H8N4|2017	LC339587|A/duck/Hokkaido/95/2014|H8N4|2014	CY140342|A/mallard/Minnesota/Sg-00701/2008|H8N4|2008	CY014659|A/turkey/Ontario/6118/1968|H8N4|1968	CY042859|A/mallard/Minnesota/Sg-00678/2008|H8N4|2008	KF501064|A/ruddy_shelduck/Mongolia/593/2010|H8N4|2010
+-22	A	-	-	-		-	-		-	-
+-21	K	-	-	-		-	-		-	-
+-20	A	-	-	-		-	-		-	-
+-19	G		-	-		-	-		-	-
+-18	V		-	-					-	-
+-17	T		-	-					-	-
+-16	M								-	
+-15	E	K		D		K			-	
+-14	K								-	
+-13	F								-	
+-11	A	I	I	I		I				I
+-10	I	M	M	M		M				M
+-9	A		T	T		T				T
+-5	A	V	V	V		V				M
+-2	N					K				
+37	E		K							D
+44	N		S							
+49	T	A	A	A		A		A		A
+71	H					Y				
+76	G		D							
+105	V		I							
+108	N	S	S	S		S		S		S
+122	R						K		K	
+127	S					R	R	R	R	
+140	G				S					
+142	A	S	S	S	S	S	S	S	S	S
+154	K					E				
+157	T						I			
+164	S	T	T	T		T		A		T
+166	V	I	I	I	I	I				I
+176	L									S
+184	N	D		D	D	D	D	D	D	D
+185	T	A	A	A		A				A
+190	T			A						
+218	P								A	
+233	I					V				
+262	H							Y		
+275	N			S						
+277	H							N		
+303	E				K					
+311	A	E	E	E		E				E
+325	I							V		
+328	K							R		
+377	T									S
+394	V			M						
+410	D		G							
+418	D	G								
+451	K	R	R	R		R				R
+456	T	A	A	A		A		A		A
+459	I					V				
+461	A	T	T	T		T				T
+473	N	D	D	D		D		D		D
+475	E					K				
+486	N							D		
+499	S			N						
+510	T		A							
+547	M									I
+549	C									F

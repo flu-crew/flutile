@@ -1,0 +1,173 @@
+site	KC609804|A/wild_duck/Korea/MHC35-25/2011|H7N9|2011	KP417758|A/chicken/Jiangxi/13512/2014|H7N9|2014	KP417636|A/chicken/Jiangxi/12243/2014|H7N9|2014	CY076802|A/northern_shoveler/California/JN586/2006|H2N9|2006	CY202908|A/mallard/Maryland/10OS2305/2010|H11N9|2010	KX978900|A/mallard_duck/Netherlands/12/2009|H11N9|2009	MH499004|A/yellow-billed_teal/Chile/C8620/2016|H11N9|2016	KP766126|A/chicken/Jiangsu/J1225/2014|H7N9|2014	KY751128|A/chicken/Jiangsu/0116/2017|H7N9|2017	MH637398|A/mallard/Alberta/361/2017|H11N9|2017
+1	-	M	M		M	M	M		M	
+2	-	N	N		N	N	N		N	
+3	-	P	P		P	P	P		P	
+4	-	N	N		N	N	N		N	
+5	-	Q	Q		Q	Q	Q		Q	
+6	-	K	K		K	K	K		K	
+7	-	I	I		I	I	I		I	
+8	-	L	L		L	L	L		L	
+9	-	C	C		C	C	C		C	
+10	-	T	T		T	T	T		T	
+11	-	S	S		S	S	S		S	
+12	-	A	A		A	A	A		A	
+13	-	T	T		T	T	T		T	
+14	-	A	A		A	A	A		A	
+15	-	I	I		I	I	I		I	
+16	-	T	I		V	V	I		I	
+17	-	I	I		I	I	I		I	
+18	-	G	G		G	G	G		G	
+19	-	A	A		I	T	T		A	
+20	-	I	I		I	I	I		I	
+21	-	A	A		A	A	A		A	
+22	-	V	V		V	V	T		V	
+23	-	L	L		L	L	L		L	
+24	-	I	I		I	I	I		I	
+25	-	G	G		G	G	G		G	
+26	-	I	I		I	I	I		I	
+27	-	A	A		A	A	A		A	
+28	-	N	N		N	N	N		N	
+29	-	L	L		L	L	L		L	
+30	-	G	G		G	G	G		G	
+31	-	L	L		L	L	L		L	
+32	-	N	N		N	N	N		N	
+33	-	I	I		I	I	I		I	
+34	-	G	G		G	G	G		G	
+35	-	L	L		L	L	L		L	
+36	-	H	H		H	H	H		H	
+37	-	L	L		L	L	L		L	
+38	-	K	K		K	K	K		K	
+39	-	P	P		P	P	P		P	
+40	-	G	G		N	S	N		G	
+41	-	C	C		C	C	C		C	
+42	-	N	N		N	N	N		N	
+43	-	C	C		C	C	C		C	
+44	-	S	S		S	S	S		T	
+45	-	H	H		H	H	S		H	
+46	-	S	S		S	S	P		S	
+47	-	Q	Q		Q	Q	P		Q	
+48	-	P	P		P	P	P		H	
+49	-	E	E		E	E	E		E	
+50	-	T	T		A	E	S		T	
+51	-	T	T		T	T	V		T	
+52	-	N	N		N	N	N		N	
+53	-	T	T		A	A	S		T	
+54	-	S	S		S	S	S		S	
+55	-	Q	Q		Q	Q	Q		Q	
+56	-	T	T		T	T	T		T	
+57	-	I	I		I	I	I		I	
+58	-	I	I		I	I	I		I	
+59	-	N	N		N	N	N		N	
+60	-	N	N		N	N	N		N	
+61	-	Y	Y		Y	Y	Y		Y	
+62	-	Y	Y		Y	Y	Y		Y	
+63	-	N	N		N	N	N		N	
+64	-	E	E		E	E	E		E	
+65	-	T	T		T	T	T		T	
+66	-	N	N		N	N	N		N	
+67	-	I	I		I	I	I		I	
+68	-				T	T	T			
+69	-				Q	Q	Q			
+70	-				I	I	I			
+71	-				S	S	S			
+72	-				N	N	N			
+73	-	T	T		T	T	T		T	
+74	-	N	N		N	N	N		N	
+75	-	I	I		I	I	I		I	
+76	-	Q	Q		Q	Q	H		Q	
+77	M						T			
+79	E						G			
+80	R			K	K					K
+81	A	T	T		I			T	T	
+82	S			N	G					N
+84	G	N	N	E	E		N	N	N	E
+90	K						R			
+91	G	R						R		
+101	Y						F			
+112	S			N	D	N	N			N
+158	A						S			
+160	I						V			
+171	Y								H	
+173	S						T			
+175	V			I						I
+183	T						A		A	
+189	K			R	R					R
+190	S			A	A		A			A
+196	I						V			
+207	V			I	I					I
+214	V								I	
+215	A			T	T		T			T
+238	V		I							I
+241	V		I							
+242	V									I
+247	S	P						P	P	
+253	D			E	E		E			E
+256	I			V	V					V
+260	K						Q			
+261	E						K			
+264	I						V			
+269	S			P	P		A			P
+285	E			V			K			V
+286	R			Q	Q		E			Q
+287	T			A	A	A	S			A
+288	G				S		T			
+311	A						S			
+319	I						M			
+327	N	S	T					S	S	
+334	N			A	T		M			A
+335	I			V	V	V	V			V
+345	N			S						
+359	A			G	G	V	D			G
+363	L						V			
+388	R					K				
+392	I			T	T		T		V	T
+401	T	A	A					A	A	
+411	M						I			
+418	D			E	E		E			E
+422	A						P			
+425	-	Y	Y	Y	Y	Y	Y	Y	Y	Y
+426	-	V	V	V	V	V	V	V	V	V
+427	-	E	E	E	E	E	E	E	E	E
+428	-	L	L	L	L	L	L	L	L	L
+429	-	I	I	I	I	I	I	I	I	I
+430	-	R	R	R	R	R	R	R	R	R
+431	-	G	G	G	G	G	G	G	G	G
+432	-	R	R	R	R	R	R	R	R	R
+433	-	P	P	P	P	P	P	P	P	P
+434	-	K	K	K	K	K	K	K	K	K
+435	-	E	E	E	E	E	E	E	E	E
+436	-	D	D	D	D	D	D	D	D	D
+437	-	K	K	K	K	K	K	K	K	K
+438	-	V	V	V	V	V	V	V	V	V
+439	-	W	W	W	W	W	W	W	W	W
+440	-	W	W	W	W	W	W	W	W	W
+441	-	T	T	T	A	T	T	T	T	T
+442	-	S	S	S	S	S	S	S	S	S
+443	-	N	N	N	N	N	N	N	N	N
+444	-	S	S	S	S	S	S	S	S	S
+445	-	I	I	I	I	I	I	I	I	I
+446	-	V	V	V	V	V	V	V	V	V
+447	-	S	S	S	S	S	S	S	S	S
+448	-	M	M	M	M	M	M	M	M	M
+449	-	C	C	C	C	C	C	C	C	C
+450	-	S	S	S	S	S	S	S	S	S
+451	-	S	S	S	S	S	S	S	S	S
+452	-	T	T	T	T	T	A	T	T	T
+453	-	E	E	E	E	E	E	E	E	E
+454	-	F	F	F	F	F	F	F	F	F
+455	-	L	L	L	L	L	L	L	L	L
+456	-	G	G	G	G	G	G	G	G	G
+457	-	Q	Q	Q	Q	Q	Q	Q	Q	Q
+458	-	W	W	W	W	W	W	W	W	W
+459	-	N	N	N	N	N	N		N	N
+460	-	W	W	W	W	W	W		W	W
+461	-	P	P	P	P	P	P		P	P
+462	-	D	D	D	D	D	D		D	D
+463	-	G	G	G	G	G	G		G	G
+464	-	A	A	A	A	A	A		A	A
+465	-	K	R	K	K	K	K		K	K
+466	-	I	I	I	I	I	I		I	I
+467	-	E	E	E	E	E	E		E	E
+468	-	Y	Y	Y	Y	Y	Y		Y	Y
+469	-	F	F	F	F	F	F		F	F
+470	-	L	L	L	L	L	L		L	L

@@ -1,0 +1,94 @@
+site	CY129641|A/Munich/INS541/2011|H1N1|NP	CY253157|A/Victoria/837/2015|H3N2|NP	CY021360|A/turkey/Italy/3620/2003|H7N3|NP	KX917221|A/Washington/41/2016|H3N2|NP	MN061180|A/Orenburg/12/2019|H1N1|NP	HM145099|A/duck/Shantou/4380/2001|H6N2|NP	JF713852|A/swine/QC/1488-2/2009|H1N1|NP	KX134845|A/California/04-033-MA/2009|H1N1|NP	CY003483|A/New_York/446/2001|H1N1|NP	MN423886|A/Indiana/33/2019|H3N2|NP
+-6	M	-	-	-		-			-	-
+-5	S	-	-	-		-			-	-
+-4	D	-	-	-		-			-	-
+-3	I	-	-	-		-			-	-
+-2	E	-	-	-		-			-	-
+-1	V	-	-	-	A	-	A	A	-	-
+16	G	D		D					D	D
+18	E	D		D						D
+21	D	N	N	N		N			N	N
+22	A				T					
+31	R	K		K			K			K
+33	I		V			V				
+34	G	D		D						D
+38	R						K			
+50	S		T						N	
+52	Y	H		H		H				H
+53	D	E	E	E		E	E		E	E
+61	I	L		L					L	L
+65	R	K		K						K
+77	K		R							
+78	Y				H					
+98	R								K	
+100	I	V	R			R	V	V	V	V
+105	M		V		T				V	
+109	I	V		V					V	V
+112	D						E			
+114	E						D			
+119	V	I	I	I		I			I	I
+127	E					D			D	
+130	T		N							
+131	A	S		S						S
+136	I		L	M		L				
+146	A								T	
+186	V	I		I						I
+189	I	M	M	M		M			M	M
+190	A	V	V	V		V			V	V
+191	M								L	
+197	I	V		V						V
+214	R	K		K					K	K
+217	V	S	I	S		I			I	S
+236	R								K	
+239	M	V		V						V
+257	I								T	
+280	V	A		A						A
+283	L	P		P					P	P
+286	A	S		S						S
+289	H	Y	Y	Y		Y			Y	Y
+293	R	K		K					K	K
+301	I								V	
+305	K		R			R				
+309	N								T	
+310	S				T					
+312	V	I		I						I
+313	V	Y	F	Y		F	F		Y	Y
+316	M	I	I	I		I	I		I	I
+334	H								N	
+343	V	L		L						L
+344	S	L		L						L
+350	K	A	T	T		T			T	T
+351	K		R			R			R	
+353	I	S	V	S		V			L	S
+357	K		Q			Q				
+371	V	M	M	M		M			M	M
+372	E	D		D					D	D
+373	T	N		N			A		A	N
+374	M								I	
+375	D	G		G				N	V	G
+377	N	S	S	S		S			S	S
+384	R	G		G						G
+396	T						A			
+400	K	R	R	R		R			R	R
+406	I	T	V	T						T
+408	V								T	
+421	E								D	
+422	R	K		K					K	K
+423	A	S		S					T	S
+425	V	I	I	I	I	I			I	I
+430	S	T	T	T		T			T	T
+433	N	T	T	T		T			T	T
+442	T	A		A					A	A
+444	V	I	I	I		I			I	I
+446	R						K		K	
+450	S	G		G		N				G
+452	K		R			R			R	
+455	D	E		E					E	E
+456	L	V	V	V		V			V	V
+459	Q	R		R						R
+470	K								R	
+472	T									A
+473	N						S			
+483	N					K				
+486	S				Y					
+498	S	N	N	N	N	N			N	N

@@ -1,0 +1,94 @@
+site	MN908128|A/Ruddy_Turnstone/Delaware/346/2019|H11N5|2019	CY206308|A/blue-winged_teal/Texas/AI12-4566/2012|H11N9|2012	MK236639|A/blue-winged_teal/Wisconsin/17OS3270/2017|H11N3|2017	KY828653|A/mallard/California/UCD954/2015|H11N9|2015	MH251214|A/green-winged_teal/California/UCD1370/2016|H11N9|2016	CY127718|A/ruddy_turnstone/Delaware_Bay/197/2002|H11N1|2002	MH597373|A/ruddy_turnstone/Delaware/650610/2002|H11N9|2002	CY021253|A/mallard/Ohio/94/1993|H11N3|1993	GQ184329|A/Baikal_Teal/Hongze/14/2005|H11N9|2005	CY094125|A/mallard/California/6634/2008|H11N9|2008
+-26	-				Q					
+-25	-				K					
+-24	-				Q					
+-23	-		G		G					
+-22	K	-						-	-	-
+-21	Y	-						-	-	-
+-20	Q	-						-	-	-
+-19	E	-						-		-
+-18	I	-								-
+-17	K	-								-
+-13	I	T		T		A	A	V	T	
+-12	L					I	I			
+-10	L		F		F				F	
+-6	I								F	
+-5	I		T		T				L	
+-4	C								Y	
+-3	I								V	
+-2	Q								K	
+14	E								D	
+22	S								N	
+30	V				I					
+35	N	S							T	
+36	G	E	E	E	E	E	E	E	K	E
+45	N	D				D	D	D		D
+47	K	R								
+48	A								Q	
+86	P	I	T	I	T	A	A	V	A	T
+94	T					S	S			
+96	E					D	D			
+104	K				E					
+111	Y	F	F	F	F			F	F	F
+116	A								T	
+127	S					Y	Y			
+137	Y	F	F	F	F			F	F	F
+140	S		G							
+141	S	N	N	N	N	N	N	N	N	N
+142	S	A								
+146	H	N	N	N	N			N	N	N
+161	Q	R	R	R	R	R	R	R	K	R
+167	T								I	
+174	M								I	
+175	V				I					
+178	I	V	V	V	V	V	V	V		V
+182	A					S	S			
+183	T					S	S			
+185	Q	K	K	K	K			K	K	K
+187	Q	H	H	H	H	H	H	H	H	H
+188	R	Q	Q	Q	Q			Q	Q	Q
+195	S		T		T	I	I			
+198	I	V				V	V	V	V	V
+204	S								T	
+210	T	I							I	
+215	T					A	A			
+218	R	K	K	K	K	A	A	K	K	K
+234	K		R							
+236	G					R	R			
+238	A					T	T		S	
+244	D	N	N	N	N	N	N	N	N	N
+248	L					I	I			
+254	F			X						
+256	L								I	
+259	L				M				V	
+268	N	G	D	D	D	D	D	D	E	D
+270	S					N	N	N	N	
+277	K					R	R			
+280	S								T	
+289	R					K	K		K	
+293	N								S	
+320	V					I	I			
+324	A								T	
+325	T								S	
+353	K	R	R	R	R	R	R	R	R	R
+364	K					R	R			
+369	K								R	
+371	V	I	I	I	I	I	I	I	I	I
+373	Q	R								
+394	H							L	Q	
+408	K					A	A			
+409	H		Q			Y				Y
+415	V	I		I		I	I	I		I
+416	D						N			
+426	I	V	V	V	V	V	V	V	V	V
+448	V		I							
+450	R							Q		
+473	G	E	E	E		E	E	E	E	E
+477	K								R	
+478	I	V	V	V	V	V	V	V	V	V
+494	L								I	
+500	E				D					
+507	N					S	S		S	
+509	N								D	
+529	I								L	
+535	L					F	F	F		

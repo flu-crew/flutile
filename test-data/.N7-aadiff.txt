@@ -1,0 +1,206 @@
+site	KF259662|A/chicken/Wenzhou/666/2013|H7N7|2013	KY676348|A/Turkey/Netherlands/11011530/2011|H7N7|2011	MT197161|A/Mallard/Ohio/19OS0083/2019|H10N7|2019	KJ413519|A/blue-winged_teal/LA/AI13-238/2013|H7N7|2013	KJ413621|A/blue-winged_teal/LA/AI13-1357/2013|H7N7|2013	GQ257465|A/mallard/Maryland/209/2001|H10N7|2001	KX061810|A/duck/Zhejiang/S3158/2012|H7N7|2012	KR862713|A/mallard/Netherlands/71/2008|H10N7|2008	CY202693|A/mallard/Ohio/14OS3237/2014|H10N7|2014	KY063970|A/blue-winged_teal/Lousiana/UGAI14-0751/2014|H7N7|2014
+1	M	-						-		
+2	N	-						-		
+3	P	-						-		
+4	N	-						-		
+5	Q	-						-		
+6	K	-						-		
+7	L	-						-		
+8	F	-						-		
+9	A	-						-		
+10	L	-						-		
+11	S	-						-		
+12	G	-						-		
+13	V	-						-		
+14	A	-						-		
+15	I	-						-		
+16	A	-						-		
+17	L	-						-		
+18	S	-						-		
+19	V	-	I	I	I	I		-	I	I
+20	L	-						-		
+21	N	-						-		
+22	L	-						-		
+23	L	-						-		
+24	I	-						-		
+25	G	-						-		
+26	L	-	I	I	I	I		-	I	I
+27	S	-						-		
+28	N	-						-		
+29	V	-						-		
+30	G	-						-		
+31	L	-						-		
+32	N	-						-		
+33	V	-						-		
+34	S	-						-		
+35	L	-						-		
+36	H	-						-		
+37	L	-						-		
+38	K	-						-		
+38+1	E	-	-	-	-	-		-	-	-
+39	T	-	G	G	G	G		-	G	G
+40	G	-	S			S		-	S	
+41	P	-	N	S	S	N		-	N	S
+42	K	-	D	D	D	N		-	D	D
+43	Q	-						-		
+44	E	-	D	D	D	D		-	D	D
+45	E	-	K	K	K	K		-	K	K
+46	N	-						-		
+47	L	-	W	W	W	W		-	W	W
+48	T	-						-		
+49	C	-						-		
+50	M	-	T	T	T	T		-	T	T
+51	T	-	S	S	S	S		-	S	S
+52	-		V	V	V	V	I		V	V
+53	-		T	T	T	T	N		T	T
+54	-		Q	Q	Q	Q	Q		Q	Q
+55	-		N	N	N	N	N		N	N
+56	-		N	N	N	N	N		N	N
+57	-		T	T	T	T	T		T	T
+58	-		T	T	T	T	T		T	T
+59	-		L	L	L	L	V		L	L
+60	-		I	I	I	I	V		I	I
+61	-		E	E	E	E	E		E	E
+62	-		N	N	N	N	N		N	N
+63	-		T	T	T	T	T		T	T
+64	-		Y	Y	Y	Y	Y		Y	Y
+65	-		V	V	V	V	V		V	V
+66	-		N	N	N	N	N		N	N
+67	-		N	N	N	N	N		N	N
+68	-		T	T	T	T	T		T	T
+69	-		T	T	T	T	T		T	T
+70	-		V	V	V	V	I		V	V
+71	-		I	I	I	I	I		I	I
+72	T	-	N	N	N	N		-	N	N
+73	K	-						-		
+74	E	-					G	-		
+75	T	-						-		P
+76	E	-	G	G	G	G		-	G	
+77	L	-	T	T	T	T		-	T	T
+78	G	-	A	T	T	A	E	-	A	T
+79	T	-	K	K	K	K		-	K	K
+80	P	-		Q	Q	Q		-		Q
+81	S	-	N	N	N	N	N	-	N	N
+82	Y	-						-		
+83	L	-						-		
+84	L	-	M	M	M	M		-	M	M
+85	L	-						-		
+86	N	-						-		
+87	K	-						-		
+88	S	-						-		
+89	L	-						-		
+90	C	-						-		
+91	N	-	K	K	K	K		-	K	K
+92	V	-						-		
+93	E	-						-		
+94	G	-						-		
+95	W	-						-		
+96	V	-						-		
+97	V	-						-		
+98	I	-	V	V	V	V		-	V	V
+99	A	-						-		
+100	K	-						-		
+101	D	-						-		
+102	N	-						-		
+103	A	-						-		
+104	V	-	I	I	I	I		-	I	I
+105	R	-						-		
+106	F	-						-		
+107	G	-						-		
+108	E	-						-		
+109	S	-						-		
+110	E	-						-		
+111	Q	-						-		
+112	I	-						-		
+113	I	-						-		
+114	I	-	V	V	V	V	V	-	V	V
+115	T	-						-		
+116	R	-						-		
+117	E	-						-		
+118	P	-						-		
+119	Y	-						-		
+120	V	-						-		
+121	S	-						-		
+122	C	-						-		
+123	D	-						-		
+124	P	-						-		
+125	N	-	L	L	L	L		-	L	L
+126	G	-						-		
+127	C	-						-		
+128	K	-						-		
+163	T		S	S	S	S			S	S
+166	T		V	V	V	I			V	V
+167	V			I	I					I
+173	I	V	L	L	L	L		M	L	L
+181	T		S	S	S	S			S	S
+193	I		V	V	V	V			V	V
+198	D			N	N					N
+207	N		D	D	D	D			D	D
+208	R	G						G		
+219	R		G	G	G	G			G	G
+237	A		V	V	V	V			V	V
+239	V		I	I	I	I			I	I
+246	S			N						
+250	H	Y	Y			Y		Y	Y	
+253	V						I			
+254	M	I	L	L	L	L			L	L
+262	V		I	I	I	I			I	M
+266	A		S	V	V				S	V
+272	K	R	R	R	R	R		R	R	R
+283	N	S						S	D	
+284	Q		S	S	S	S			S	S
+301	I		V	V	V	V			V	V
+302	I						V			
+303	E		A							
+305	D	N								
+308	T		A	A	A	A			A	A
+309	L		M	M	M	M			M	M
+314	R		Q	Q	Q	Q			Q	Q
+316	V		I	L	L	L			L	L
+320	I		V	V	V	V			V	V
+328	G		S	S	S	S			S	S
+331	P	S	T	S	S	S	S	S	S	S
+332	T	S	V	M	M	I		S	M	M
+336	S		N	N	N	N			N	N
+344	G					E				
+350	G			X						
+355	N		D	D	D	D			D	D
+356	G		N	S	S	S			S	S
+357	D		S			G			S	
+382	G								E	
+383	I	T	T	T	T	T	T	T	T	T
+386	N								S	
+388	R		K					K	K	
+390	A		T	T	T	T			T	T
+399	S	N	N	N	N			N	N	N
+413	N		D	D	D	D			D	D
+414	D		E	E	E	E			E	E
+415	N		S	S	S	S	D		G	S
+417	E			V	V					V
+435	A							S		
+445	L				-					
+446	I		V	V	-	V			V	V
+447	A			-	-					
+448	L			-	-					
+449	C			-	-					
+450	G			-	-					
+451	S			-	-					
+452	P			-	-					
+453	F		I	-	-	V			I	I
+454	P		S	-	-	S	S		S	
+455	V			-	-					
+456	G			-	-					
+457	S			-	-					
+458	G			-	-					
+459	S			-	-					
+460	F			-	-					
+461	P			-	-					
+462	D			-	-					
+463	G			-	-					
+464	A			-	-			H		
+465	Q			-	-			R		
+466	I			-	-			S		
+467	Q			-	-			K		
+468	Y			-	-			L		
+469	F			-	-			-		
+470	S			-	-			-		

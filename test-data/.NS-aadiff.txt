@@ -1,0 +1,228 @@
+site	MK705327|A/swine/Iowa/18TOSU0373/2018|H3N2|NS	CY264247|A/Connecticut/37/2017|H3N2|NS	KC739855|A/Taiwan/46/2006|H1N1|NS	MT168642|A/Hawaii/74/2019|H3N2|NS	CY090201|A/Thailand/CU-B3919/2010|H1N1|NS	KT388608|A/goose/Taiwan/TNO7/2015|H5N8|NS	KY550853|A/American_green-winged_teal/Colorado/AH0026688/2015|H7N3|NS	MK772435|A/Mississippi/11/2019|H3N2|NS	KJ561710|A/Czech_Republic/1/2014|H3N2|NS	CY163092|A/Peru/PER359/2012|H3N2|NS
+1	M		-		-					
+2	D		-		-					
+3	S		-		-					
+4	N		-		-					
+5	T		-		-					
+6	V		-		-					
+7	S		-		-					
+8	S		-		-					
+9	F		-		-					
+10	Q		-		-					
+11	V		-		-					
+12	D		-		-					
+13	C		-		-					
+14	F		-		-					
+15	L		-		-					
+16	W		-		-					
+17	H		-		-					
+18	I		-		-	V	V			
+19	R		-		-					
+20	K		-		-					
+21	R	Q	-	Q	-			Q	Q	Q
+22	F	V	-	V	-			V	V	V
+23	A	V	-	V	-			V	V	V
+24	D		-		-					
+25	N	Q	-	Q	-	Q	Q	Q	Q	Q
+26	G	K	-	K	-	E	E	K	K	E
+27	L		-		-					
+28	G	S	-	S	-			S		S
+29	D		-		-					
+30	A		-		-			T		
+31	P		-		-					
+32	F		-		-					
+33	L		-		-					
+34	D		-		-					
+35	R		-		-					
+36	L		-		-					
+37	R		-		-					
+38	R		-		-					
+39	D		-		-					
+40	Q		-		-					
+41	K	R	-	R	-		R	R	R	R
+42	S		-		-					
+43	L		-		-					
+44	K	R	-	R	-	R	R	R	R	R
+45	G		-		-					
+46	R		-		-					
+47	G		-		-					
+48	N		-		-	S	S			
+49	T		-		-					
+50	L		-		-					
+51	S	G	-	G	-	G	G	G	G	G
+52	L		-		-					
+53	D		-		-		N			
+54	I		-		-					
+55	E	K	-	K	-			K	K	K
+56	T	S	-	S	-			A	A	A
+57	A		-		-					
+58	T		-		-					
+59	L	H	-	H	-	R	R	H	H	H
+60	V		-		-	A		A		
+61	G		-		-					
+62	K		-		-					
+63	Q		-		-					
+64	I		-		-					
+65	V		-		-			I		
+66	E		-		-					
+67	W	K	-	K	-	R	R	K	K	K
+68	I		-		-					
+69	L		-		-					
+70	K		-		-	G	E			
+71	E	G	-	G	-					
+72	G	E	-	E	-	E	E	E	E	E
+73	S		-		-					
+74	S	D	-	D	-	D	D	D	D	D
+75	E		-		-					
+76	T	A	-	A	-	A	A	A	A	A
+77	L		-		-					
+78	K		-		-					
+80	T					N				
+81	T	M	M	M	I	I	I	M	M	M
+82	A	V		V				V	V	V
+84	V	T	A	T				T	T	T
+85	P		L							
+86	T	A	A	A			A	A	A	A
+90	L	I		I	I			I	I	I
+91	A	T	T	T	S	T	T	T	T	T
+95	L	I	V	I				I	I	I
+98	M	L		L				L	L	L
+99	S				-					
+100	R				-					
+101	D	N		N	-			N	N	N
+102	W				-					
+103	F				-					
+104	M				-					
+105	L				-					
+106	M				-					
+107	P				-					
+108	R	K	K	K	-	K	K	K	K	K
+109	Q				-					
+110	K				-					
+111	I	V	V	V	-	V	V	V	V	V
+112	I	E	A	E	-	A	A	E	E	E
+113	G				-					
+114	P				-	S	S			
+115	L				-					
+116	C				-					
+117	V	I		I	-	I	I	I	I	I
+118	R				-	K				
+119	I	M	M	M	-	M	M	M	M	M
+120	D				-					
+121	Q				-					
+122	A				-					
+123	I				-					
+124	I	M	M	M	-	M	M	M	M	M
+125	E		D		-	D	D			
+126	K				-					
+127	T	N	N	N	-		N	K	N	N
+128	I				-					
+129	I	M		M	-		T	M	M	M
+130	L				-					
+131	K			R	-					
+132	A				-					
+133	N				-					
+134	F				-					
+135	S	N		N	-			N	N	N
+136	V				-					
+137	I				-					
+138	F				-					
+139	N	G	D	G	-	D	D	G	G	G
+140	R				-					
+141	L				-					
+142	E				-					
+143	T		N		-					
+144	L	I		I	-			I	I	I
+145	I	V	T	V	-			V	V	V
+146	L				-					
+147	L				-					
+148	R				-					
+149	A				-					
+150	F				-					
+151	T				-					
+152	E				-					
+153	E				-					
+154	G				-					
+155	A				-					
+156	I				-					
+157	V				-					
+158	G				-					
+159	E				-					
+160	I				-					
+161	S				-					
+162	P				-					
+163	L				-					
+164	P				-					
+165	S				-					
+166	L	F	F	F	-			F	F	F
+167	P				-					
+168	G				-					
+169	H				-					
+170	T				-					
+171	N	I		I	-	D	D	I	I	I
+172	E				-					
+173	D				-					
+174	V				-					
+175	K				-					
+176	N				-	I				
+177	A				-					
+178	I				-					
+179	G				-					
+180	V				-					
+181	L				-					
+182	I				-					
+183	G				-					
+184	G				-					
+185	L				-					
+186	E				-					
+187	W				-					
+188	N				-					
+189	G	D	D	D	-	D	D	D	D	D
+190	N				-					
+191	T				-					
+192	V				-					
+193	R				-					
+194	G	V	V	V	-	V	V	V	V	V
+195	S				-					
+196	E	K		K	-			K	K	K
+197	N		T		-	T	T			
+198	L				-					
+199	Q				-					
+200	R				-					
+201	F				-					
+202	A				-	T				
+203	W				-					
+204	R				-					
+205	N	S	S	S	-	S	S	S	S	S
+206	R	S	S	S	-	S	S	S	S	S
+207	N				-					
+208	E				-					
+209	D	N	T	N	-			N	N	N
+210	G				-					
+211	R	G	G	G	-			G	G	G
+212	P			S	-					
+213	P				-	S				
+214	L		F	P	-					
+215	P	T	T	T	-			T	T	T
+216	P		T		-	S				
+217	E	K	T	K	-	K	K	K	K	K
+218	Q				-					
+219	K				-					
+220	-	R	R	R		R	R	R	R	R
+221	-	E	K	E		K	K	E	E	E
+222	-	M	M	M		M	M	M	M	M
+223	-	A	A	A		A	A	A	A	A
+224	-	R	G	R		R	R	R	R	R
+225	-	T	T	T		T	T	T	T	T
+226	-	A	I	A		I	I	A	A	A
+227	-	R	R	R		E	E	R	R	R
+228	-	S	S	S		S	S	S	S	S
+229	-	E	E	E		E	E	E	E	K
+230	-	V	V	V		V	V	V	V	V
+230+1	-					R				
+230+2	-					G				
+230+3	-					N				
+230+4	-					K				
+230+5	-					M				
+230+6	-					A				
+230+7	-					D				

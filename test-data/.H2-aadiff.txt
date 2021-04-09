@@ -1,0 +1,85 @@
+site	CY204089|A/mallard/Ohio/14OS3363/2014|H2N3|2014	CY032253|A/Krasnodar/101/1959|H2N2|1959	CY117083|A/mallard/Stralsund/45-6/1981|H2N3|1981	CY116907|A/chicken/Connecticut/13657/1990|H2N2|1990	CY117035|A/chicken/New_Jersey/10977-2/1994|H2N2|1994	MN988214|A/mallard/Minnesota/MN18-WB1-025A/2018|H2N3|2018	CY117139|A/mallard/Stralsund/55-6/1981|H2N3|1981	CY191011|A/mallard/Maryland/11OS3829/2012|H2N2|2012	CY003871|A/mallard_duck/ALB/884/1984|H2N5|1984	MN988198|A/mallard/Minnesota/MN18-WB1-021A/2018|H2N3|2018
+-29	-								S	
+-28	-								K	
+-27	-								S	
+-26	-								R	
+-25	G	-	-		-	-	-			-
+-24	Y	-	-		-	-	-			-
+-23	T	-	-		-	-	-			-
+-22	I	-	-	M	-	-	-		M	-
+-21	D	-	T	N	-	-	T		E	-
+-20	N	-	T		-	-	T			-
+-19	R	-	K	Q	-	-	K	Q		-
+-18	T	S	S		-	-	S			-
+-17	K				-	-				-
+-16	K	T	T	T	T	-	T		T	-
+-14	T	A	A				A			
+-12	T	I	I				I			
+-11	F	Y	Y				Y			
+-4	V	A	A	I			A			
+-2	K	R								
+9	A		S				S			
+30	K		Q				Q			
+43	K			R	R				R	
+45	S	N	N			N	N			N
+70	L		F				F			
+72	S		T				T			
+80	V	M	M				M			
+82	K				R					
+86	V	R	R	A	I		R	M	A	
+87	N	D								
+105	L			I	I					
+106	T	S	S				S			
+109	T	K								
+112	E									X
+114	I	V	V	V			V			
+119	R	K	K				K			
+121	Q	R	R				R			
+133	A			T						
+137	S			L	F					
+140	P					X				X
+151	K	Q								
+158	I	V	V	L			V		V	
+160	K		R				R			
+161	R	G	G				G			
+173	I			V						
+177	V			I	I				I	
+183	D	E	E				E			
+184	A	T	T				T			
+199	I	V	V	V	V		V		V	
+209	V	T	I	I	I	I	I	T	I	I
+211	E	D								
+231	L		I				I			
+233	E	D	D	K	K	D	D			D
+234	T	M	I				I			
+235	L	W	W	W	W	W	W	W	W	W
+237	V	T	T				T			
+246	L		I				I			
+268	K	G	G				G			
+274	E				D					
+276	R	K	K	K	K		K		K	
+293	I	V	V				V			
+308	D	E	E			N	E			N
+309	R	K								
+319	V				I					I
+343	V			I	I				I	I
+368	R	K	K	K	K	K	K	K	K	K
+370	I	F								
+376	K				N					
+379	S		F							
+396	N	S	S				S			
+400	R		K				K			
+425	V									I
+428	E					X				
+432	T					X				X
+435	F								Y	
+441	K							R		
+455	A	V								
+458	I	L	L				L			
+475	N							D		
+478	R	K	K				K			
+505	N	S								
+508	V				I					
+528	I	M		M	M	M				
+532	S				F					
+533	F		L				L			

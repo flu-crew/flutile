@@ -1,0 +1,49 @@
+site	CY006010|A/wedge-tailed_shearwater/Western_Australia/2576/1979|H15N9|1979	CY006034|A/wedge-tailed_shearwater/Western_Australia/2327/1983|H15N9|1983	MF147328|A/mallard_duck/Sweden/139752/2012|H15N5|2012	MF145787|A/mallard_duck/Sweden/139937/2012|H15N5|2012	KP087869|A/mallard/Novomychalivka/2-23-12/2010|H15N7|2010	MF145790|A/mallard_duck/Sweden/139899/2012|H15N5|2012	MF145850|A/mallard_duck/Sweden/139579/2012|H15N5|2012	CY006032|A/Australian_shelduck/Western_Australia/1756/1983|H15N2|1983	CY185887|A/wedge-tailed_shearwater/Western_Australia/2327/1983|H15N9|1983	KY635719|A/duck/Bangladesh/24697/2015|H15N9|2015
+-25	S				-				-	-
+-24	K				-				-	-
+-23	S				-				-	-
+-22	R				-				-	-
+-21	G				-					
+-20	N				-					
+-19	K				-					
+-12	V		A	A	A	A	A			A
+-9	V		A	A	A	A	A			A
+-4	M		V	V	V	V	V			V
+22	R		K	K	K	K	K			K
+35	I		T	T	T	T	T			T
+37	G		S	S	S	S	S			S
+39	D		N	N	N	N	N			N
+46	K		R	R	R	R	R			R
+53	S		F	F	F	F	F			F
+69	H		Y		Y		Y			
+71	E		D	D	D	D	D			D
+86	I		T	T	T	T	T			T
+91	R		K	K	K	K	K			K
+93	T		S	S	S	S	S			S
+112	S		T	T	T	T	T			T
+125	A		V	V	V	V	V			V
+133	V		G	G		G	G			G
+140	M									L
+144	S		L	L	L	L	L			L
+147	M		R	R	R	R	R	G		R
+148	N		S	S	S	S	S			S
+160	R		K	K	K	K	K			K
+173	V		I	I	I	I	I			I
+180	D		E	E	E	E	E			E
+184	K		Q	Q	Q	Q	Q			Q
+249	T		S	S		S	S			S
+256	P		L	L	L	L	L			L
+259	I		V	V	V	V	V			V
+274	I		L	L	L	L	L			L
+276	E		D	D	D	D	D			D
+328	I		T	T	T	T	T			T
+329	R		H	H	H	H	H			H
+392	K		Q	Q	Q	Q	Q			Q
+497	A		S	S	S	S	S			S
+505	N		D	D	D	D	D			D
+506	P				S					
+510	S		N	N	N	N	N			N
+511	S				N					
+527	V		F	F	F	F	F			F
+528	M									V
+534	M	X								

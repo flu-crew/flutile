@@ -1,0 +1,128 @@
+site	CY212839|A/Indiana/45/2016|H3N2|PB2	CY220516|A/North_Carolina/05/2017|H3N2|PB2	CY041321|A/ruddy_turnstone/Delaware_Bay/279/2006|H7N3|PB2	MW109405|A/environment/Hunan/8.25_YYGKZ12-E/2016|H9N2|PB2	CY028066|A/Tennessee/UR06-0238/2007|H1N1|PB2	MT306307|A/Iowa/13/2020|H3N2|PB2	JN641324|A/avian/Israel/543/2008|H10N7|PB2	CY223226|A/Utah/13/2017|H3N2|PB2	MT105447|A/Florida/143/2019|H3N2|PB2	MN975656|A/Florida/127/2019|H3N2|PB2
+1	M						-			
+2	E						-			
+3	R						-			
+4	I						-			
+5	K						-			
+6	E						-			
+7	L						-			
+8	R						-			
+9	N		D	D			-			
+10	L						-			
+11	M						-			
+12	S						-			
+13	Q						-			
+14	S						-			
+15	R						-			
+16	T						-			
+17	R						-			
+18	E						-			
+19	I						-			
+20	L						-			
+21	T						-			
+22	K						-			
+23	T						-			
+24	T						-			
+25	V						-			
+26	D						-			
+27	H						-			
+28	M						-			
+29	A						-			
+30	I						-			
+31	I						-			
+32	K						-			
+33	K						-			
+34	Y						-			
+35	T						-			
+36	S						-			
+37	G						-			
+38	R						-			
+39	Q						-			
+40	E						-			
+41	K						-			
+42	N						-			
+43	P						-			
+44	S		A	A			-			
+45	L						-			
+46	R						-			
+47	M						-			
+48	K						-			
+49	W						-			
+50	M						-			
+51	M						-			
+52	A						-			
+64	T		M	M			M			
+67	V		I	I	I		I			
+81	M		T	T			T			
+82	S		N	N	N		N			
+91	V				I					
+105	V		T	T			T			
+106	T				A					
+107	S				N	N			N	N
+109	V		I		I					
+114	V				I					
+120	D		E	E	E		E			
+187	K			R						
+194	R		Q	Q	Q		Q			
+199	S		A	A			A			
+227	I		V	V	V		V			
+249	G		E	E	E		E			
+271	A		T	T			T			
+292	T		I	V			I			
+295	V		I							
+299	K	R	R	R	R	R	R		R	R
+309	D		N		G					
+339	K				R					
+340	K	R	R		R	R	R		R	R
+353	K	R				R		R	R	R
+354	I				L					
+355	R				T					
+356	V		I							
+368	K		R	R			R			
+375	R				K					
+382	V		I	I	I		I			
+389	R			K						
+395	A				V					
+397	A		V							
+399	I				V					
+410	M								V	V
+447	Q				L					
+451	V		I	I	I		I			
+453	H			P			P			
+456	S		N	N	N		N			
+461	V		I	I	I		I			
+463	V		I	I	I		I			
+475	M		L	L			L			
+478	I			V	V		V			
+483	M		V							
+490	S				N					
+491	T				A					
+497	S		N							
+526	R		K	K	K		K			
+535	M				L					
+547	V				I					
+559	A		T	T	T		T			
+567	N		D	D			D			
+569	A		T	T	T		T			
+588	T		A	V	I		A			
+590	S		G	G	G		G			
+598	T			V						
+613	A		V	V	T		V			
+627	K		E	E			E			
+648	L			V						
+661	T		A	A			A			
+667	I		V	V			V			
+674	T	S	A	A			A			
+676	I		T	M	T		T			
+677	E		K							
+682	S		G	G	G		G			
+684	S		A	A	A		A			
+697	I		L	L	L		L			
+702	R		K	K			K			
+753	R						-			
+754	I						-			
+755	R						-			
+756	M						-			
+757	A						-			
+758	I						-			
+759	N						-			

@@ -1,0 +1,7 @@
+site	CY103876|A/little_yellow-shouldered_bat/Guatemala/153/2009|H17N10|2009	CY103884|A/little_yellow-shouldered_bat/Guatemala/164/2009|H17N10|2009	CY103892|A/little_yellow-shouldered_bat/Guatemala/060/2010|H17N10|2010
+-14	V		I
+69	S		N
+84	S		N
+209	E		D
+216	V		I
+510	I		T

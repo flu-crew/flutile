@@ -1,0 +1,89 @@
+site	CY141097|A/mallard/Minnesota/AI10-2217/2010|H12N5|2010	MH578899|A/ruddy_turnstone/Delaware_Bay/368/2008|H12N5|2008	MN937958|A/ruddy_turnstone/Georgia/UGAI18-740/2018|H12N5|2018	CY184023|A/mallard/Sweden/2213/2003|H12N5|2003	CY005920|A/pintail/Alberta/49/2003|H12N5|2003	CY145541|A/red_knot/New_Jersey/Sg-00483/2008|H12N5|2008	MK627638|A/ruddy_turnstone/Delaware_Bay/545/2012|H12N3|2012	EU557489|A/northern_pintail/Alaska/44160-060/2006|H12N5|2006	GQ247864|A/duck/Alberta/60/1976|H12N5|1976	MH598198|A/ruddy_turnstone/New_Jersey/AI00-2150/2000|H12N5|2000
+-22	-				A					
+-21	-				K					
+-20	-				A					
+-19	-				G					
+-18	V	-					-	-	-	
+-17	T	-					-	-	-	
+-16	M								-	
+-15	E								-	
+-14	K								-	
+-13	F								-	
+-12	I								-	
+-11	F		L	V	I			I	-	I
+-10	L								-	
+-9	S								-	
+-8	T			V					-	
+-7	V			I					-	
+-6	L								-	
+-5	A			T					-	
+-4	V			T					S	
+-3	S			G						
+-2	L		F		F			F	F	
+3	K		R				R			
+15	E			D						
+21	I								S	
+25	V				I					
+37	G		E	Q						
+38	I			V						
+39	D			N						
+41	I				V					
+44	G		K	S						
+90	V			I				I		I
+130	T		I			I				
+132	K		R							
+136	N	D	D			D	D			D
+154	S					L				
+155	G	E					E			
+156	Q						R			
+171	D		N							
+175	T		I							
+185	N	D	D	D		D	D	D	D	D
+189	K		E		Q					
+210	K			R						
+218	L				F					
+264	V	I	I	I	I	I	I	I	I	I
+268	N			D						
+271	I								M	
+275	V			T						
+277	E		G							
+294	T							I		
+295	S							C		
+297	H							P		
+309	G			N						
+323	A				I				V	
+325	D	N	S		N	N			N	
+355	A			S						
+360	I							M		
+369	K		R						R	M
+391	V							M		
+400	E					G				
+411	D			E						
+448	V	I				I				I
+451	V		I							
+453	R			K			K			
+459	T			N						
+469	K							R		
+472	N			D				D		
+473	N			G						
+476	D							E		
+479	R			K						
+480	N							T		
+484	D	N		N	N	N	N	N	N	N
+486	K		Q	Q				R		
+487	E			D						
+494	I			L						
+498	K			R						
+499	I								V	
+500	S	N	N	N	N	N	N	N	N	N
+523	L	S								
+527	L				F					
+540	G								-	
+541	N								-	
+542	V								-	
+543	R								-	
+544	C								-	
+545	T								-	
+546	F								-	
+547	C								-	
+548	I								-	
