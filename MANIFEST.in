@@ -17,3 +17,10 @@ include flutile/data/caton82.txt
 include flutile/data/wiley81.txt
 
 include flutile/data/burke2014-index-map.txt
+
+include flutile/data/burke-phenotypes.txt
+include flutile/data/a26-h1.txt
+include flutile/data/a26-h3.txt
+include flutile/data/a26-h5.txt
+include flutile/data/a26-h7.txt
+include flutile/data/a26-h9.txt

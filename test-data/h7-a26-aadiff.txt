@@ -1,0 +1,175 @@
+site	AY338459|A/Netherlands/219/2003|H7N7	KJ413675|A/blue-winged_teal/LA/AI13-1420/2013|H7N7|2013	JN244227|A/wild_bird/Korea/A330/09|H7N7|2009	MF630557|A/environment/Hunan/S40858/2015|H7N9|2015	KP766068|A/chicken/Shanghai/S3309/2014|H7N9|2014	KP415539|A/chicken/Dongguan/856/2014|H7N9|2014	KY777626|A/mallard/Netherlands/13/2015|H7N7|2015	CY186356|A/mallard/Sweden/1967/2003|H7N7|2003	LC018982|A/duck/Hokkaido/W20/2013|H7N2|2013	KY818835|A/chicken/Tennessee/17-008279-4/2017|H7N9|2017	MT090530|A/duck/Bangladesh/37529/2019|H7N3|2019	CY039319|A/avian/Delaware_Bay/226/2006|H7N3|2006	MK530477|A/chicken/China/0606-12/2017|H7N9|2017	JX307180|A/duck/Thailand/CU-10534C/2011|H7N4|2011	KF500928|A/Zhejiang/DTID-ZJU08/2013|H7N9|2013	KY550794|A/northern_shoveler/California/AH0076719/2016|H7N3|2016	increased_a2-6_binding
+
+-21	-										G					G	
+-20	-							Y	Y		Y			Y		Y	
+-19	-							K	K	K	K			K		K	
+-18	M	-			-		-						-		-		
+-17	N	-			-		-						-		-		
+-16	T	-			-		-						-		-		
+-15	Q	-			-		-						-		-		
+-14	I						-						-		-		
+-13	L						-						-		-		
+-12	V	A					-			A		A	-		-	A	
+-11	F	L					-			L	L		V			L	
+-10	A	I								I		I				I	
+-9	L	A								A		A				A	
+-8	V	C		T	I	I				C		C	I		I	C	
+-7	A	M								M		M				M	
+-6	S	L	I	I	I	I	I	I	I	L	I	L	I	I	I	L	
+-4	P	G								G		G				G	
+-3	T	A						I		A		A				A	
+-2	N	R								K		K				K	
+-1	A	G								G		G				G	
+11	S	A							P	A		A				A	
+14	T								I								
+22	R											K					
+24	V	I								I		I			G	I	
+35	R	T								T		T				T	
+36	T	A								A		V				A	
+37	N		S														
+38	V	I	I	I	I	I				I		I	I		F	I	
+39	P	K								K		K				K	
+40	R	K								K		K				K	
+43	S	T								T		T				T	
+44	K	Q								Q		Q				Q	
+46	K									R							
+47	R					K											
+48	T	P	A				A			P		P				P	
+49	V	T		I						T		T				T	
+57	L														R		
+60	I	L								L		L				L	
+61	T	I								I		I				I	
+68	Q											L					
+73	S	D								D		D				D	Glu->Lys
+78	I										V						
+84	S	T								T		T				T	
+93	V	T								T		T				T	
+97	A	S								S		S				S	
+101	I			V													
+104	E	G								G	G	R				G	
+109	D												V				
+112	T	S		A	A	A				S	S	S			A	S	
+118	S			N	N								N	N			Ser->Pro
+125	T	A	A	V	A	A	A	A	A	A	A	A	V	A	A	A	
+130	R			K									K	K			
+134	S							P									
+147	T	S								S		S		N		S	
+148	D									N							
+150	A													V			
+155	M		T														
+160	K	R								R		R				R	
+162	T	P								P		P				P	
+164	K	N							R	S		N		R		S	
+165	D	K		S	S	S				K		K	S		S	K	
+168	L			I	I								I				
+170	I			V	V	V			V				V	V	V		
+173	I	V								V		V				V	
+177	G			V	V	V							V		V		Asn->Lys
+179	T	A								A		A				A	
+180	T			A	A	A				A		D	A		A		
+184	K								M								Lys->Arg
+188	S													G			Asn->Lys
+190	N						S		S					S			
+193	I			V	V	V							V		V		
+199	N	K			D					K		K	D			K	
+205	V	T								T		T				T	Val->lle
+217	Q			L	L	L							L		L		Gln->Leu
+227	I	L	M	M	M	M	M			L	M	L		M	M	L	
+229	N	D								D		D				D	
+237	S	T					N			T		T				T	
+246	D					E											Glu->Lys
+251	L	F										F				F	
+254	K	E								E	E	E				E	
+256	M	L								L		L				L	
+258	I	V								V		V				V	
+261	E	D	G	G	G	G	G	G	G	D	G	D	G	G	G	D	
+263	Q	P								P		P				P	
+264	V	L								L		L				L	
+266	A	S					T			S		T				S	
+267	N	G								S		G		S		S	
+273	Y	F								F		F				F	
+275	S	N	N							N	N					N	
+280	I	V								V		V				V	
+282	N	S		S				K		S		S				S	
+289	N			D	D	D							D		D		
+290	S	P								P		P				P	
+292	A	T								T		T				T	
+303	E	T		R	R	R				T		T	R		R	T	
+306	L						M		M		M			M			
+312	K	R								R		R				R	
+317	I	N							L	N	P	N		L		N	
+320	R	T	-	-	-	-	-	-	-	T	-	T	-	-	-	T	
+320+1	-									D							
+320+2	-									R							
+320+3	-									K							
+320+4	-									S							
+320+5	-									R							
+320+6	-									H							
+320+7	-									R							
+321	R	-	-	-	-	-	-	-	-		-	-	-	-	-	-	
+322	R	-	G	G	G	G	G	G	G	I	G	-	G	G	G	-	
+341	I		V														
+348	R					K											
+380	E	D		A	A					D		D	A			D	
+388	L											M					
+394	T	S		N	N	N				S		N	N		N	S	
+396	V	I								I		I				I	
+398	R	Q		K	K	T	K	K	K	Q	K	Q	K	K	K	Q	
+411	M			I	I	I							I		I		
+423	V								I				I				
+439	N			G	D	D							D		D		
+442	Y								F								
+446	K	R	R				R		R	R		R		R		R	
+447	R	K								K	K	K				K	
+470	D	Q								Q		Q				Q	
+473	A	E								E		E				E	
+483	S	T		R	R					T		T	R			T	
+484	K	Q								Q		Q				Q	
+487	E	T				G				A		T				A	
+489	A	S								S		S				S	
+490	I	L	M	M	M	M	M	M	M	L	L	L	M	M	M	L	
+497	D										N	N					
+500	K												R				
+502	S	-															
+503	S	-															
+504	G	-															
+505	Y	-															
+506	K	-															
+507	D	-															
+508	V	-								I		I				I	
+509	I	-					V										
+510	L	-															
+511	W	-															
+512	F	-															
+513	S	-															
+514	F	-															
+515	G	-															
+516	A	-															
+517	S	-															
+518	C	-															
+519	F	-															
+520	I	-				M				L		L				L	
+521	L	-															
+522	L	-										I					
+523	A	-															
+524	I	-											-				
+525	A	-		V	V	V							-		V		
+526	M	-											-				
+527	G	-											-				
+528	L	-											-				
+529	V	-											-				
+530	F	-											-				
+531	I	-											-				
+532	C	-											-				
+533	V	-								I		I	-			I	
+534	K	-											-				
+535	N	-											-				
+536	G	-					-						-				
+537	N	-					-						-				
+538	M	-					-						-				
+539	R	-					-				Q		-				
+540	C	-					-						-				
+541	T	-					-						-				
+542	I	-					-						-		-		
+543	C	-					-						-		-		
+544	I	-					-						-		-		

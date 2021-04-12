@@ -1,0 +1,34 @@
+Mutation	H1pdm	H3	H5	H7	H9	Phenotype	Reference
+Tyr->His	7	17	7	7	7	[13]	Increase in fusion pH
+His->Gin	8	18	8	8	8	[13]	Decrease in fusion pH; increased stability
+Asn->Any	11	21	11	11	11	[14]	Loss of N-glycosylation; increased virulence
+Glu->Lys	75	83	75	73	75	[15]	Increased virus binding to a2-6 glycans
+His->Tyr	103	110	103	100	103	[2]	Increased stability
+Ser->Asn	122	126	121	116	121	[16]	Increased virus binding to a2-6 glycans
+Ser->Pro	124	128	123	118	123	[15]	Increased virus binding to a2-6 glycans
+Ala->-	130	-	129	-	-	[17–18]	Increased virus binding to a2-6 glycans
+Ser->Ala	134	137	133	127	131	[19]	Increased virus binding to a2-6 glycans
+Ala->Val	135	138	134	128	132	[20]	Increased infectivity in SIAT Cells
+Gly->Arg	140	143	139	132	-	[15]	Increased virus binding to a2-6 glycans
+lle->Thr	152	155	151	144	145	[17-18]	Increased virus binding to a2-6 glycans
+Asn->Asp	155	158	154	147	148	[2]	Loss of N-glycosylation; increased binding and transmission
+Thr->Ala	157	160	156	151	150	[1]	Loss of N-glycosylation; increased binding and transmission
+Asn->Lys	183	186	182	177	176	[15,21]	Increased virus binding to a2-6 glycans
+Asp->Gly	184	187	183	178	177	[22]	Increased virus binding to a2-6 glycans
+Glu->Gly	187	190	186	181	180	[22]	Increased virus binding to a2-6 glycans
+Thr->lle	189	192	188	183	182	[19]	Increased virus binding to a2-6 glycans
+Lys->Arg	190	193	189	184	183	[16]	Increased virus binding to a2-6 glycans
+Gln->Arg/His	193	196	192	187	186	[15,18,22]	Increased virus binding to a2-6 glycans
+Asn->Lys	194	197	193	188	187	[15]	Increased virus binding to a2-6 glycans
+Val->lle	211	214	210	205	204	[18]	Increased virus binding to a2-6 glycans
+Gln->Leu	223	226	222	217	216	[21]	Increased virus binding to a2-6 glycans
+Ser->Asn	224	227	223	218	217	[21-23]	Increased virus binding to a2-6 glycans
+Gly->Ser	225	228	224	219	218	[14–15,24]	Increased virus binding to a2-6 glycans
+Pro->Ser	236	239	235	230	229	[18]	Increased virus binding to a2-6 glycans
+Glu->Lys	252	255	251	246	245	[22]	Increased virus binding to a2-6 glycans
+Thr->lle	316	318	315	309	309	[1]	Increase in fusion pH
++Arg/Lys	327	329	326	321	320	[25]	Poly-basic cleavage; increased pathogenicity
+Lys->lle	385	387	384	379	378	[13,26]	Increase in fusion pH; increased stability
+Asn->Lys	441	443	440	435	434	[13]	Increase in fusion pH; decreased stability
+Asn->Asp	444	446	443	438	437	[27]	Increase in fusion pH
+Arg->Lys	494	496	493	488	487	[15]	Increased virus binding to a2-6 glycans
