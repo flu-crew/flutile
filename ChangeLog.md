@@ -1,3 +1,9 @@
+0.11.0 [2021-04-12]
+-------------------
+
+ * Add support for for NA subtypes and internal genes 
+
+
 0.10.0 [2021-03-24]
 -------------------
 
