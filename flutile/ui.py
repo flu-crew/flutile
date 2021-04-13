@@ -83,6 +83,16 @@ subtype_opt = click.option(
     help="The segment subtype of all entries in the input fasta file. For HA subtypes, the numbering will be relative to the start of the mature peptide, with offsets as defined by (Burke 2014). When the `--keep-signal` flag is set for an HA subtype, and for all NA and internal gene segments, indexing is from the initial methionine. For NA, you may use N1 to index by conventional WNS numbering.",
 )
 
+ha_subtype_no_keep_opt = click.option(
+    "--subtype",
+    type=click.Choice(
+        ha_subtypes,
+        case_sensitive=False,
+    ),
+    required=True,
+    help="The segment subtype of all strains in the input fasta file",
+)
+
 subtype_no_keep_opt = click.option(
     "--subtype",
     type=click.Choice(
@@ -97,7 +107,7 @@ as_fasta_opt = click.option(
     "--fasta",
     is_flag=True,
     default=False,
-    help="Return motif as a FASTA file with all motifs concatenated",
+    help="Return motif as a FASTA file with all motifs concatenated (by default a table is printed)",
 )
 
 make_consensus_opt = click.option(
@@ -243,7 +253,7 @@ conversion_opt = click.option(
 )
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
-@subtype_no_keep_opt
+@ha_subtype_no_keep_opt
 @conversion_opt
 def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
     extract_ha1(
