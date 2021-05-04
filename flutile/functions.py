@@ -3,7 +3,6 @@ import sys
 import datetime
 import re
 import tqdm
-import tempfile
 import smof
 import os
 import flutile.motifs as motifs
@@ -236,18 +235,24 @@ def get_ref(subtype):
 
 def align(seq, mafft_exe="mafft"):
     from Bio.Align.Applications import MafftCommandline
+    from tempfile import mkstemp
 
-    with open(".tmp", "w+") as fasta_fh:
+    hashy = smof.md5sum(seq) 
+    (n, fasta_filename) = mkstemp(suffix=f"-{hashy}.fa")
+
+    with open(fasta_filename, "w+") as fasta_fh:
         smof.print_fasta(seq, out=fasta_fh)
 
-    o, e = MafftCommandline(mafft_exe, input=".tmp")()
+    o, e = MafftCommandline(mafft_exe, input=fasta_filename)()
 
     print(e, file=sys.stderr)
 
-    with open(".tmp_aln", "w+") as fh:
+    (n, aln_filename) = mkstemp(suffix=f"-{hashy}.aln")
+
+    with open(aln_filename, "w+") as fh:
         print(o, file=fh)
 
-    aln = list(smof.open_fasta(".tmp_aln"))
+    aln = list(smof.open_fasta(aln_filename))
 
     return aln
 

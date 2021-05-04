@@ -1,3 +1,8 @@
+0.12.0 [2021-05-xx]
+-------------------
+
+ * Don't spam .tmp temporary alignment files everywhere
+
 0.11.0 [2021-04-12]
 -------------------
 
