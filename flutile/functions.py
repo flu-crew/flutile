@@ -534,6 +534,18 @@ def aadiff_table(
                 yield row
                 break
 
+def transpose(xss):
+  """
+  Transpose a list of lists. Each element in the input list of lists is
+  considered to be a column. The list of rows is returned.
+
+  The nested lists are assumed to all be of the same length. If they are not,
+  the shortest list will be used as the number of output rows and other rows
+  wil be lost without raising an error.
+  """
+  # get the number of rows in the input
+  N = min([len(xs) for xs in xss])
+  return [[xs[i] for xs in xss] for i in range(N)]
 
 def annotate_table(
     table,
@@ -541,6 +553,7 @@ def annotate_table(
     annotation_tables="",
     join_annotations=False,
     keep_signal=False,
+    count=False,
     caton82=False,
     wiley81=False,
     **kwargs,
@@ -581,6 +594,13 @@ def annotate_table(
                     annotations[k] += new_annotations[k]
                 else:
                     annotations[k] += [""] * len(lines[0][1:])
+
+    if count:
+      # aggregate all non-index rows into a single counts column
+      for i in range(len(table)):
+        ag = ", ".join([f"{str(v)} {k}" for (k,v) in collections.Counter(table[i][2:]).items() if k])
+        table[i] = [table[i][0], table[i][1], f"({ag})"]
+      new_column_names = ["site", "reference", "changes"]
 
     if join_annotations:
         annotations = {

@@ -126,6 +126,12 @@ keep_signal_opt = click.option(
     help="Number relative to the initial Methionine (do not trim the signal peptide)",
 )
 
+count_variants_opt = click.option(
+    "--count",
+    is_flag=True,
+    help="Instead of listing each strain in the alignment, count the amino acid variations",
+)
+
 annotation_tables_opt = click.option(
     "--annotation-tables",
     help="One or more TAB-delimited tables containing annotations (separated by commas). The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
@@ -163,6 +169,7 @@ motif_range_opt = click.option(
 @make_consensus_opt
 @consensus_as_reference_opt
 @keep_signal_opt
+@count_variants_opt
 @mafft_exe_opt
 @annotation_tables_opt
 @join_annotations_opt

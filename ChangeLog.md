@@ -1,7 +1,8 @@
-0.12.0 [2021-05-xx]
+0.12.0 [2021-05-05]
 -------------------
 
  * Don't spam .tmp temporary alignment files everywhere
+ * Add `--count` flag to aggregate counts in aadiff tables
 
 0.11.0 [2021-04-12]
 -------------------
