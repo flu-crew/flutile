@@ -268,8 +268,9 @@ def ungap_indices(start, end, fasta):
     """
     Map indices in an ungapped sequence to indices in the gapped string
     """
+    ok = False
     original_index = 0
-    (a, b) = (0, 0)
+    (a, b) = (-1, 0)
     for (i, c) in enumerate(fasta):
         if c not in "._-":
             original_index += 1
@@ -281,7 +282,13 @@ def ungap_indices(start, end, fasta):
     # truncate to sequence length if the end index is greater than sequence length
     else:
         b = i + 1
-    return (a, b)
+    if a == -1:
+      # The start is beyond the end of the sequence
+      # For now I will provide a dumby value that is guaranteed to index to an empty list
+      dumby = len(fasta) + 1
+      return (dumby, dumby)
+    else:
+      return (a, b)
 
 
 def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
@@ -303,21 +310,16 @@ def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
         yield list(extracted)[1:]
 
 
-def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
-    # translate the DNA inputs (longest uninterupted CDS)
-    faa = smof.translate(fna, all_frames=True)
+def map_dna2dna(bounds, fna, aln):
 
-    # because generators are the root of all evil
-    ref = list(ref)
-    faa = list(faa)
-    fna = list(fna)
-    aln = list(align(ref + faa, mafft_exe=mafft_exe))
+    motif_sets = []
 
     for (gapped_start, gapped_stop) in bounds:
         # find reference gapped start and stop positions
         (a, b) = ungap_indices(gapped_start, gapped_stop, list(aln)[0].seq)
 
         motif = []
+
         # find (start, length) bounds for each DNA entry
         for i in range(len(fna)):
             # start is 0-based
@@ -331,11 +333,28 @@ def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
             aa_length = len(seq[(a - 1) : b].replace("-", ""))
 
             dna_start = start + aa_offset * 3
-            dna_end = dna_start + aa_length * 3 + 1
+            dna_end = dna_start + aa_length * 3
 
-            motif[i].seq = fna[i].seq[dna_start:dna_end]
+            motif.append(smof.FastaEntry(header=fna[i].header, seq = fna[i].seq[dna_start:dna_end]))
 
-        yield motif
+        motif_sets.append(motif)
+
+    return motif_sets
+
+
+def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
+    # translate the DNA inputs (longest uninterupted CDS)
+    faa = smof.translate(fna, all_frames=True)
+
+    # because generators are the root of all evil
+    ref = list(ref)
+    faa = list(faa)
+    fna = list(fna)
+    aln = list(align(ref + faa, mafft_exe=mafft_exe))
+
+    extracted = map_dna2dna(bounds, fna, aln)
+
+    return extracted
 
 
 def _dispatch_extract(
@@ -359,7 +378,9 @@ def _dispatch_extract(
     else:
         err("You shouldn't have done that")
 
-    return f(bounds, entries, ref, *args, **kwargs)
+    motifs = f(bounds, entries, ref, *args, **kwargs)
+
+    return motifs
 
 
 def extract_ha1(subtype, *args, **kwargs):
@@ -369,6 +390,7 @@ def extract_ha1(subtype, *args, **kwargs):
     """
     (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=int(subtype[1]))
     outs = _dispatch_extract(bounds=[(start, end)], subtype=subtype, *args, **kwargs)
+
     # for ha1 extract, there will be exactly one region extracted for sequence
     out = list(outs)[0]
     smof.print_fasta(out)
