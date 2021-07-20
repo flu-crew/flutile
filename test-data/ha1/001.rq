@@ -1,0 +1,33 @@
+PREFIX onto: <http://www.ontotext.com/>
+PREFIX f: <https://flu-crew.org/term/>
+PREFIX fid: <https://flu-crew.org/id/>
+PREFIX world: <https://flu-crew.org/geo/country/>
+PREFIX usa: <https://flu-crew.org/geo/country/usa/>
+
+SELECT
+  # required for upload to IRD
+  ?gb
+  ?strain
+  ?subtype
+  ?seqdna
+  ?seqaa
+  ?seqha1
+FROM onto:disable-sameAs
+WHERE {
+  ?sid f:strain_name ?strain .
+  ?sid f:subtype ?subtype .
+  ?sid f:has_segment ?gid . 
+  ?gid f:genbank_id ?gb .
+  ?gid f:dnaseq ?seqdna .
+  ?gid f:segment_name "HA" .
+
+  FILTER(REGEX(?subtype, "__HA_SUBTYPE__"))
+
+  ?gid f:has_feature ?pid .
+  ?pid f:product "hemagglutinin" .
+  ?pid f:proseq ?seqaa .
+
+  ?gid f:has_feature ?fid .
+  ?fid f:product "HA1" .
+  ?fid f:peptide ?seqha1 .
+}
