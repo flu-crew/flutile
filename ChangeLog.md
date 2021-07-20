@@ -1,3 +1,10 @@
+0.12.2 [2021-07-20]
+-------------------
+
+ * Fix HA1 trimming for all subtypes
+ * Test agreement of flutile predicted HA1 with 50 randomly selected strains
+   for each subtype from genbank
+
 0.12.1 [2021-07-15]
 -------------------
 
