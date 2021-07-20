@@ -254,15 +254,17 @@ conversion_opt = click.option(
 )
 
 
-@click.command(
-    name="ha1",
-    help="Trim down to the HA1 using using subtype references from (Burke 2014)",
-)
+@click.command(name="ha1")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
 @ha_subtype_no_keep_opt
 @conversion_opt
 def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
+    """
+    Trim down to the HA1 using using subtype references from (Burke 2014). The
+    HA1 bounds calibrated to reproduce the HA1 regions that are reported in
+    genbank.
+    """
     extract_ha1(
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,

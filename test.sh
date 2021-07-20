@@ -1,3 +1,13 @@
 #!/usr/bin/env bash
 
-cd test-data && ./test.sh && cd clades && ./test.sh
+set -e
+set -u
+
+cd test-data
+./test.sh
+
+cd clades
+./test.sh
+
+cd ../ha1
+./test.sh

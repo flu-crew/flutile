@@ -189,20 +189,23 @@ def components(pairs):
 
     return groups
 
+
 def is_ha(subtype):
-  return bool(re.fullmatch("H\d+", subtype))
+    return bool(re.fullmatch("H\d+", subtype))
+
 
 def is_na(subtype):
-  return bool(re.fullmatch("N\d+", subtype))
+    return bool(re.fullmatch("N\d+", subtype))
+
 
 def get_ref(subtype):
     synonyms = {
-        "M" : "M1",
-        "MP" : "M1",
-        "NS" : "NS1",
-      }
+        "M": "M1",
+        "MP": "M1",
+        "NS": "NS1",
+    }
     if subtype in synonyms:
-      subtype = synonyms[subtype]
+        subtype = synonyms[subtype]
 
     if is_ha(subtype):
         try:
@@ -221,13 +224,19 @@ def get_ref(subtype):
             os.path.dirname(__file__), "data", "na-subtype-refs.faa"
         )
         ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|H[0-9]+N{i}\\|"))
-    elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
-        ref_file = os.path.join(
-            os.path.dirname(__file__), "data", "internal-refs.faa"
+        ref = list(
+            smof.grep(
+                ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|H[0-9]+N{i}\\|"
+            )
         )
+    elif subtype in ["PB2", "PB1", "PA", "NP", "M1", "NS1"]:
+        ref_file = os.path.join(os.path.dirname(__file__), "data", "internal-refs.faa")
         ref_fasta = smof.open_fasta(ref_file)
-        ref = list(smof.grep(ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"))
+        ref = list(
+            smof.grep(
+                ref_fasta, perl_regexp=True, no_color=True, pattern=f"\\|{subtype}$"
+            )
+        )
     else:
         err("Unexpected subtype")
     return ref
@@ -237,7 +246,7 @@ def align(seq, mafft_exe="mafft"):
     from Bio.Align.Applications import MafftCommandline
     from tempfile import mkstemp
 
-    hashy = smof.md5sum(seq) 
+    hashy = smof.md5sum(seq)
     (n, fasta_filename) = mkstemp(suffix=f"-{hashy}.fa")
 
     with open(fasta_filename, "w+") as fasta_fh:
@@ -283,12 +292,12 @@ def ungap_indices(start, end, fasta):
     else:
         b = i + 1
     if a == -1:
-      # The start is beyond the end of the sequence
-      # For now I will provide a dumby value that is guaranteed to index to an empty list
-      dumby = len(fasta) + 1
-      return (dumby, dumby)
+        # The start is beyond the end of the sequence
+        # For now I will provide a dumby value that is guaranteed to index to an empty list
+        dumby = len(fasta) + 1
+        return (dumby, dumby)
     else:
-      return (a, b)
+        return (a, b)
 
 
 def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
@@ -298,9 +307,10 @@ def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
     # align the reference and input protein sequences
     aln = align(faa, mafft_exe=mafft_exe)
 
-
     # find reference gapped start and stop positions
-    intervals = [ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds]
+    intervals = [
+        ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
+    ]
 
     # extract the subset regions
     extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
@@ -335,7 +345,9 @@ def map_dna2dna(bounds, fna, aln):
             dna_start = start + aa_offset * 3
             dna_end = dna_start + aa_length * 3
 
-            motif.append(smof.FastaEntry(header=fna[i].header, seq = fna[i].seq[dna_start:dna_end]))
+            motif.append(
+                smof.FastaEntry(header=fna[i].header, seq=fna[i].seq[dna_start:dna_end])
+            )
 
         motif_sets.append(motif)
 
@@ -357,9 +369,7 @@ def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
     return extracted
 
 
-def _dispatch_extract(
-    bounds, subtype, fasta_file, conversion=None, *args, **kwargs
-):
+def _dispatch_extract(bounds, subtype, fasta_file, conversion=None, *args, **kwargs):
     # get reference for this subtype
     ref = get_ref(subtype)
 
@@ -388,12 +398,25 @@ def extract_ha1(subtype, *args, **kwargs):
     Get the HA1 range relative to the subtype of interest by mapping the H1 HA1
     range (18,344) range to the subtype of interest
     """
-    (start, end) = map_ha_range(start=18, end=344, subtype1=1, subtype2=int(subtype[1]))
+    subtype_index = int(subtype[1:])
+
+    (start, end) = motifs.GENBANK_HA1_REGIONS[subtype]
+
     outs = _dispatch_extract(bounds=[(start, end)], subtype=subtype, *args, **kwargs)
 
     # for ha1 extract, there will be exactly one region extracted for sequence
     out = list(outs)[0]
     smof.print_fasta(out)
+
+
+def get_signal_offset(subtype):
+    """
+    subtype should be a string from H1 to H18
+    """
+    try:
+        return len(motifs.NTERM_MOTIFS[subtype])
+    except KeyError:
+        err(f"Expected a subtype string (e.g., H1)")
 
 
 def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
@@ -403,16 +426,19 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     bounds = [(min(xs), max(xs)) for xs in bounds]
 
     if is_ha(subtype) and not keep_signal:
-        offset = len(motifs.NTERM_MOTIFS[subtype])
+        offset = get_signal_offset(subtype)
         bounds = [(a + offset, b + offset) for (a, b) in bounds]
 
-    extracts = [list(seq) for seq in _dispatch_extract(bounds=bounds, subtype=subtype, *args, **kwargs)]
+    extracts = [
+        list(seq)
+        for seq in _dispatch_extract(bounds=bounds, subtype=subtype, *args, **kwargs)
+    ]
 
     pairs = []
     for n_seq in range(len(extracts[0])):
-      defline = extracts[0][n_seq].header
-      motif_seqs = [motif[n_seq].seq for motif in extracts]
-      pairs.append((defline, motif_seqs))
+        defline = extracts[0][n_seq].header
+        motif_seqs = [motif[n_seq].seq for motif in extracts]
+        pairs.append((defline, motif_seqs))
 
     return pairs
 
@@ -556,18 +582,20 @@ def aadiff_table(
                 yield row
                 break
 
-def transpose(xss):
-  """
-  Transpose a list of lists. Each element in the input list of lists is
-  considered to be a column. The list of rows is returned.
 
-  The nested lists are assumed to all be of the same length. If they are not,
-  the shortest list will be used as the number of output rows and other rows
-  wil be lost without raising an error.
-  """
-  # get the number of rows in the input
-  N = min([len(xs) for xs in xss])
-  return [[xs[i] for xs in xss] for i in range(N)]
+def transpose(xss):
+    """
+    Transpose a list of lists. Each element in the input list of lists is
+    considered to be a column. The list of rows is returned.
+
+    The nested lists are assumed to all be of the same length. If they are not,
+    the shortest list will be used as the number of output rows and other rows
+    wil be lost without raising an error.
+    """
+    # get the number of rows in the input
+    N = min([len(xs) for xs in xss])
+    return [[xs[i] for xs in xss] for i in range(N)]
+
 
 def annotate_table(
     table,
@@ -618,11 +646,17 @@ def annotate_table(
                     annotations[k] += [""] * len(lines[0][1:])
 
     if count:
-      # aggregate all non-index rows into a single counts column
-      for i in range(len(table)):
-        ag = ", ".join([f"{str(v)} {k}" for (k,v) in collections.Counter(table[i][2:]).items() if k])
-        table[i] = [table[i][0], table[i][1], f"({ag})"]
-      new_column_names = ["site", "reference", "changes"]
+        # aggregate all non-index rows into a single counts column
+        for i in range(len(table)):
+            ag = ", ".join(
+                [
+                    f"{str(v)} {k}"
+                    for (k, v) in collections.Counter(table[i][2:]).items()
+                    if k
+                ]
+            )
+            table[i] = [table[i][0], table[i][1], f"({ag})"]
+        new_column_names = ["site", "reference", "changes"]
 
     if join_annotations:
         annotations = {
@@ -682,7 +716,7 @@ def referenced_table(
     indices = gapped_indices(aln[0][1])
 
     # remove any reference sequences (1 or 0)
-    aln = aln[len(refseq):]
+    aln = aln[len(refseq) :]
 
     table = list(aadiff_table(aln, remove_unchanged=remove_unchanged, **kwargs))
 

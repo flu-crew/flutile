@@ -6,6 +6,28 @@ import sys
 
 RefMotif = namedtuple("RefMotif", "defline sequence motif")
 
+# These bounds are calibrated to reproduce the HA1 regions that are reported in
+# genbank. They are tested against random selections from genbank.
+GENBANK_HA1_REGIONS = {
+    "H1": (18, 344),
+    "H2": (16, 340),
+    "H3": (17, 345),
+    "H4": (17, 343),
+    "H5": (17, 346),
+    "H6": (17, 345),
+    "H7": (19, 341),
+    "H8": (18, 344),
+    "H9": (19, 338),
+    "H10": (17, 340),
+    "H11": (17, 342),
+    "H12": (18, 342),
+    "H13": (19, 343),
+    "H14": (18, 347),
+    "H15": (19, 349),
+    "H16": (20, 344),
+    "H17": (19, 342),
+    "H18": (15, 339),
+}
 
 NTERM_MOTIFS = {
     "H1": "MKARLLVLLCALAATDA",
