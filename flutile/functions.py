@@ -6,22 +6,20 @@ import tqdm
 import smof
 import os
 import flutile.motifs as motifs
-from flutile.functions import *
-from flutile.version import __version__
 
 
 class InputError(Exception):
     pass
 
 
+def err(msg):
+    raise InputError("msg")
+
+
 def is_aligned(fasta):
     lengths = {len(s.seq) for s in fasta}
     if len(lengths) != 1:
-        err("Expected all files to be of equal length")
-
-
-def err(msg):
-    raise InputError("msg")
+        err("FASTA file is not aligned, all entries should be of equal length")
 
 
 def with_aligned_pairs(alignment, f, *args, **kwargs):
@@ -158,7 +156,7 @@ def represent(s, max_day_sep, min_pident_sep, same_state):
             group = sorted(list(group), key=lambda i: s[i])
         seqs.add(group[0])
 
-    groups = groups + [{i} for i in range(N) if not i in grouped]
+    groups = groups + [{i} for i in range(N) if i not in grouped]
 
     return (groups, [s[i] for i in seqs])
 
@@ -175,7 +173,7 @@ def components(pairs):
 
     def group(x, xs, xss):
         for y in xss[x]:
-            if not y in xs:
+            if y not in xs:
                 xs.add(y)
                 xs.update(group(y, xs, xss))
         return xs
@@ -184,7 +182,7 @@ def components(pairs):
     while groupmap:
         (a, b) = list(groupmap.items())[0]
         xs = group(a, set(), groupmap)
-        groupmap = {k: v for (k, v) in groupmap.items() if not k in xs}
+        groupmap = {k: v for (k, v) in groupmap.items() if k not in xs}
         groups.append(xs)
 
     return groups
@@ -266,18 +264,10 @@ def align(seq, mafft_exe="mafft"):
     return aln
 
 
-def is_aligned(fasta):
-    lengths = {len(s.seq) for s in fasta}
-    if len(lengths) != 1:
-        print(lengths, file=sys.stderr)
-        err("Expected all files to be of equal length")
-
-
 def ungap_indices(start, end, fasta):
     """
     Map indices in an ungapped sequence to indices in the gapped string
     """
-    ok = False
     original_index = 0
     (a, b) = (-1, 0)
     for (i, c) in enumerate(fasta):
@@ -398,7 +388,6 @@ def extract_ha1(subtype, *args, **kwargs):
     Get the HA1 range relative to the subtype of interest by mapping the H1 HA1
     range (18,344) range to the subtype of interest
     """
-    subtype_index = int(subtype[1:])
 
     (start, end) = motifs.GENBANK_HA1_REGIONS[subtype]
 
@@ -416,7 +405,7 @@ def get_signal_offset(subtype):
     try:
         return len(motifs.NTERM_MOTIFS[subtype])
     except KeyError:
-        err(f"Expected a subtype string (e.g., H1)")
+        err("Expected a subtype string (e.g., H1)")
 
 
 def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
@@ -444,7 +433,7 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
 
 
 def parse_motifs(motif_strs, subtype):
-    motifs = dict()
+    motif_set = dict()
     for (i, motif_str) in enumerate(motif_strs):
         motif_str = motif_str.strip()
         pair = motif_str.split("=")
@@ -467,8 +456,8 @@ def parse_motifs(motif_strs, subtype):
             else:
                 raise InputError("Badly formed motif string")
             bounds.append((int(a), int(b)))
-        motifs[name] = bounds
-    return motifs
+        motif_set[name] = bounds
+    return motif_set
 
 
 def concat(xss):
@@ -503,10 +492,10 @@ def write_bounds(tabular=False, *args, **kwargs):
     (names, pairs) = make_motifs(*args, **kwargs)
     if tabular:
         print("\t" + "\t".join(names))
-        for (defline, motifs) in pairs:
-            print(defline + "\t" + "\t".join(motifs))
+        for (defline, seqs) in pairs:
+            print(defline + "\t" + "\t".join(seqs))
     else:
-        pairs = [(header, "".join(motifs)) for (header, motifs) in pairs]
+        pairs = [(header, "".join(seqs)) for (header, seqs) in pairs]
         smof.print_fasta(pairs)
 
 

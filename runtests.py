@@ -3,7 +3,6 @@
 import flutile.functions as f
 import unittest
 import datetime
-import sys
 import smof
 
 
@@ -320,7 +319,7 @@ class TestParsers(unittest.TestCase):
         # end studies
         self.assertEqual(f.ungap_indices(start=4, end=6, fasta="-GA-TACA"), (6, 8))
         self.assertEqual(f.ungap_indices(start=4, end=600, fasta="-GA-TACA"), (6, 8))
-        self.assertEqual(f.ungap_indices(start=500, end=600, fasta="-GA-TACA"), (9,9))
+        self.assertEqual(f.ungap_indices(start=500, end=600, fasta="-GA-TACA"), (9, 9))
 
     def test_parse_motifs(self):
         self.assertEqual(
@@ -330,7 +329,8 @@ class TestParsers(unittest.TestCase):
             f.parse_motifs(motif_strs=["x = 1 "], subtype="H1"), {"x": [(1, 1)]}
         )
         self.assertEqual(
-            f.parse_motifs(motif_strs=["x= 1 , 3"], subtype="H1"), {"x": [(1, 1), (3, 3)]}
+            f.parse_motifs(motif_strs=["x= 1 , 3"], subtype="H1"),
+            {"x": [(1, 1), (3, 3)]},
         )
         self.assertEqual(
             f.parse_motifs(motif_strs=[" x=1, 3 -5"], subtype="H1"),
@@ -344,47 +344,110 @@ class TestParsers(unittest.TestCase):
     def test_concat(self):
         self.assertEqual(f.concat([]), [])
         self.assertEqual(f.concat([[1]]), [1])
-        self.assertEqual(f.concat([[1,2],[3,4,5],[]]), [1,2,3,4,5])
+        self.assertEqual(f.concat([[1, 2], [3, 4, 5], []]), [1, 2, 3, 4, 5])
 
     def test_unconcat(self):
-        self.assertEqual(f.unconcat([], [1,1]), [])
-        self.assertEqual(f.unconcat(["1234","567"], [1,1]), ["1234", "567"])
-        self.assertEqual(f.unconcat(["1234","567"], [2]), ["1234567"])
-        self.assertEqual(f.unconcat(["1", "234", "567"], [2,1]), ["1234", "567"])
+        self.assertEqual(f.unconcat([], [1, 1]), [])
+        self.assertEqual(f.unconcat(["1234", "567"], [1, 1]), ["1234", "567"])
+        self.assertEqual(f.unconcat(["1234", "567"], [2]), ["1234567"])
+        self.assertEqual(f.unconcat(["1", "234", "567"], [2, 1]), ["1234", "567"])
         # it isn't entirely obvious what to do if the widths don't sum to the expected size
         # perhaps this should raise an error?
         self.assertEqual(f.unconcat(["1", "234", "567"], [2]), ["1234"])
         # and if there are extra width terms, I just ignore them
-        self.assertEqual(f.unconcat(["1", "234", "567"], [1,2,10]), ["1", "234567"])
-        self.assertEqual(f.unconcat(["1", "234", "567"], [1,10]), ["1", "234567"])
+        self.assertEqual(f.unconcat(["1", "234", "567"], [1, 2, 10]), ["1", "234567"])
+        self.assertEqual(f.unconcat(["1", "234", "567"], [1, 10]), ["1", "234567"])
         # 0's do nothing
-        self.assertEqual(f.unconcat(["1", "234", "567"], [0,1,10,0]), ["1", "234567"])
+        self.assertEqual(
+            f.unconcat(["1", "234", "567"], [0, 1, 10, 0]), ["1", "234567"]
+        )
         # negative values do nothing
-        self.assertEqual(f.unconcat(["1", "234", "567"], [-42,1,10,0]), ["1", "234567"])
+        self.assertEqual(
+            f.unconcat(["1", "234", "567"], [-42, 1, 10, 0]), ["1", "234567"]
+        )
 
     def test_map_dna2dna(self):
-      fna1 = [ smof.FastaEntry(header="A", seq="ATGTTTAAATTTAAA")]
-      aln1 = [ smof.FastaEntry(header="ref", seq="MGYGY")
-             , smof.FastaEntry(header="A", seq="MFKFK") ]
+        fna1 = [smof.FastaEntry(header="A", seq="ATGTTTAAATTTAAA")]
+        aln1 = [
+            smof.FastaEntry(header="ref", seq="MGYGY"),
+            smof.FastaEntry(header="A", seq="MFKFK"),
+        ]
 
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,1)], fna=fna1, aln=aln1)[0]], [("A", "ATG")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,2)], fna=fna1, aln=aln1)[0]], [("A", "ATGTTT")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,5)], fna=fna1, aln=aln1)[0]], [("A", "ATGTTTAAATTTAAA")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(2,5)], fna=fna1, aln=aln1)[0]], [("A", "TTTAAATTTAAA")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,6)], fna=fna1, aln=aln1)[0]], [("A", "ATGTTTAAATTTAAA")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,60)], fna=fna1, aln=aln1)[0]], [("A", "ATGTTTAAATTTAAA")])
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(50,60)], fna=fna1, aln=aln1)[0]], [("A", "")])
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 1)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "ATG")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 2)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "ATGTTT")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 5)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "ATGTTTAAATTTAAA")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(2, 5)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "TTTAAATTTAAA")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 6)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "ATGTTTAAATTTAAA")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 60)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "ATGTTTAAATTTAAA")],
+        )
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(50, 60)], fna=fna1, aln=aln1)[0]
+            ],
+            [("A", "")],
+        )
 
-      fna2 = [ smof.FastaEntry(header="A", seq="ATGTTTAAATTTAAA")
-             , smof.FastaEntry(header="B", seq="ATGTTTAAATTTAAA")
-             ]
-      aln2 = [ smof.FastaEntry(header="ref", seq="MGYGY")
-             , smof.FastaEntry(header="A", seq="MFKFK")
-             , smof.FastaEntry(header="B", seq="MFKFK") ]
+        fna2 = [
+            smof.FastaEntry(header="A", seq="ATGTTTAAATTTAAA"),
+            smof.FastaEntry(header="B", seq="ATGTTTAAATTTAAA"),
+        ]
+        aln2 = [
+            smof.FastaEntry(header="ref", seq="MGYGY"),
+            smof.FastaEntry(header="A", seq="MFKFK"),
+            smof.FastaEntry(header="B", seq="MFKFK"),
+        ]
 
-      self.assertEqual([smof.to_pair(x) for x in f.map_dna2dna(bounds=[(1,1)], fna=fna2, aln=aln2)[0]], [("A", "ATG"), ("B", "ATG")])
-      self.assertEqual([[smof.to_pair(x) for x in xs ] for xs in f.map_dna2dna(bounds=[(1,1), (2,2)], fna=fna2, aln=aln2)],
-          [[("A", "ATG"), ("B", "ATG")], [("A", "TTT"), ("B", "TTT")]])
+        self.assertEqual(
+            [
+                smof.to_pair(x)
+                for x in f.map_dna2dna(bounds=[(1, 1)], fna=fna2, aln=aln2)[0]
+            ],
+            [("A", "ATG"), ("B", "ATG")],
+        )
+        self.assertEqual(
+            [
+                [smof.to_pair(x) for x in xs]
+                for xs in f.map_dna2dna(bounds=[(1, 1), (2, 2)], fna=fna2, aln=aln2)
+            ],
+            [[("A", "ATG"), ("B", "ATG")], [("A", "TTT"), ("B", "TTT")]],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

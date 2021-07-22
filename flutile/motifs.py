@@ -73,7 +73,7 @@ def get_ha_subtype_nterm_motif(ha_subtype):
             print(f"Unexpected HA, found {subtype}, expected H1-H18", file=sys.stderr)
             raise
 
-        if not motif in entry.seq:
+        if motif not in entry.seq:
             print(
                 f"Could not find the motif '{motif}' in {subtype} refernce in '{ref_file}'"
             )

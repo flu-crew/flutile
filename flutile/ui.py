@@ -1,9 +1,8 @@
 import signal
 import os
 import click
-from flutile.version import __version__
 import sys
-from flutile.functions import *
+import flutile.functions as fun
 
 INT_SENTINEL = 1e9
 
@@ -176,7 +175,7 @@ motif_range_opt = click.option(
 @caton82_opt
 @wiley81_opt
 def aadiff_cmd(*args, **kwargs):
-    for row in referenced_aadiff_table(*args, **kwargs):
+    for row in fun.referenced_aadiff_table(*args, **kwargs):
         print("\t".join(row))
 
 
@@ -194,7 +193,7 @@ def aadiff_cmd(*args, **kwargs):
 @caton82_opt
 @wiley81_opt
 def annotate_cmd(*args, **kwargs):
-    for row in referenced_annotation_table(*args, **kwargs):
+    for row in fun.referenced_annotation_table(*args, **kwargs):
         print("\t".join(row))
 
 
@@ -227,9 +226,9 @@ def represent_cmd(alignment, max_day_sep, min_pident_sep, same_state, print_grou
     if max_day_sep == INT_SENTINEL:
         max_day_sep = None
 
-    (groups, seqs) = with_aligned_pairs(
+    (groups, seqs) = fun.with_aligned_pairs(
         alignment,
-        represent,
+        fun.represent,
         max_day_sep=max_day_sep,
         min_pident_sep=min_pident_sep,
         same_state=same_state,
@@ -238,7 +237,7 @@ def represent_cmd(alignment, max_day_sep, min_pident_sep, same_state, print_grou
     if print_groups:
         for group in groups:
             for i in group:
-                print(s[i][0])
+                print(seqs[i][0])
             print("")
     else:
         for (header, seq) in seqs:
@@ -265,7 +264,7 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
     HA1 bounds calibrated to reproduce the HA1 regions that are reported in
     genbank.
     """
-    extract_ha1(
+    fun.extract_ha1(
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
         subtype=subtype,
@@ -302,7 +301,7 @@ def motif_cmd(fasta_file, keep_signal, fasta, mafft_exe, motif, subtype, convers
        flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
     """
 
-    write_bounds(
+    fun.write_bounds(
         tabular=not (fasta),
         motif_strs=motif,
         keep_signal=keep_signal,
@@ -342,6 +341,6 @@ def main():
 
 
 if __name__ == "__main__":
-    if os.main is "posix":
+    if os.main == "posix":
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     main()
