@@ -2,6 +2,10 @@ Contents:
 
  * `caton82.txt` - H1 antigenic sites from (Caton 82)
 
+   The annotations come directly from Table 3 of the Caton82 paper. This paper
+   is based on the A/PR/8/34 H1N1 strain, which has a deletion relative
+   to Burke's reference H1.
+
  * `wiley81.txt` - H3 antigenic sites from (Wiley 81)
 
  * `subtype-refs.faa` and `subtype-refs.fna` - protein and DNA fasta files
