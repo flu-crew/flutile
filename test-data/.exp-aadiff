@@ -13,8 +13,8 @@ site	MN428031|A/swine/Illinois/A01644401/2018|2019-09-09	MN225001|A/swine/Indian
 15	T								I	I	I	I			I	
 16	V		I											I		
 19	V	I														
-69	L	M	M				M	M						M		Cb
-71	N	I	I	T	T	T	T	T	I	I	I	I	I	I	I	
+69	L	M	M				M	M						M		
+71	N	I	I	T	T	T	T	T	I	I	I	I	I	I	I	Cb
 82	T		K								A	A				
 83	S	P	P				P	P	P	P	P	P	P	P	P	
 87	N												X			
@@ -29,7 +29,7 @@ site	MN428031|A/swine/Illinois/A01644401/2018|2019-09-09	MN225001|A/swine/Indian
 130	T						N	N								
 138	H	Y														
 141	N								K							
-142	S										R	R				
+142	S										R	R				Ca2
 153	V							M								Sb
 155	N	D														Sa
 156	N												G			Sb
@@ -37,7 +37,7 @@ site	MN428031|A/swine/Illinois/A01644401/2018|2019-09-09	MN225001|A/swine/Indian
 160	N			T												Sa
 162	S	T												R		Sa
 169	E	R	K		K	K	K	K	K	K	K	K	K	K	K	
-170	G	E	E				E	E	E	E	E	E	E	E	E	Ca2
+170	G	E	E				E	E	E	E	E	E	E	E	E	Ca1
 173	V	I	I	I	I	I	I	I	I	I	I	I		I	I	
 175	V												I			
 185	M							I					I			
@@ -47,10 +47,10 @@ site	MN428031|A/swine/Illinois/A01644401/2018|2019-09-09	MN225001|A/swine/Indian
 193	H		N						R	R				N		Sb, RBS
 194	T				K								I			RBS
 200	S													X		
-204	S													X		Ca3
+204	S													X		Ca1
 215	A	S														
 216	K						X				R	R	R			
-222	N										D	D				RBS
+222	N										D	D				Ca2, RBS
 224	E	G	G											G		RBS
 237	G		E										R	E		Ca1
 241	I						M	M								
