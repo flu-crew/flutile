@@ -1,3 +1,8 @@
+0.13.0 [2021-10-03]
+-------------------
+
+ * Set caton82 antigenic sites exactly to the sites described in paper
+
 0.12.3 [2021-07-xx]
 -------------------
 
