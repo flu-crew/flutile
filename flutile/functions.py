@@ -488,7 +488,7 @@ def make_motifs(motif_strs, subtype, *args, **kwargs):
     return (motifs.keys(), pairs)
 
 
-def write_bounds(tabular=False, *args, **kwargs):
+def write_bounds(tabular=False, outfile=sys.stdout, *args, **kwargs):
     (names, pairs) = make_motifs(*args, **kwargs)
     if tabular:
         print("\t" + "\t".join(names))
@@ -496,7 +496,7 @@ def write_bounds(tabular=False, *args, **kwargs):
             print(defline + "\t" + "\t".join(seqs))
     else:
         pairs = [(header, "".join(seqs)) for (header, seqs) in pairs]
-        smof.print_fasta(pairs)
+        smof.print_fasta(pairs, out=outfile)
 
 
 def gapped_indices(seq):
