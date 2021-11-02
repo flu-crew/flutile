@@ -298,9 +298,12 @@ def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
     aln = align(faa, mafft_exe=mafft_exe)
 
     # find reference gapped start and stop positions
-    intervals = [
-        ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
-    ]
+    try:
+      intervals = [
+          ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
+      ]
+    except IndexError:
+        err("Expected at least one entry in the fasta file")
 
     # extract the subset regions
     extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
@@ -490,10 +493,14 @@ def make_motifs(motif_strs, subtype, *args, **kwargs):
 
 def write_bounds(tabular=False, outfile=sys.stdout, *args, **kwargs):
     (names, pairs) = make_motifs(*args, **kwargs)
+
+    if isinstance(outfile, str):
+        outfile = open(outfile, "w")
+
     if tabular:
-        print("\t" + "\t".join(names))
+        print("\t" + "\t".join(names), file=outfile)
         for (defline, seqs) in pairs:
-            print(defline + "\t" + "\t".join(seqs))
+            print(defline + "\t" + "\t".join(seqs), file=outfile)
     else:
         pairs = [(header, "".join(seqs)) for (header, seqs) in pairs]
         smof.print_fasta(pairs, out=outfile)
