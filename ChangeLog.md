@@ -1,3 +1,9 @@
+0.13.1-dev [2021-11-xx]
+-------------------
+
+ * Fix edge cases
+ * Pass filehandles to functions that print
+
 0.13.0 [2021-10-03]
 -------------------
 
