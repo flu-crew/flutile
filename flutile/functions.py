@@ -13,7 +13,7 @@ class InputError(Exception):
 
 
 def err(msg):
-    raise InputError("msg")
+    raise InputError(msg)
 
 
 def is_aligned(fasta):
@@ -291,27 +291,35 @@ def ungap_indices(start, end, fasta):
 
 
 def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
-    # add reference sequences to the input seq
-    faa = list(ref) + list(faa)
+    faa = list(faa)
+    ref = list(ref)
 
-    # align the reference and input protein sequences
-    aln = align(faa, mafft_exe=mafft_exe)
+    # empty inputs silently return empty results
+    if (len(faa) > 0):
 
-    # find reference gapped start and stop positions
-    try:
+      # there must exactly 1 referece
+      if len(ref) != 1:
+          err("Expected exactly one reference file")
+
+      # add reference sequences to the input seq
+      with_ref = ref + faa
+
+      # align the reference and input protein sequences
+      aln = align(with_ref, mafft_exe=mafft_exe)
+
+      # find reference gapped start and stop positions
       intervals = [
           ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
       ]
-    except IndexError:
-        err("Expected at least one entry in the fasta file")
 
-    # extract the subset regions
-    extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
+      # extract the subset regions
+      extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
 
-    for extracted in extracts:
-        # return sans reference
-        yield list(extracted)[1:]
+      return [list(extracted)[1:] for extracted in extracts]
 
+    else:
+
+      return []
 
 def map_dna2dna(bounds, fna, aln):
 
@@ -427,10 +435,11 @@ def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
     ]
 
     pairs = []
-    for n_seq in range(len(extracts[0])):
-        defline = extracts[0][n_seq].header
-        motif_seqs = [motif[n_seq].seq for motif in extracts]
-        pairs.append((defline, motif_seqs))
+    if len(extracts) > 0:
+        for n_seq in range(len(extracts[0])):
+            defline = extracts[0][n_seq].header
+            motif_seqs = [motif[n_seq].seq for motif in extracts]
+            pairs.append((defline, motif_seqs))
 
     return pairs
 
