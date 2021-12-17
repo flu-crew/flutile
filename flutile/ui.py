@@ -3,6 +3,7 @@ import os
 import click
 import sys
 import flutile.functions as fun
+from flutile.version import __version__
 
 INT_SENTINEL = 1e9
 
@@ -326,6 +327,7 @@ trim_grp.add_command(motif_cmd)
 
 
 @click.group(help="Flu-crew utilities", context_settings=CONTEXT_SETTINGS)
+@click.version_option(__version__, "-v", "--version", message=__version__)
 def cli_grp():
     pass
 
