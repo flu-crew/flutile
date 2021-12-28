@@ -1,0 +1,35 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install smof
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Unit tests
+      run: ./runtests.py
+      # This is the most computationally expensive step, so put it last
+    - name: Golden tests
+      run: |
+        pip install .
+        sudo apt-get install -y mafft
+        cd test-data && ./test.sh && cd clades && ./test.sh
