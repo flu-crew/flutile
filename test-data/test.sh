@@ -2,6 +2,7 @@
 
 set -e
 set -u
+set -v
 
 diff <(flutile aadiff --subtype=H1 h1-aadiff-ex.faa) h1-aadiff-ex.txt
 

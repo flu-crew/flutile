@@ -2,6 +2,7 @@
 
 set -u
 set -e
+set -v
 
 # these should all yield the same final amino acid sequences (gaps are removed
 # since `smof translate` does not preserve gap spacing)
