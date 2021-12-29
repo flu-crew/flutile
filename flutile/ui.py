@@ -3,6 +3,7 @@ import os
 import click
 import sys
 import flutile.functions as fun
+from flutile.parameters import AadiffOpts, MafftOpts, SeqOpts, Conversion
 from flutile.version import __version__
 
 INT_SENTINEL = 1e9
@@ -141,7 +142,8 @@ count_variants_opt = click.option(
 
 annotation_tables_opt = click.option(
     "--annotation-tables",
-    help="One or more TAB-delimited tables containing annotations (separated by commas). The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
+    multiple=True,
+    help="A filename containing annotations. The first column must contain relative indices. These may be negative to refer to positions before the start of the HA1 region or may refer to indels (e.g., 42+1 for an insertion after the 42 site in the reference). The table is expected to have a header with column names.",
 )
 
 join_annotations_opt = click.option(
@@ -183,8 +185,35 @@ motif_range_opt = click.option(
 @join_annotations_opt
 @caton82_opt
 @wiley81_opt
-def aadiff_cmd(*args, **kwargs):
-    for row in fun.referenced_aadiff_table(*args, **kwargs):
+def aadiff_cmd(
+    faa,
+    subtype,
+    make_consensus,
+    consensus_as_reference,
+    keep_signal,
+    count,
+    mafft_exe,
+    verbose,
+    annotation_tables,
+    join_annotations,
+    caton82,
+    wiley81,
+):
+    mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
+    seq_opts = SeqOpts(subtype=subtype, keep_signal=keep_signal)
+    aadiff_opts = AadiffOpts(
+        make_consensus=make_consensus,
+        consensus_as_reference=consensus_as_reference,
+        remove_unchanged=True,
+        annotation_tables=annotation_tables,
+        join_annotations=join_annotations,
+        count=count,
+        caton82=caton82,
+        wiley81=wiley81,
+    )
+    for row in fun.referenced_aadiff_table(
+        faa, mafft_opts=mafft_opts, seq_opts=seq_opts, aadiff_opts=aadiff_opts
+    ):
         print("\t".join(row))
 
 
@@ -202,8 +231,30 @@ def aadiff_cmd(*args, **kwargs):
 @join_annotations_opt
 @caton82_opt
 @wiley81_opt
-def annotate_cmd(*args, **kwargs):
-    for row in fun.referenced_annotation_table(*args, **kwargs):
+def annotate_cmd(
+    faa,
+    subtype,
+    make_consensus,
+    consensus_as_reference,
+    mafft_exe,
+    verbose,
+    annotation_tables,
+    join_annotations,
+    caton82,
+    wiley81,
+):
+    mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
+    seq_opts = SeqOpts(subtype=subtype, keep_signal=False)
+    aadiff_opts = AadiffOpts(
+        make_consensus=make_consensus,
+        consensus_as_reference=consensus_as_reference,
+        remove_unchanged=False,
+        annotation_tables=annotation_tables,
+        join_annotations=join_annotations,
+        caton82=caton82,
+        wiley81=wiley81,
+    )
+    for row in fun.referenced_annotation_table(faa, mafft_opts, seq_opts, aadiff_opts):
         print("\t".join(row))
 
 
@@ -263,6 +314,17 @@ conversion_opt = click.option(
 )
 
 
+def parse_conversion(x):
+    if x is None or x.lower() == "dna2aa":
+        return Conversion.DNA_TO_AA
+    elif x.lower() == "dna2dna":
+        return Conversion.DNA_TO_DNA
+    elif x.lower() == "aa2aa":
+        return Conversion.AA_TO_AA
+    else:
+        sys.exit("Invalid argument to --conversion")
+
+
 @click.command(name="ha1")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
@@ -275,12 +337,13 @@ def ha1_cmd(fasta_file, mafft_exe, verbose, subtype, conversion):
     HA1 bounds calibrated to reproduce the HA1 regions that are reported in
     genbank.
     """
+    conversion_enum = parse_conversion(conversion)
+    mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
+    seq_opts = SeqOpts(subtype=subtype, conversion=conversion_enum)
     fun.extract_ha1(
         fasta_file=fasta_file,
-        mafft_exe=mafft_exe,
-        verbose=verbose,
-        subtype=subtype,
-        conversion=conversion,
+        mafft_opts=mafft_opts,
+        seq_opts=seq_opts,
     )
 
 
@@ -316,15 +379,19 @@ def motif_cmd(
        flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
     """
 
+    conversion_enum = parse_conversion(conversion)
+
+    mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
+    seq_opts = SeqOpts(
+        keep_signal=keep_signal, conversion=conversion_enum, subtype=subtype
+    )
+
     fun.write_bounds(
+        fasta_file=fasta_file,
         tabular=not (fasta),
         motif_strs=motif,
-        keep_signal=keep_signal,
-        subtype=subtype,
-        fasta_file=fasta_file,
-        mafft_exe=mafft_exe,
-        verbose=verbose,
-        conversion=conversion,
+        seq_opts=seq_opts,
+        mafft_opts=mafft_opts,
     )
 
 

@@ -6,6 +6,7 @@ import tqdm
 import smof
 import os
 import flutile.motifs as motifs
+from flutile.parameters import AadiffOpts, SeqOpts, MafftOpts, Conversion
 
 
 class InputError(Exception):
@@ -240,7 +241,7 @@ def get_ref(subtype):
     return ref
 
 
-def align(seq, mafft_exe="mafft", verbose=False):
+def align(seq, mafft_opts=MafftOpts()):
     from Bio.Align.Applications import MafftCommandline
     from tempfile import mkstemp
 
@@ -250,9 +251,9 @@ def align(seq, mafft_exe="mafft", verbose=False):
     with open(fasta_filename, "w+") as fasta_fh:
         smof.print_fasta(seq, out=fasta_fh)
 
-    o, e = MafftCommandline(mafft_exe, input=fasta_filename)()
+    o, e = MafftCommandline(mafft_opts.mafft_exe, input=fasta_filename)()
 
-    if verbose:
+    if mafft_opts.verbose:
         print(e, file=sys.stderr)
 
     (n, aln_filename) = mkstemp(suffix=f"-{hashy}.aln")
@@ -291,7 +292,7 @@ def ungap_indices(start, end, fasta):
         return (a, b)
 
 
-def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft", verbose=False):
+def extract_aa2aa(bounds, faa, ref, mafft_opts=MafftOpts()):
     faa = list(faa)
     ref = list(ref)
 
@@ -306,7 +307,7 @@ def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft", verbose=False):
         with_ref = ref + faa
 
         # align the reference and input protein sequences
-        aln = align(with_ref, mafft_exe=mafft_exe, verbose=verbose)
+        aln = align(with_ref, mafft_opts)
 
         # find reference gapped start and stop positions
         intervals = [
@@ -357,7 +358,7 @@ def map_dna2dna(bounds, fna, aln):
     return motif_sets
 
 
-def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft", verbose=False):
+def extract_dna2dna(bounds, fna, ref, mafft_opts=MafftOpts()):
     # translate the DNA inputs (longest uninterupted CDS)
     faa = smof.translate(fna, all_frames=True)
 
@@ -365,46 +366,56 @@ def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft", verbose=False):
     ref = list(ref)
     faa = list(faa)
     fna = list(fna)
-    aln = list(align(ref + faa, mafft_exe=mafft_exe, verbose=verbose))
+    aln = list(align(ref + faa, mafft_opts))
 
     extracted = map_dna2dna(bounds, fna, aln)
 
     return extracted
 
 
-def _dispatch_extract(bounds, subtype, fasta_file, conversion=None, *args, **kwargs):
+def _dispatch_extract(fasta_file, bounds, seq_opts=SeqOpts(), mafft_opts=MafftOpts()):
     # get reference for this subtype
-    ref = get_ref(subtype)
+    ref = get_ref(seq_opts.subtype)
 
     # open input sequences
     entries = smof.open_fasta(fasta_file)
     # remove gaps
     entries = list(smof.clean(entries, toseq=True))
     # dispatch by sequence type
-    if conversion == "aa2aa":
-        f = extract_aa2aa
-    elif conversion == "dna2aa":
-        entries = smof.translate(entries, all_frames=True)
-        f = extract_aa2aa
-    elif conversion == "dna2dna":
-        f = extract_dna2dna
+    if seq_opts.conversion is None:
+        raise ValueError(
+            "Conversion is undefined, did you forget a --conversion argument?"
+        )
     else:
-        err("You shouldn't have done that")
+        if seq_opts.conversion == Conversion.AA_TO_AA:
+            f = extract_aa2aa
+        elif seq_opts.conversion == Conversion.DNA_TO_AA:
+            entries = smof.translate(entries, all_frames=True)
+            f = extract_aa2aa
+        elif seq_opts.conversion == Conversion.DNA_TO_DNA:
+            f = extract_dna2dna
+        else:
+            raise ValueError("Invalid Conversion value - this is a bug in flutile")
 
-    motifs = f(bounds, entries, ref, *args, **kwargs)
+    motifs = f(bounds, entries, ref, mafft_opts)
 
     return motifs
 
 
-def extract_ha1(subtype, *args, **kwargs):
+def extract_ha1(fasta_file, seq_opts=SeqOpts(), mafft_opts=MafftOpts()):
     """
     Get the HA1 range relative to the subtype of interest by mapping the H1 HA1
     range (18,344) range to the subtype of interest
     """
 
-    (start, end) = motifs.GENBANK_HA1_REGIONS[subtype]
+    (start, end) = motifs.GENBANK_HA1_REGIONS[seq_opts.subtype]
 
-    outs = _dispatch_extract(bounds=[(start, end)], subtype=subtype, *args, **kwargs)
+    outs = _dispatch_extract(
+        fasta_file=fasta_file,
+        bounds=[(start, end)],
+        seq_opts=seq_opts,
+        mafft_opts=mafft_opts,
+    )
 
     # for ha1 extract, there will be exactly one region extracted for sequence
     out = list(outs)[0]
@@ -421,19 +432,24 @@ def get_signal_offset(subtype):
         err("Expected a subtype string (e.g., H1)")
 
 
-def extract_bounds(bounds, keep_signal, subtype, *args, **kwargs):
+def extract_bounds(fasta_file, bounds, seq_opts=SeqOpts(), mafft_opts=MafftOpts()):
     """
     Extract a motif
     """
     bounds = [(min(xs), max(xs)) for xs in bounds]
 
-    if is_ha(subtype) and not keep_signal:
-        offset = get_signal_offset(subtype)
+    if is_ha(seq_opts.subtype) and not seq_opts.keep_signal:
+        offset = get_signal_offset(seq_opts.subtype)
         bounds = [(a + offset, b + offset) for (a, b) in bounds]
 
     extracts = [
         list(seq)
-        for seq in _dispatch_extract(bounds=bounds, subtype=subtype, *args, **kwargs)
+        for seq in _dispatch_extract(
+            fasta_file=fasta_file,
+            bounds=bounds,
+            seq_opts=seq_opts,
+            mafft_opts=mafft_opts,
+        )
     ]
 
     pairs = []
@@ -489,10 +505,12 @@ def unconcat(xs, widths, joiner=lambda ys: "".join(ys)):
     return collapsed
 
 
-def make_motifs(motif_strs, subtype, *args, **kwargs):
-    motifs = parse_motifs(motif_strs=motif_strs, subtype=subtype)
+def make_motifs(fasta_file, motif_strs, seq_opts=SeqOpts(), mafft_opts=MafftOpts()):
+    motifs = parse_motifs(motif_strs=motif_strs, subtype=seq_opts.subtype)
     bounds = concat(motifs.values())
-    pairs_flat = extract_bounds(bounds, subtype=subtype, *args, **kwargs)
+    pairs_flat = extract_bounds(
+        fasta_file, bounds, seq_opts=seq_opts, mafft_opts=mafft_opts
+    )
 
     widths = [len(v) for v in motifs.values()]
     pairs = []
@@ -502,8 +520,20 @@ def make_motifs(motif_strs, subtype, *args, **kwargs):
     return (motifs.keys(), pairs)
 
 
-def write_bounds(tabular=False, outfile=sys.stdout, *args, **kwargs):
-    (names, pairs) = make_motifs(*args, **kwargs)
+def write_bounds(
+    fasta_file,
+    motif_strs,
+    seq_opts=SeqOpts(),
+    mafft_opts=MafftOpts(),
+    tabular=False,
+    outfile=sys.stdout,
+):
+    (names, pairs) = make_motifs(
+        fasta_file=fasta_file,
+        motif_strs=motif_strs,
+        seq_opts=seq_opts,
+        mafft_opts=mafft_opts,
+    )
 
     if isinstance(outfile, str):
         outfile = open(outfile, "w")
@@ -541,13 +571,7 @@ def gapped_indices(seq):
     return indices
 
 
-def aadiff_table(
-    s,
-    make_consensus=False,
-    consensus_as_reference=False,
-    remove_unchanged=True,
-    **kwargs,
-):
+def aadiff_table(s, aadiff_opts=AadiffOpts()):
     """
     From the input alignment s, make an aadiff table
     """
@@ -557,10 +581,10 @@ def aadiff_table(
         return counts.most_common()[0][0]
 
     # add the consensus header column, if needed
-    if make_consensus or consensus_as_reference:
+    if aadiff_opts.make_consensus or aadiff_opts.consensus_as_reference:
         consensus_seq = "".join(find_consensus(i) for i in range(len(s[0][1])))
         # the consensus column goes first if it is being used as a reference
-        if consensus_as_reference:
+        if aadiff_opts.consensus_as_reference:
             s = [("Consensus", consensus_seq)] + s
         # otherwise it goes last
         else:
@@ -578,7 +602,7 @@ def aadiff_table(
         position = str(i + 1)
         # for each sequence in the alignment
         for j in seq_ids:
-            if not remove_unchanged or s[j][1][i] != ref:
+            if not aadiff_opts.remove_unchanged or s[j][1][i] != ref:
                 row = [position, ref]
                 for k in seq_ids[1:]:
                     aa = s[k][1][i]
@@ -604,40 +628,29 @@ def transpose(xss):
     return [[xs[i] for xs in xss] for i in range(N)]
 
 
-def annotate_table(
-    table,
-    subtype=None,
-    annotation_tables="",
-    join_annotations=False,
-    keep_signal=False,
-    count=False,
-    caton82=False,
-    wiley81=False,
-    **kwargs,
-):
+def annotate_table(table, seq_opts=SeqOpts(), aadiff_opts=AadiffOpts()):
     def load_builtin_annotations(name, subtype_exp):
-        if subtype_exp != subtype:
+        if subtype_exp != seq_opts.subtype:
             err(f"{name} annotation is only defined for {subtype_exp}")
 
-        if keep_signal:
+        if seq_opts.keep_signal:
             err("{name} annotation is incompatible with --keep_signal")
 
         return os.path.join(os.path.dirname(__file__), "data", f"{name}.txt")
 
     all_anntables = []
 
-    if caton82:
+    if aadiff_opts.caton82:
         all_anntables.append(load_builtin_annotations("caton82", "H1"))
 
-    if wiley81:
+    if aadiff_opts.wiley81:
         all_anntables.append(load_builtin_annotations("wiley81", "H3"))
+
+    all_anntables += aadiff_opts.annotation_tables
 
     annotations = {x[0]: [] for x in table[1:]}
 
     new_column_names = []
-
-    if annotation_tables:
-        all_anntables += [f.strip() for f in annotation_tables.split(",")]
 
     for annotation_file in all_anntables:
 
@@ -652,7 +665,7 @@ def annotate_table(
                 else:
                     annotations[k] += [""] * len(lines[0][1:])
 
-    if count:
+    if aadiff_opts.count:
         # aggregate all non-index rows into a single counts column
         for i in range(len(table)):
             ag = ", ".join(
@@ -665,7 +678,7 @@ def annotate_table(
             table[i] = [table[i][0], table[i][1], f"({ag})"]
         new_column_names = ["site", "reference", "changes"]
 
-    if join_annotations:
+    if aadiff_opts.join_annotations:
         annotations = {
             k: [", ".join([v for v in vs if v])] for (k, vs) in annotations.items()
         }
@@ -682,16 +695,13 @@ def annotate_table(
 
 def referenced_table(
     faa,
-    subtype=None,
-    mafft_exe="mafft",
-    keep_signal=False,
-    remove_unchanged=True,
-    verbose=False,
-    **kwargs,
+    seq_opts=SeqOpts(),
+    mafft_opts=MafftOpts(),
+    aadiff_opts=AadiffOpts(),
 ):
     # if this is an HA and we want to trim off the signal peptide
-    if is_ha(subtype) and not keep_signal:
-        ref = motifs.get_ha_subtype_nterm_motif(subtype)
+    if is_ha(seq_opts.subtype) and not seq_opts.keep_signal:
+        ref = motifs.get_ha_subtype_nterm_motif(seq_opts.subtype)
         # the motif here is an exact match to the reference signal peptide, we
         # want to remove the signal peptide, so the trim length is simply the
         # peptide length
@@ -702,8 +712,8 @@ def referenced_table(
 
         refseq = [smof.FastaEntry(header=ref.defline, seq=seq)]
     # if we aren't trimming, we can use the default (M-initialized) full protein references
-    elif subtype:
-        refseq = get_ref(subtype)
+    elif seq_opts.subtype:
+        refseq = get_ref(seq_opts.subtype)
     # unless we aren't given a reference, then we do nothing special
     else:
         refseq = []
@@ -718,7 +728,7 @@ def referenced_table(
     entries = refseq + entries
 
     # align the reference and input protein sequences
-    aln = align(entries, mafft_exe=mafft_exe, verbose=verbose)
+    aln = align(entries, mafft_opts)
     aln = [(s.header, s.seq) for s in aln]
 
     indices = gapped_indices(aln[0][1])
@@ -726,7 +736,7 @@ def referenced_table(
     # remove any reference sequences (1 or 0)
     aln = aln[len(refseq) :]
 
-    table = list(aadiff_table(aln, remove_unchanged=remove_unchanged, **kwargs))
+    table = list(aadiff_table(aln, aadiff_opts))
 
     # set relative indices
     for i, row in enumerate(table):
@@ -736,9 +746,13 @@ def referenced_table(
     return table
 
 
-def referenced_aadiff_table(faa, **kwargs):
-    table = referenced_table(faa, remove_unchanged=True, **kwargs)
-    return annotate_table(table, **kwargs)
+def referenced_aadiff_table(
+    faa, mafft_opts=MafftOpts(), seq_opts=SeqOpts(), aadiff_opts=AadiffOpts()
+):
+    table = referenced_table(
+        faa, mafft_opts=mafft_opts, seq_opts=seq_opts, aadiff_opts=aadiff_opts
+    )
+    return annotate_table(table, aadiff_opts=aadiff_opts, seq_opts=seq_opts)
 
 
 def map_ha_range(start, end, subtype1, subtype2):
@@ -777,17 +791,19 @@ def map_ha_range(start, end, subtype1, subtype2):
         return (None, None)
 
 
-def referenced_annotation_table(faa, subtype, **kwargs):
+def referenced_annotation_table(
+    faa, mafft_opts=MafftOpts(), seq_opts=SeqOpts(), aadiff_opts=AadiffOpts()
+):
     """
     This is just for HA
     """
 
-    table = referenced_table(faa, subtype=subtype, remove_unchanged=False, **kwargs)
+    table = referenced_table(faa, seq_opts, mafft_opts, aadiff_opts)
 
     subtype_file = os.path.join(
         os.path.dirname(__file__), "data", "burke2014-index-map.txt"
     )
-    subtype_number = int(subtype[1:])
+    subtype_number = int(seq_opts.subtype[1:])
     subtype_annotation = dict()
     with open(subtype_file, "r") as f:
         for line in f.readlines():
@@ -804,4 +820,4 @@ def referenced_annotation_table(faa, subtype, **kwargs):
         except:
             table[idx + 1] += ["\t"] * 18
 
-    return annotate_table(table, subtype=subtype, **kwargs)
+    return annotate_table(table, seq_opts, aadiff_opts)
