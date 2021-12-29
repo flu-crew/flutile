@@ -2,6 +2,7 @@
 -------------------
 
  * Migrate from Travis to GitHub Actions for CI
+ * Add verbose option, by default do not print mafft messages
 
 0.13.2 [2021-12-16]
 -------------------

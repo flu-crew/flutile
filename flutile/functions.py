@@ -240,7 +240,7 @@ def get_ref(subtype):
     return ref
 
 
-def align(seq, mafft_exe="mafft"):
+def align(seq, mafft_exe="mafft", verbose=False):
     from Bio.Align.Applications import MafftCommandline
     from tempfile import mkstemp
 
@@ -252,7 +252,8 @@ def align(seq, mafft_exe="mafft"):
 
     o, e = MafftCommandline(mafft_exe, input=fasta_filename)()
 
-    print(e, file=sys.stderr)
+    if verbose:
+        print(e, file=sys.stderr)
 
     (n, aln_filename) = mkstemp(suffix=f"-{hashy}.aln")
 
@@ -290,36 +291,37 @@ def ungap_indices(start, end, fasta):
         return (a, b)
 
 
-def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft"):
+def extract_aa2aa(bounds, faa, ref, mafft_exe="mafft", verbose=False):
     faa = list(faa)
     ref = list(ref)
 
     # empty inputs silently return empty results
-    if (len(faa) > 0):
+    if len(faa) > 0:
 
-      # there must exactly 1 referece
-      if len(ref) != 1:
-          err("Expected exactly one reference file")
+        # there must exactly 1 referece
+        if len(ref) != 1:
+            err("Expected exactly one reference file")
 
-      # add reference sequences to the input seq
-      with_ref = ref + faa
+        # add reference sequences to the input seq
+        with_ref = ref + faa
 
-      # align the reference and input protein sequences
-      aln = align(with_ref, mafft_exe=mafft_exe)
+        # align the reference and input protein sequences
+        aln = align(with_ref, mafft_exe=mafft_exe, verbose=verbose)
 
-      # find reference gapped start and stop positions
-      intervals = [
-          ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
-      ]
+        # find reference gapped start and stop positions
+        intervals = [
+            ungap_indices(start, stop, list(aln)[0].seq) for (start, stop) in bounds
+        ]
 
-      # extract the subset regions
-      extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
+        # extract the subset regions
+        extracts = [smof.subseq(aln, start, stop) for (start, stop) in intervals]
 
-      return [list(extracted)[1:] for extracted in extracts]
+        return [list(extracted)[1:] for extracted in extracts]
 
     else:
 
-      return []
+        return []
+
 
 def map_dna2dna(bounds, fna, aln):
 
@@ -355,7 +357,7 @@ def map_dna2dna(bounds, fna, aln):
     return motif_sets
 
 
-def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
+def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft", verbose=False):
     # translate the DNA inputs (longest uninterupted CDS)
     faa = smof.translate(fna, all_frames=True)
 
@@ -363,7 +365,7 @@ def extract_dna2dna(bounds, fna, ref, mafft_exe="mafft"):
     ref = list(ref)
     faa = list(faa)
     fna = list(fna)
-    aln = list(align(ref + faa, mafft_exe=mafft_exe))
+    aln = list(align(ref + faa, mafft_exe=mafft_exe, verbose=verbose))
 
     extracted = map_dna2dna(bounds, fna, aln)
 
@@ -684,6 +686,7 @@ def referenced_table(
     mafft_exe="mafft",
     keep_signal=False,
     remove_unchanged=True,
+    verbose=False,
     **kwargs,
 ):
     # if this is an HA and we want to trim off the signal peptide
@@ -715,7 +718,7 @@ def referenced_table(
     entries = refseq + entries
 
     # align the reference and input protein sequences
-    aln = align(entries, mafft_exe=mafft_exe)
+    aln = align(entries, mafft_exe=mafft_exe, verbose=verbose)
     aln = [(s.header, s.seq) for s in aln]
 
     indices = gapped_indices(aln[0][1])

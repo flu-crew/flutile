@@ -73,6 +73,13 @@ ha_subtype_opt = click.option(
     help="The HA segment subtype of all entries in the input fasta file. The numbering will be relative to the start of the mature peptide, with offsets as defined by (Burke 2014).",
 )
 
+verbose_opt = click.option(
+    "--verbose",
+    is_flag=True,
+    default=False,
+    help="Print verbose log messages",
+)
+
 subtype_opt = click.option(
     "--subtype",
     type=click.Choice(
@@ -171,6 +178,7 @@ motif_range_opt = click.option(
 @keep_signal_opt
 @count_variants_opt
 @mafft_exe_opt
+@verbose_opt
 @annotation_tables_opt
 @join_annotations_opt
 @caton82_opt
@@ -189,6 +197,7 @@ def aadiff_cmd(*args, **kwargs):
 @make_consensus_opt
 @consensus_as_reference_opt
 @mafft_exe_opt
+@verbose_opt
 @annotation_tables_opt
 @join_annotations_opt
 @caton82_opt
@@ -257,9 +266,10 @@ conversion_opt = click.option(
 @click.command(name="ha1")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
+@verbose_opt
 @ha_subtype_no_keep_opt
 @conversion_opt
-def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
+def ha1_cmd(fasta_file, mafft_exe, verbose, subtype, conversion):
     """
     Trim down to the HA1 using using subtype references from (Burke 2014). The
     HA1 bounds calibrated to reproduce the HA1 regions that are reported in
@@ -268,6 +278,7 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
     fun.extract_ha1(
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
+        verbose=verbose,
         subtype=subtype,
         conversion=conversion,
     )
@@ -279,11 +290,14 @@ def ha1_cmd(fasta_file, mafft_exe, subtype, conversion):
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @keep_signal_opt
 @mafft_exe_opt
+@verbose_opt
 @as_fasta_opt
 @motif_range_opt
 @subtype_no_keep_opt
 @conversion_opt
-def motif_cmd(fasta_file, keep_signal, fasta, mafft_exe, motif, subtype, conversion):
+def motif_cmd(
+    fasta_file, keep_signal, fasta, mafft_exe, verbose, motif, subtype, conversion
+):
     """
      Extract a motif based on indices relative to the reference (Burke 2014).
 
@@ -309,6 +323,7 @@ def motif_cmd(fasta_file, keep_signal, fasta, mafft_exe, motif, subtype, convers
         subtype=subtype,
         fasta_file=fasta_file,
         mafft_exe=mafft_exe,
+        verbose=verbose,
         conversion=conversion,
     )
 
