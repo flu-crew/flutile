@@ -8,7 +8,7 @@ class Conversion(Enum):
     DNA_TO_AA = 3
 
 
-def parse_conversion(x):
+def parse_conversion(x : str) -> Conversion:
     if x is None or x.lower() == "dna2aa":
         return Conversion.DNA_TO_AA
     elif x.lower() == "dna2dna":
@@ -17,7 +17,7 @@ def parse_conversion(x):
         return Conversion.AA_TO_AA
     else:
         raise ValueError(
-            f"Invalid argument to conversion: expected 'dna2aa', 'dna2dna', or 'aa2aa'"
+            f"Invalid argument to conversion: expected 'dna2aa', 'dna2dna', or 'aa2aa' but got {x}"
         )
 
 

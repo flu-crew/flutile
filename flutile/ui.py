@@ -5,7 +5,6 @@ from flutile.parameters import (
     AadiffOpts,
     MafftOpts,
     SeqOpts,
-    Conversion,
     parse_conversion,
 )
 from flutile.version import __version__
