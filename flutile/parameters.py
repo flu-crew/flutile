@@ -8,6 +8,19 @@ class Conversion(Enum):
     DNA_TO_AA = 3
 
 
+def parse_conversion(x):
+    if x is None or x.lower() == "dna2aa":
+        return Conversion.DNA_TO_AA
+    elif x.lower() == "dna2dna":
+        return Conversion.DNA_TO_DNA
+    elif x.lower() == "aa2aa":
+        return Conversion.AA_TO_AA
+    else:
+        raise ValueError(
+            f"Invalid argument to conversion: expected 'dna2aa', 'dna2dna', or 'aa2aa'"
+        )
+
+
 class MafftOpts:
     """
     Options for the msa aligner

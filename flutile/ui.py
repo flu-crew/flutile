@@ -1,7 +1,13 @@
 import click
 import sys
 import flutile.functions as fun
-from flutile.parameters import AadiffOpts, MafftOpts, SeqOpts, Conversion
+from flutile.parameters import (
+    AadiffOpts,
+    MafftOpts,
+    SeqOpts,
+    Conversion,
+    parse_conversion,
+)
 from flutile.version import __version__
 
 INT_SENTINEL = 1e9
@@ -312,17 +318,6 @@ conversion_opt = click.option(
 )
 
 
-def parse_conversion(x):
-    if x is None or x.lower() == "dna2aa":
-        return Conversion.DNA_TO_AA
-    elif x.lower() == "dna2dna":
-        return Conversion.DNA_TO_DNA
-    elif x.lower() == "aa2aa":
-        return Conversion.AA_TO_AA
-    else:
-        sys.exit("Invalid argument to --conversion")
-
-
 @click.command(name="ha1")
 @click.argument("fasta_file", default=sys.stdin, type=click.File())
 @mafft_exe_opt
@@ -385,27 +380,19 @@ def motif_cmd(
     HA2 region by reference index.
     """
 
-    conversion_enum = parse_conversion(conversion)
+    from flutile.api import write_bounds
 
-    mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
-    seq_opts = SeqOpts(
-        keep_signal=keep_signal, conversion=conversion_enum, subtype=subtype
-    )
-
-    (names, pairs) = fun.make_motifs(
-        fasta_file=fasta_file,
+    write_bounds(
         motif_strs=motif,
-        seq_opts=seq_opts,
-        mafft_opts=mafft_opts,
+        subtype=subtype,
+        fasta_file=fasta_file,
+        tabular=not fasta,
+        keep_signal=keep_signal,
+        conversion=conversion,
+        outfile=sys.stdout,
+        mafft_exe=mafft_exe,
+        verbose=verbose,
     )
-
-    if fasta:
-        pairs = [(header, "".join(seqs)) for (header, seqs) in pairs]
-        fun.print_fasta(pairs, out=sys.stdout)
-    else:
-        print("\t" + "\t".join(names), file=sys.stdout)
-        for (defline, seqs) in pairs:
-            print(defline + "\t" + "\t".join(seqs), file=sys.stdout)
 
 
 @click.group(
