@@ -1,4 +1,4 @@
-0.13.3 [2021-12-xx]
+0.13.3 [2021-12-30]
 -------------------
 
  * Add verbose option, by default do not print mafft messages
@@ -7,6 +7,7 @@
         flutile aadiff --annotation-table foo.txt --annotation-table bar.txt
  * Migrate from Travis to GitHub Actions for CI
  * Add MyPy type annotations
+ * Removed mixed data from test files
 
 0.13.2 [2021-12-16]
 -------------------
