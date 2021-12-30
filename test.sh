@@ -2,6 +2,7 @@
 
 set -e
 set -u
+set -v
 
 cd test-data
 ./test.sh
