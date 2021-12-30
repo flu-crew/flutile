@@ -8,6 +8,7 @@ import smof
 
 class TestIndexedAADiff(unittest.TestCase):
     def test_gapped_indices(self):
+        self.assertEqual(f.gapped_indices(""), [])
         self.assertEqual(f.gapped_indices("ATG"), ["1", "2", "3"])
         self.assertEqual(f.gapped_indices("--ATG"), ["-2", "-1", "1", "2", "3"])
         self.assertEqual(
@@ -17,6 +18,7 @@ class TestIndexedAADiff(unittest.TestCase):
             f.gapped_indices("--A--T-G--"),
             ["-2", "-1", "1", "1+1", "1+2", "2", "2+1", "3", "3+1", "3+2"],
         )
+        self.assertEqual(f.gapped_indices("-"), ["-1"])
         self.assertEqual(f.gapped_indices("---"), ["-3", "-2", "-1"])
 
     #  def test_indexed_aa_diff_table(self):
@@ -321,24 +323,20 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(f.ungap_indices(start=4, end=600, fasta="-GA-TACA"), (6, 8))
         self.assertEqual(f.ungap_indices(start=500, end=600, fasta="-GA-TACA"), (9, 9))
 
-    def test_parse_motifs(self):
+    def test_parse_motif(self):
         self.assertEqual(
-            f.parse_motifs(motif_strs=[" 1 "], subtype="H1"), {"H1:1": [(1, 1)]}
+            f.parse_motif(motif_str=" 1 ", subtype="H1"), ("H1:1", [(1, 1)])
         )
         self.assertEqual(
-            f.parse_motifs(motif_strs=["x = 1 "], subtype="H1"), {"x": [(1, 1)]}
+            f.parse_motif(motif_str="x = 1 ", subtype="H1"), ("x", [(1, 1)])
         )
         self.assertEqual(
-            f.parse_motifs(motif_strs=["x= 1 , 3"], subtype="H1"),
-            {"x": [(1, 1), (3, 3)]},
+            f.parse_motif(motif_str="x= 1 , 3", subtype="H1"),
+            ("x", [(1, 1), (3, 3)]),
         )
         self.assertEqual(
-            f.parse_motifs(motif_strs=[" x=1, 3 -5"], subtype="H1"),
-            {"x": [(1, 1), (3, 5)]},
-        )
-        self.assertEqual(
-            f.parse_motifs(motif_strs=["x=1,3- 5", "162"], subtype="H1"),
-            {"x": [(1, 1), (3, 5)], "H1:162": [(162, 162)]},
+            f.parse_motif(motif_str=" x=1, 3 -5", subtype="H1"),
+            ("x", [(1, 1), (3, 5)]),
         )
 
     def test_concat(self):

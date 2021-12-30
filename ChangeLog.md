@@ -1,11 +1,12 @@
 0.13.3 [2021-12-xx]
 -------------------
 
- * Migrate from Travis to GitHub Actions for CI
  * Add verbose option, by default do not print mafft messages
  * Make --annotation-table argument take a single filename (rather than
    comma-delimited) and allow the option to be used multiple times. E.g.:
         flutile aadiff --annotation-table foo.txt --annotation-table bar.txt
+ * Migrate from Travis to GitHub Actions for CI
+ * Add MyPy type annotations
 
 0.13.2 [2021-12-16]
 -------------------

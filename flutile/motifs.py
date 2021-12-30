@@ -1,14 +1,15 @@
 from collections import namedtuple
 import os
-import smof
+import smof  # type: ignore
 import re
 import sys
+from typing import Dict, Tuple
 
 RefMotif = namedtuple("RefMotif", "defline sequence motif")
 
 # These bounds are calibrated to reproduce the HA1 regions that are reported in
 # genbank. They are tested against random selections from genbank.
-GENBANK_HA1_REGIONS = {
+GENBANK_HA1_REGIONS: Dict[str, Tuple[int, int]] = {
     "H1": (18, 344),
     "H2": (16, 340),
     "H3": (17, 345),
@@ -29,7 +30,8 @@ GENBANK_HA1_REGIONS = {
     "H18": (15, 339),
 }
 
-NTERM_MOTIFS = {
+
+NTERM_MOTIFS: Dict[str, str] = {
     "H1": "MKARLLVLLCALAATDA",
     "H2": "MAIIYLILLFTAVRG",
     "H3": "MKTIIALSYIFCLALG",  # the paper had the motif MKTIIALSYIFCLPLG, but this seems to be a mistake
@@ -51,7 +53,7 @@ NTERM_MOTIFS = {
 }
 
 
-def get_ha_subtype_nterm_motif(ha_subtype):
+def get_ha_subtype_nterm_motif(ha_subtype: str) -> RefMotif:
     """
     ha_subtype: H1, H2, ..., H18
     """
@@ -59,14 +61,13 @@ def get_ha_subtype_nterm_motif(ha_subtype):
     subtype_faa = os.path.join(os.path.dirname(__file__), "data", ref_file)
     ref_motif = None
     for entry in smof.open_fasta(subtype_faa):
-        try:
-            subtype = re.match(".*(H[0-9]+)N[0-9]+.*", entry.header).groups(1)[0]
-        except AttributeError:
-            print(
-                "Expected the subtype to be in the '{ref_file}' defline",
-                file=sys.stderr,
-            )
-            raise
+        subtype_match = re.match(".*(H[0-9]+)N[0-9]+.*", entry.header)
+        subtype: str
+        if subtype_match is None:
+            raise ValueError("Expected the subtype to be in the '{ref_file}' defline")
+        else:
+            subtype = subtype_match.groups(1)[0]  # type: ignore
+
         try:
             motif = NTERM_MOTIFS[subtype]
         except KeyError:
@@ -85,4 +86,7 @@ def get_ha_subtype_nterm_motif(ha_subtype):
             # the whole file is not great enough to offset the value of
             # checking the correctness of the data.
 
-    return ref_motif
+    if ref_motif is None:
+        raise ValueError("Expected an HA subtype such as 'H1' or 'H12'")
+    else:
+        return ref_motif

@@ -1,5 +1,3 @@
-import signal
-import os
 import click
 import sys
 import flutile.functions as fun
@@ -337,13 +335,17 @@ def ha1_cmd(fasta_file, mafft_exe, verbose, subtype, conversion):
     HA1 bounds calibrated to reproduce the HA1 regions that are reported in
     genbank.
     """
+
     conversion_enum = parse_conversion(conversion)
     mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
     seq_opts = SeqOpts(subtype=subtype, conversion=conversion_enum)
-    fun.extract_ha1(
-        fasta_file=fasta_file,
-        mafft_opts=mafft_opts,
-        seq_opts=seq_opts,
+
+    fun.print_fasta(
+        fun.extract_ha1(
+            fasta_file=fasta_file,
+            mafft_opts=mafft_opts,
+            seq_opts=seq_opts,
+        )
     )
 
 
@@ -362,21 +364,25 @@ def motif_cmd(
     fasta_file, keep_signal, fasta, mafft_exe, verbose, motif, subtype, conversion
 ):
     """
-     Extract a motif based on indices relative to the reference (Burke 2014).
+    Extract a motif based on indices relative to the reference (Burke 2014).
 
-     Example:
+    Example:
 
-       flutile trim motif --subtype=H1 -m "Cb=69-75" -m "Ca2=154-159,163-164"
+      flutile trim motif --subtype=H1 -m "Cb=69-75" -m "Ca2=154-159,163-164"
 
-     This would create a table with the fasta deflines in the first column and
-     the Cb and Ca2 motifs in the next two columns
+    This would create a table with the fasta deflines in the first column and
+    the Cb and Ca2 motifs in the next two columns.
 
-     If no name is given, for example in `-m "69-79"`, the column name will
-     default to the name of the subtype followed by the bounds ("H1:69-79").
+    If no name is given, for example in `-m "69-79"`, the column name will
+    default to the name of the subtype followed by the bounds ("H1:69-79").
 
     You can get the H3 antigenic motif as so:
 
        flutile trim motif --subtype=H3 -m "motif=145,155,156,158,159,189"
+
+    If the --fasta flag is set, a fasta file with just the motifs is created
+    instead of a table. This would allow, for example, the extraction of the
+    HA2 region by reference index.
     """
 
     conversion_enum = parse_conversion(conversion)
@@ -386,13 +392,20 @@ def motif_cmd(
         keep_signal=keep_signal, conversion=conversion_enum, subtype=subtype
     )
 
-    fun.write_bounds(
+    (names, pairs) = fun.make_motifs(
         fasta_file=fasta_file,
-        tabular=not (fasta),
         motif_strs=motif,
         seq_opts=seq_opts,
         mafft_opts=mafft_opts,
     )
+
+    if fasta:
+        pairs = [(header, "".join(seqs)) for (header, seqs) in pairs]
+        fun.print_fasta(pairs, out=sys.stdout)
+    else:
+        print("\t" + "\t".join(names), file=sys.stdout)
+        for (defline, seqs) in pairs:
+            print(defline + "\t" + "\t".join(seqs), file=sys.stdout)
 
 
 @click.group(
@@ -422,9 +435,3 @@ cli_grp.add_command(trim_grp)
 
 def main():
     cli_grp()
-
-
-if __name__ == "__main__":
-    if os.main == "posix":
-        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
-    main()
