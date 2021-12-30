@@ -29,7 +29,7 @@ def write_bounds(
         fasta_fh = fasta_file
 
     if isinstance(outfile, str):
-        outfile_fh = open(outfile, "r")
+        outfile_fh = open(outfile, "w")
     else:
         outfile_fh = outfile
 
