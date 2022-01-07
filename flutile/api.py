@@ -2,6 +2,7 @@
 # other packages may use. Specifically octofludb. Any change to these functions
 # may break packages that depend on them, so take care.
 
+from __future__ import annotations
 from typing import TextIO, List, Union
 import flutile.parameters as par
 import flutile.functions as fun

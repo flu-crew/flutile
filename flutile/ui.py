@@ -1,3 +1,4 @@
+from __future__ import annotations
 import click
 import sys
 import flutile.functions as fun
@@ -8,6 +9,7 @@ from flutile.parameters import (
     parse_conversion,
 )
 from flutile.version import __version__
+from typing import TextIO, List, Optional
 
 INT_SENTINEL = 1e9
 
@@ -189,18 +191,18 @@ motif_range_opt = click.option(
 @caton82_opt
 @wiley81_opt
 def aadiff_cmd(
-    faa,
-    subtype,
-    make_consensus,
-    consensus_as_reference,
-    keep_signal,
-    count,
-    mafft_exe,
-    verbose,
-    annotation_tables,
-    join_annotations,
-    caton82,
-    wiley81,
+    faa: TextIO,
+    subtype: str,
+    make_consensus: bool,
+    consensus_as_reference: bool,
+    keep_signal: bool,
+    count: bool,
+    mafft_exe: str,
+    verbose: bool,
+    annotation_tables: List[str],
+    join_annotations: bool,
+    caton82: bool,
+    wiley81: bool,
 ):
     mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
     seq_opts = SeqOpts(subtype=subtype, keep_signal=keep_signal)
@@ -235,16 +237,16 @@ def aadiff_cmd(
 @caton82_opt
 @wiley81_opt
 def annotate_cmd(
-    faa,
-    subtype,
-    make_consensus,
-    consensus_as_reference,
-    mafft_exe,
-    verbose,
-    annotation_tables,
-    join_annotations,
-    caton82,
-    wiley81,
+    faa: TextIO,
+    subtype: str,
+    make_consensus: bool,
+    consensus_as_reference: bool,
+    mafft_exe: str,
+    verbose: bool,
+    annotation_tables: List[str],
+    join_annotations: bool,
+    caton82: bool,
+    wiley81: bool,
 ):
     mafft_opts = MafftOpts(mafft_exe=mafft_exe, verbose=verbose)
     seq_opts = SeqOpts(subtype=subtype, keep_signal=False)
@@ -286,7 +288,13 @@ def annotate_cmd(
     help="Rather than subsetting the fasta, print the groups of similar strains",
     is_flag=True,
 )
-def represent_cmd(alignment, max_day_sep, min_pident_sep, same_state, print_groups):
+def represent_cmd(
+    alignment: TextIO,
+    max_day_sep: Optional[int],
+    min_pident_sep: float,
+    same_state: bool,
+    print_groups: bool,
+):
     if max_day_sep == INT_SENTINEL:
         max_day_sep = None
 
@@ -323,7 +331,9 @@ conversion_opt = click.option(
 @verbose_opt
 @ha_subtype_no_keep_opt
 @conversion_opt
-def ha1_cmd(fasta_file, mafft_exe, verbose, subtype, conversion):
+def ha1_cmd(
+    fasta_file: TextIO, mafft_exe: str, verbose: bool, subtype: str, conversion: str
+):
     """
     Trim down to the HA1 using using subtype references from (Burke 2014). The
     HA1 bounds calibrated to reproduce the HA1 regions that are reported in
@@ -355,7 +365,14 @@ def ha1_cmd(fasta_file, mafft_exe, verbose, subtype, conversion):
 @subtype_no_keep_opt
 @conversion_opt
 def motif_cmd(
-    fasta_file, keep_signal, fasta, mafft_exe, verbose, motif, subtype, conversion
+    fasta_file: TextIO,
+    keep_signal: bool,
+    fasta: bool,
+    mafft_exe: str,
+    verbose: bool,
+    motif: List[str],
+    subtype: str,
+    conversion: str,
 ):
     """
     Extract a motif based on indices relative to the reference (Burke 2014).

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import List, Optional
 from enum import Enum
 
@@ -8,7 +9,7 @@ class Conversion(Enum):
     DNA_TO_AA = 3
 
 
-def parse_conversion(x : str) -> Conversion:
+def parse_conversion(x: str) -> Conversion:
     if x is None or x.lower() == "dna2aa":
         return Conversion.DNA_TO_AA
     elif x.lower() == "dna2dna":
