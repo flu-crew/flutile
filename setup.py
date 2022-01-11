@@ -23,5 +23,6 @@ setup(
     entry_points={"console_scripts": ["flutile=flutile.ui:main"]},
     py_modules=["flutile"],
     zip_safe=False,
+    package_data = {"flutile" : ["py.typed"]},
     include_package_data=True,
 )
