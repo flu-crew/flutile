@@ -1,6 +1,8 @@
 from setuptools import setup
 
-from flutile.version import __version__
+# This value will be reassigned when version.py is parsed
+__version__ = "x.x.x"
+exec(open("flutile/version.py", "r").read())
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
