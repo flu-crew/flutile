@@ -42,25 +42,26 @@ positions 1 and 2 residues after the reference position 154.
 
 `flutile` uses the references from (Burke 2014):
 
---- | ------------------------------------------------- | ------------------- | ---------------------- |
-H1  | A/United Kingdom/1/1933                           | MKARLLVLLCALAATDA   | DTICIGYHANNS           |
-H2  | A/Singapore/1/1957                                | MAIIYLILLFTAVRG     | DQICIGYHANNS           |
-H3  | A/Aichi/2/1968                                    | MKTIIALSYIFCLPLG    | QDLPGNDNSTATLCLGHHAVPN |
-H4  | A/swine/Ontario/01911–2/1999                      | MLSIAILFLLIAEGSS    | QNYTGNPVICLGHHAVSN     |
-H5  | A/Vietnam/1203/2004                               | MEKIVLLFAIVSLVKS    | DQICIGYHANNS           |
-H6  | A/chicken/Taiwan/0705/1999                        | MIAIIVIATLAAAGKS    | DKICIGYHANNS           |
-H7  | A/Netherlands/219/2003                            | MNTQILVFALVASIPTNA  | DKICLGHHAVSN           |
-H8  | A/turkey/Ontario/6118/1968                        | MEKFIAIAMLLASTNA    | YDRICIGYQSNNS          |
-H9  | A/swine/Hong Kong/9/1998                          | MEAASLITILLVVTASNA  | DKICIGYQSTNS           |
-H10 | A/mallard/bavaria/3/2006                          | MYKIVVIIALLGAVKG    | LDKICLGHHAVAN          |
-H11 | A/duck/England/1/1956                             | MEKTLLFAAIFLCVKA    | DEICIGYLSNNS           |
-H12 | A/duck/Alberta/60/1976                            | MEKFIILSTVLAASFA    | YDKICIGYQTNNS          |
-H13 | A/gull/Maryland/704/1977                          | MALNVIATLTLISVCVHA  | DRICVGYLSTNS           |
-H14 | A/mallard/Astrakhan/263/1982                      | MIALILVALALSHTAYS   | QITNGTTGNPIICLGHHAVEN  |
-H15 | A/duck/Australia/341/1983                         | MNTQIIVILVLGLSMVRS  | DKICLGHHAVAN           |
-H16 | A/black-headed-gull/Turkmenistan/13/1976          | MMIKVLYFLIIVLGRYSKA | DKICIGYLSNNS           |
-H17 | A/little-yellow-shouldered bat/Guatemala/060/2010 | MELIILLILLNPYTFVLG  | DRICIGYQANQN           |
-H18 | A/flat-faced bat/Peru/033/2010                    | MITILILVLPIVVG      | DQICIGYHSNNS           |
+|HA  | Reference                                         |                     |                        |
+|--- | ------------------------------------------------- | ------------------- | ---------------------- |
+|H1  | A/United Kingdom/1/1933                           | MKARLLVLLCALAATDA   | DTICIGYHANNS           |
+|H2  | A/Singapore/1/1957                                | MAIIYLILLFTAVRG     | DQICIGYHANNS           |
+|H3  | A/Aichi/2/1968                                    | MKTIIALSYIFCLPLG    | QDLPGNDNSTATLCLGHHAVPN |
+|H4  | A/swine/Ontario/01911–2/1999                      | MLSIAILFLLIAEGSS    | QNYTGNPVICLGHHAVSN     |
+|H5  | A/Vietnam/1203/2004                               | MEKIVLLFAIVSLVKS    | DQICIGYHANNS           |
+|H6  | A/chicken/Taiwan/0705/1999                        | MIAIIVIATLAAAGKS    | DKICIGYHANNS           |
+|H7  | A/Netherlands/219/2003                            | MNTQILVFALVASIPTNA  | DKICLGHHAVSN           |
+|H8  | A/turkey/Ontario/6118/1968                        | MEKFIAIAMLLASTNA    | YDRICIGYQSNNS          |
+|H9  | A/swine/Hong Kong/9/1998                          | MEAASLITILLVVTASNA  | DKICIGYQSTNS           |
+|H10 | A/mallard/bavaria/3/2006                          | MYKIVVIIALLGAVKG    | LDKICLGHHAVAN          |
+|H11 | A/duck/England/1/1956                             | MEKTLLFAAIFLCVKA    | DEICIGYLSNNS           |
+|H12 | A/duck/Alberta/60/1976                            | MEKFIILSTVLAASFA    | YDKICIGYQTNNS          |
+|H13 | A/gull/Maryland/704/1977                          | MALNVIATLTLISVCVHA  | DRICVGYLSTNS           |
+|H14 | A/mallard/Astrakhan/263/1982                      | MIALILVALALSHTAYS   | QITNGTTGNPIICLGHHAVEN  |
+|H15 | A/duck/Australia/341/1983                         | MNTQIIVILVLGLSMVRS  | DKICLGHHAVAN           |
+|H16 | A/black-headed-gull/Turkmenistan/13/1976          | MMIKVLYFLIIVLGRYSKA | DKICIGYLSNNS           |
+|H17 | A/little-yellow-shouldered bat/Guatemala/060/2010 | MELIILLILLNPYTFVLG  | DRICIGYQANQN           |
+|H18 | A/flat-faced bat/Peru/033/2010                    | MITILILVLPIVVG      | DQICIGYHSNNS           |
 
  * The H3 signal peptide appears to actually be `MKTIIALSYIFCLALG`
 
